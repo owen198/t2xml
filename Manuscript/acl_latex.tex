@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+
+% Change "review" to "final" to generate the final (sometimes called camera-ready) version.
+% Change to "preprint" to generate a non-anonymous version with page numbers.
+% \usepackage[review]{acl}
+\usepackage[preprint]{acl}
+\usepackage{tabularx}
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{todonotes}
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out,
+% but it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+%Including images in your LaTeX document requires adding
+%additional package(s)
+\usepackage{graphicx}
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{TP-RAG: Topic-Partitioned RAG for Complex Question Answering over Large-Scale Economic Literature}
+
+% Complex multi-document economic questions
+% Topic-Partitioned RAG (TP-RAG)
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+% \author{Author 1 \and ... \and Author n \\
+%         Address line \\ ... \\ Address line}
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a separate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+% \author{Owen H.T. Lu \\
+%   National Chengchi University  \\
+%   \texttt{owen.lu.academic@gmail.com} \\\And
+%   Tiffany T.Y. Hsu \\
+%   The London School of Economics \\and Political Science \\
+%   \texttt{tyhsu.ac@gmail.com} \\}
+
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+
+\todo{Week 13}
+
+Topic-Partitioned RAG (TP-RAG) is a retrieval architecture that partitions large document corpora into topic-specific RAG modules. Instead of retrieving from a single large index, TP-RAG dynamically selects relevant topic modules and aggregates evidence across them to answer complex multi-document questions.
+
+\end{abstract}
+
+\section{Introduction}
+
+\todo{Week 1}
+
+% Writing hint for Related Work paragraphs
+% Sentence 1: State the main idea or research trend.
+% Sentences 2-4: Cite representative studies supporting the statement.
+% Sentence 5: Summarize and transition to the next topic.
+% This structure ensures concise literature review and clear positioning of our work.
+
+\paragraph{Paragraph 1, Background} 
+
+Query information across a large volume of documents to answer a complex question (cannot answer from a single document), 3-5 related papers.
+
+\paragraph{Paragraph 2, Problem statement} 
+
+What is RAG, why single RAG is insufficient, and what is complex problem solving? (3-5 related papers):
+
+\paragraph{Paragraph 3, Potential Solution} 
+
+Explain what is multi-RAG (3-5 papers):
+
+\paragraph{Paragraph 4, Summarize this chapter:} 
+To sum up, we introduce Topic-Partitioned RAG (TP-RAG), a retrieval architecture that partitions large multi-topic corpora into domain-specific RAG modules to improve retrieval focus and scalability. This paper makes the following contributions:
+
+
+\begin{itemize}
+    \item We propose Topic-Partitioned RAG (TP-RAG), a retrieval architecture that partitions large multi-topic corpora into domain-specific RAG modules to improve retrieval efficiency and relevance.
+
+    \item We release a dataset of economic literature and complex evaluation queries for studying retrieval-augmented systems. The dataset focuses on questions that require synthesizing information across multiple papers and topics.
+    
+    \item We conduct systematic experiments using several test cases to evaluate TP-RAG. The results analyze retrieval effectiveness, answer quality, and system efficiency.
+
+\end{itemize}
+
+
+\section{Related Work} \label{sec:related_works}
+
+\todo{Week 2}
+
+\paragraph{Paragraph 1: Retrieval-Augmented Generation Architectures}
+
+\paragraph{Paragraph 2: Datasets for Knowledge-Intensive Question Answering}
+
+\paragraph{Paragraph 3: Experimental Evaluation of Retrieval-Augmented Systems}
+
+\paragraph{Paragraph 4: Summarize to the design and evaluation}
+
+
+
+
+
+
+\section{TP-RAG Architecture}
+
+\todo{Week 3-5}
+
+\section{Dataset and Experimental Setup}
+
+\todo{Week 3-5}
+
+\section{Evaluation and Results}
+
+\todo{Week 5-10}
+
+\section{Discussion}
+
+\todo{Week 11-12}
+
+\paragraph{Paragraph 1: Key findings}
+
+\paragraph{Paragraph 2: Interpretation of results}
+
+\paragraph{Paragraph 3: Comparison with previous studies}
+
+\paragraph{Paragraph 4: Implications/significance}
+
+\paragraph{Paragraph 5: Limitations \& future research}
+
+\cite{janssens2025comparative}
+
+\section{Conclusion}
+
+\todo{Week 13}
+
+\bibliography{custom}
+
+% \appendix
+
+% \section{Example Appendix}
+% \label{sec:appendix}
+
+% This is an appendix.
+
+\end{document}

@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+
+# LaTeX intermediate and cache files
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.idx
+*.ist
+*.nav
+*.snm
+*.vrb
+
+# Build outputs
+*.dvi
+*.ps
+Manuscript/*.pdf
+
+# Editor temporary files
+*~
+*.swp
+*.tmp
