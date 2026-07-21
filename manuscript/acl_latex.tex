@@ -34,6 +34,7 @@
 %Including images in your LaTeX document requires adding
 %additional package(s)
 \usepackage{graphicx}
+\usepackage{import}
 
 % If the title and author information does not fit in the area allocated, uncomment the following
 %
@@ -41,7 +42,7 @@
 %
 % and set <dim> to something 5cm or larger.
 
-\title{TP-RAG: Topic-Partitioned RAG for Complex Question Answering over Large-Scale Economic Literature}
+\title{Structure-Aware Representation Learning for S1000D Schema}
 
 % Complex multi-document economic questions
 % Topic-Partitioned RAG (TP-RAG)
@@ -81,90 +82,19 @@ Topic-Partitioned RAG (TP-RAG) is a retrieval architecture that partitions large
 
 \end{abstract}
 
-\section{Introduction}
+\import{sections/}{section_introduction_v1.tex}
 
-\todo{Week 1}
+\import{sections/}{section_related_work_v1.tex}
 
-% Writing hint for Related Work paragraphs
-% Sentence 1: State the main idea or research trend.
-% Sentences 2-4: Cite representative studies supporting the statement.
-% Sentence 5: Summarize and transition to the next topic.
-% This structure ensures concise literature review and clear positioning of our work.
+\import{sections/}{section_methodology_v1.tex}
 
-\paragraph{Paragraph 1, Background} 
+\import{sections/}{section_experimental_setup_v1.tex}
 
-Query information across a large volume of documents to answer a complex question (cannot answer from a single document), 3-5 related papers.
+\import{sections/}{section_results_v1.tex}
 
-\paragraph{Paragraph 2, Problem statement} 
+\import{sections/}{section_discussion_v1.tex}
 
-What is RAG, why single RAG is insufficient, and what is complex problem solving? (3-5 related papers):
-
-\paragraph{Paragraph 3, Potential Solution} 
-
-Explain what is multi-RAG (3-5 papers):
-
-\paragraph{Paragraph 4, Summarize this chapter:} 
-To sum up, we introduce Topic-Partitioned RAG (TP-RAG), a retrieval architecture that partitions large multi-topic corpora into domain-specific RAG modules to improve retrieval focus and scalability. This paper makes the following contributions:
-
-
-\begin{itemize}
-    \item We propose Topic-Partitioned RAG (TP-RAG), a retrieval architecture that partitions large multi-topic corpora into domain-specific RAG modules to improve retrieval efficiency and relevance.
-
-    \item We release a dataset of economic literature and complex evaluation queries for studying retrieval-augmented systems. The dataset focuses on questions that require synthesizing information across multiple papers and topics.
-    
-    \item We conduct systematic experiments using several test cases to evaluate TP-RAG. The results analyze retrieval effectiveness, answer quality, and system efficiency.
-
-\end{itemize}
-
-
-\section{Related Work} \label{sec:related_works}
-
-\todo{Week 2}
-
-\paragraph{Paragraph 1: Retrieval-Augmented Generation Architectures}
-
-\paragraph{Paragraph 2: Datasets for Knowledge-Intensive Question Answering}
-
-\paragraph{Paragraph 3: Experimental Evaluation of Retrieval-Augmented Systems}
-
-\paragraph{Paragraph 4: Summarize to the design and evaluation}
-
-
-
-
-
-
-\section{TP-RAG Architecture}
-
-\todo{Week 3-5}
-
-\section{Dataset and Experimental Setup}
-
-\todo{Week 3-5}
-
-\section{Evaluation and Results}
-
-\todo{Week 5-10}
-
-\section{Discussion}
-
-\todo{Week 11-12}
-
-\paragraph{Paragraph 1: Key findings}
-
-\paragraph{Paragraph 2: Interpretation of results}
-
-\paragraph{Paragraph 3: Comparison with previous studies}
-
-\paragraph{Paragraph 4: Implications/significance}
-
-\paragraph{Paragraph 5: Limitations \& future research}
-
-\cite{janssens2025comparative}
-
-\section{Conclusion}
-
-\todo{Week 13}
+\import{sections/}{section_conclusion_v1.tex}
 
 \bibliography{custom}
 

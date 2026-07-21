@@ -35,7 +35,7 @@
 # Build outputs
 *.dvi
 *.ps
-Manuscript/*.pdf
+manuscript/*.pdf
 
 # Editor temporary files
 *~
