@@ -1,0 +1,17 @@
+{
+  "checkpoint": "proced_xsd_2.pth",
+  "dataset": "xsd/proced_closure.csv",
+  "manifold": "poincare",
+  "model": "distance",
+  "dimension": 2,
+  "learning_rate": 0.3,
+  "epochs": 300,
+  "best_epoch": 299,
+  "elapsed_time_s": 1.74,
+  "final_loss": 0.683964,
+  "mean_rank": 5.189931082817428,
+  "map_rank": 0.6287781099249493,
+  "sqnorm_min": 0.05013404246576454,
+  "sqnorm_avg": 0.9537046485224107,
+  "sqnorm_max": 0.9999899413133009
+}

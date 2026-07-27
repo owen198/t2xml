@@ -1,0 +1,12 @@
+*.so
+build
+__pycache__
+embeddings
+
+#hype/adjacency_matrix_dataset.cpp
+#hype/graph_dataset.cpp
+.idea
+venv
+data
+.DS_Store
+.venv
