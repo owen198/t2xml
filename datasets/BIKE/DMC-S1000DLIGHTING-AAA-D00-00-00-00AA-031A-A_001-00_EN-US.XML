@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [
+]>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_6/xml_schema_flat/wrngdata.xsd">
+   <identAndStatusSection>
+      <dmAddress>
+         <dmIdent>
+            <dmCode modelIdentCode="S1000DLIGHTING"
+                    systemDiffCode="AAA"
+                    systemCode="D00"
+                    subSystemCode="0"
+                    subSubSystemCode="0"
+                    assyCode="00"
+                    disassyCode="00"
+                    disassyCodeVariant="AA"
+                    infoCode="031"
+                    infoCodeVariant="A"
+                    itemLocationCode="A"/>
+            <language countryIsoCode="US" languageIsoCode="en"/>
+            <issueInfo issueNumber="001" inWork="00"/>
+         </dmIdent>
+         <dmAddressItems>
+            <issueDate year="2024" month="06" day="19"/>
+            <dmTitle>
+               <techName>Wiring</techName>
+               <infoName>Electrical standard parts data</infoName>
+            </dmTitle>
+         </dmAddressItems>
+      </dmAddress>
+      <dmStatus issueType="new">
+         <security securityClassification="01"
+                   commercialClassification="cc51"
+                   caveat="cv51"/>
+         <dataRestrictions>
+            <restrictionInstructions>
+               <dataDistribution>To be made available to all S1000D users.</dataDistribution>
+               <exportControl>
+                  <exportRegistrationStmt>
+                     <simplePara>Export of this data module to all countries that are the residence of organizations that are users of S1000D is permitted. Storage of this data module is to be at the discretion of the organization.</simplePara>
+                  </exportRegistrationStmt>
+               </exportControl>
+               <dataHandling>There are no specific handling instructions for this data module.</dataHandling>
+               <dataDestruction>Users may destroy this data module in accordance with their own local procedures.</dataDestruction>
+               <dataDisclosure>There are no dissemination limitations that apply to this data module.</dataDisclosure>
+            </restrictionInstructions>
+            <restrictionInfo>
+               <copyright>
+                  <copyrightPara>
+                     <emphasis>Copyright (C) 2024</emphasis> by AeroSpace, Security and Defence Industries Association of Europe - ASD</copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Publishers:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf01">
+                        <listItem>
+                           <para>Aerospace, Security and Defence Industries Association of Europe</para>
+                        </listItem>
+                        <listItem>
+                           <para>Aerospace Industries Association of America</para>
+                        </listItem>
+                        <listItem>
+                           <para>ATA e-Business Program</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Limitations of liability:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf02">
+                        <listItem>
+                           <para>This material is provided "As is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Revisions to this document may occur after its issuance. The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable.</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>The details for copyright can be found in the S1000D Specification.</copyrightPara>
+               </copyright>
+               <policyStatement>S1000D-SC-2016-017-002-00 Steering Committee TOR</policyStatement>
+               <dataConds>There are no known conditions that would change the data restrictions for, or security classification of, this data module.</dataConds>
+            </restrictionInfo>
+         </dataRestrictions>
+         <responsiblePartnerCompany enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </originator>
+         <applicCrossRefTableRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="00W"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </applicCrossRefTableRef>
+         <applicRef applicIdentValue="app-00000000AA031A-0000"/>
+         <techStandard>
+            <authorityInfoAndTp>
+               <authorityInfo>20010131</authorityInfo>
+               <techPubBase>Bike book</techPubBase>
+            </authorityInfoAndTp>
+            <authorityExceptions/>
+            <authorityNotes/>
+         </techStandard>
+         <brexDmRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="022"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </brexDmRef>
+         <qualityAssurance>
+            <firstVerification verificationType="tabtop"/>
+         </qualityAssurance>
+         <systemBreakdownCode>LT</systemBreakdownCode>
+         <skillLevel skillLevelCode="sk01"/>
+         <remarks>
+            <simplePara>CPF_2020-040EPWG Bike Enhancement with elements and attributes missing in the samples</simplePara>
+            <simplePara>accessory accessoryGroup amperage attenuation coaxialCableFlag conduit conduitGroup connector connectorAccessories connectorGroup contactCount contactDescr contactDescrGroup contactDiameter contactSize distributionPart distributionPartGroup frequency frequencyAttenuation frequencyCharacteristics harnessSize identSleeve identSleeveGroup impedance mass material maxDiameter maxHarnessSize minDiameter minHarnessSize numberOfCores orientation outerDiameter outerJacketColor rack resistance screenCount shrinkSleeve shrinkSleeveGroup size sleeveDiameter solderSleeve solderSleeveGroup specialTerminal standardPartGroup surfaceProtection thermoCoupleMinus thermoCouplePlus triaxialCableFlag voltage wallThickness wireMaterial wireMaterialGroup</simplePara>
+         </remarks>
+      </dmStatus>
+   </identAndStatusSection>
+   <content id="SPEC-0001">
+      <referencedApplicGroupRef>
+         <applicRef applicIdentValue="app-00000000AA031A-0001" id="app-0001"/>
+      </referencedApplicGroupRef>
+      <wiringData>
+         <standardPartGroup>
+            <connectorGroup>
+               <connector applicRefId="app-0001">
+                  <partNumber>JN1003S-12</partNumber>
+                  <mass unitOfMeasure="kg">0,0154</mass>
+                  <orientation>A</orientation>
+                  <rack>A</rack>
+                  <contactCount>40</contactCount>
+                  <contactDescrGroup>
+                     <contactDescr>
+                        <contact contactIdent="1"/>
+                        <contactDiameter unitOfMeasure="mm">1,15</contactDiameter>
+                        <thermoCouplePlus>Y</thermoCouplePlus>
+                        <thermoCoupleMinus>Y</thermoCoupleMinus>
+                        <specialTerminal>Y</specialTerminal>
+                        <coaxialCableFlag>Y</coaxialCableFlag>
+                        <triaxialCableFlag>N</triaxialCableFlag>
+                     </contactDescr>
+                  </contactDescrGroup>
+                  <connectorAccessories>
+                     <partNumber>JN1003P22</partNumber>
+                     <partNumber>JN1003C22</partNumber>
+                     <partNumber>JN1003D22</partNumber>
+                     <partNumber>JN1003K22</partNumber>
+                     <partNumber>JN1003L22</partNumber>
+                     <partNumber>JN1003MA22</partNumber>
+                     <partNumber>JN1003MB22</partNumber>
+                     <partNumber>JN1003MF22</partNumber>
+                     <partNumber>JN1003N22</partNumber>
+                  </connectorAccessories>
+               </connector>
+            </connectorGroup>
+            <distributionPartGroup>
+               <distributionPart applicRefId="app-0001">
+                  <partNumber>PAN6466A</partNumber>
+                  <contactSize>12</contactSize>
+                  <material>Copper alloy</material>
+                  <wireColor>Orange/Blue/Green</wireColor>
+                  <surfaceProtection>Gold plated</surfaceProtection>
+                  <contactDiameter unitOfMeasure="mm">2,41</contactDiameter>
+                  <temperature>
+                     <minTemperature unitOfMeasure="degC">-55</minTemperature>
+                     <maxTemperature unitOfMeasure="degC">150</maxTemperature>
+                  </temperature>
+               </distributionPart>
+            </distributionPartGroup>
+            <accessoryGroup>
+               <accessory applicRefId="app-0001">
+                  <partNumber>accy_123</partNumber>
+                  <orientation>90</orientation>
+               </accessory>
+            </accessoryGroup>
+            <solderSleeveGroup>
+               <solderSleeve applicRefId="app-0001">
+                  <partNumber>solder_987</partNumber>
+                  <length unitOfMeasure="mm">14,23</length>
+                  <material>Nickel</material>
+                  <mass unitOfMeasure="g">0,226</mass>
+                  <sleeveDiameter>
+                     <minDiameter unitOfMeasure="mm">2,04</minDiameter>
+                     <maxDiameter unitOfMeasure="mm">5,08</maxDiameter>
+                  </sleeveDiameter>
+               </solderSleeve>
+            </solderSleeveGroup>
+            <shrinkSleeveGroup>
+               <shrinkSleeve applicRefId="app-0001">
+                  <partNumber>shrink_456</partNumber>
+                  <size unitOfMeasure="in">3/16</size>
+                  <mass unitOfMeasure="kg/m">0,350</mass>
+                  <wireColor>Transparent</wireColor>
+                  <sleeveDiameter>
+                     <minDiameter unitOfMeasure="mm">1,6</minDiameter>
+                     <maxDiameter unitOfMeasure="mm">0,8</maxDiameter>
+                  </sleeveDiameter>
+                  <temperature>
+                     <minTemperature unitOfMeasure="degC">-55</minTemperature>
+                     <maxTemperature unitOfMeasure="degC">175</maxTemperature>
+                  </temperature>
+                  <harnessSize>
+                     <minHarnessSize unitOfMeasure="mm">0,8</minHarnessSize>
+                     <maxHarnessSize unitOfMeasure="mm">1,2</maxHarnessSize>
+                  </harnessSize>
+               </shrinkSleeve>
+            </shrinkSleeveGroup>
+            <identSleeveGroup>
+               <identSleeve applicRefId="app-0001">
+                  <partNumber>ident_642</partNumber>
+                  <material>PVC-Nitrile</material>
+                  <mass unitOfMeasure="kg">0,0001</mass>
+               </identSleeve>
+            </identSleeveGroup>
+            <conduitGroup>
+               <conduit applicRefId="app-0001">
+                  <partNumber>condt_468</partNumber>
+                  <size unitOfMeasure="mm">11,4</size>
+                  <mass unitOfMeasure="g/m">4,67</mass>
+                  <wireColor>Black</wireColor>
+                  <wallThickness unitOfMeasure="mm">0,15</wallThickness>
+                  <temperature>
+                     <minTemperature unitOfMeasure="degC">-55</minTemperature>
+                     <maxTemperature unitOfMeasure="degC">200</maxTemperature>
+                  </temperature>
+               </conduit>
+            </conduitGroup>
+            <wireMaterialGroup>
+               <wireMaterial applicRefId="app-0001">
+                  <partNumber>Connector_C1</partNumber>
+                  <wireCode>
+                     <wireType>QC</wireType>
+                     <wireGauge wireGaugeType="mt">1,82</wireGauge>
+                  </wireCode>
+                  <numberOfCores>3</numberOfCores>
+                  <size>030</size>
+                  <mass unitOfMeasure="kg/km">58,7</mass>
+                  <outerJacketColor>W</outerJacketColor>
+                  <outerDiameter unitOfMeasure="mm">4,85</outerDiameter>
+                  <resistance unitOfMeasure="mohm/m">6,8</resistance>
+                  <voltage unitOfMeasure="V">600</voltage>
+                  <amperage unitOfMeasure="A">10</amperage>
+                  <temperature>
+                     <maxTemperature unitOfMeasure="degC">260</maxTemperature>
+                  </temperature>
+                  <screenCount>1</screenCount>
+                  <coaxialCableFlag>N</coaxialCableFlag>
+                  <triaxialCableFlag>Y</triaxialCableFlag>
+                  <frequencyCharacteristics>
+                     <impedance unitOfMeasure="ohm">50</impedance>
+                     <frequencyAttenuation>
+                        <frequency unitOfMeasure="MHz">20</frequency>
+                        <attenuation unitOfMeasure="dB/100m">14</attenuation>
+                     </frequencyAttenuation>
+                     <frequencyAttenuation>
+                        <frequency unitOfMeasure="MHz">100</frequency>
+                        <attenuation unitOfMeasure="dB/100m">31</attenuation>
+                     </frequencyAttenuation>
+                  </frequencyCharacteristics>
+               </wireMaterial>
+            </wireMaterialGroup>
+         </standardPartGroup>
+      </wiringData>
+   </content>
+</dmodule>
