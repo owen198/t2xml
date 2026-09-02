@@ -1,0 +1,17 @@
+{
+  "checkpoint": "xsd_models/all_poincare/pall_direct_xsd_20.pth",
+  "dataset": "xsd/all_xsd_direct.csv",
+  "manifold": "poincare",
+  "model": "distance",
+  "dimension": 20,
+  "learning_rate": 0.05,
+  "epochs": 300,
+  "best_epoch": 297,
+  "elapsed_time_s": 0.21,
+  "final_loss": 0.994717,
+  "mean_rank": 23.55249500998004,
+  "map_rank": 0.43335389832808774,
+  "sqnorm_min": 0.40891881252595735,
+  "sqnorm_avg": 0.9246484158971916,
+  "sqnorm_max": 0.9990984878324817
+}
