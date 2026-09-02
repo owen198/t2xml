@@ -41,3 +41,20 @@ manuscript/*.pdf
 *~
 *.swp
 *.tmp
+
+# Secrets
+.env
+
+# Python virtual environments
+.venv/
+__pycache__/
+
+poincare/
+
+# Model checkpoints / training runs (large binary artifacts, not source)
+**/runs/
+**/checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.bin
