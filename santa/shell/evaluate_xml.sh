@@ -4,10 +4,7 @@ set -e
 # Computes MRR@100 from a TREC-format retrieval run against t2xml's
 # retrieval/qrels.test.tsv. Does not run retrieval itself -- point
 # TREC_PATH at wherever your retriever wrote its run file first.
-#
-# The test split is hardcoded, matching index-xml.sh and SANTA's own
-# evaluate_code.sh (which scores ${language}_inference.trec from the test dir
-# and takes no split argument).
+
 export SPLIT=test
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

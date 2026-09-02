@@ -5,7 +5,7 @@ set -e
 # the final save at the run root) against pretrain/sda_pairs.dev.jsonl (the
 # pretraining task's own self-referential SDA dev pairs, not the Stage 3
 # retrieval/*.dev.jsonl benchmark), then copies whichever scored highest into
-# checkpoints/best_dev -- mirrors best-dev-xml.sh, but for pretrain.sh's run.
+# checkpoints/best_dev -- mirrors best-dev-finetune.sh, but for pretrain.sh's run.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SANTA_DIR="$(dirname "${SCRIPT_DIR}")"

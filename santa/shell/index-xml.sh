@@ -4,14 +4,9 @@ set -e
 # Encodes t2xml's retrieval/{corpus,queries}.test.jsonl with a finetuned
 # SANTA checkpoint, searches a FAISS IndexFlatIP (see evaluate_xml/index_xml.py),
 # and writes a TREC-format run file for evaluate_xml.sh to score. Run
-# best-dev-xml.sh first so MODEL_PATH's default (.../checkpoints/best_dev)
+# best-dev-finetune.sh first so MODEL_PATH's default (.../checkpoints/best_dev)
 # exists -- otherwise point MODEL_PATH at a specific checkpoint yourself.
-#
-# The test split is hardcoded, matching SANTA's own index-code.sh (which points
-# at ${language}_test_doc.jsonl / ${language}_test_query.jsonl and takes no
-# split argument). dev is used only by best-dev-xml.sh for checkpoint
-# selection, so scoring it here would report on the split the model was
-# selected with.
+
 export SPLIT=test
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
