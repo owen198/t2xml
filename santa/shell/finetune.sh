@@ -16,6 +16,9 @@ PYTHON="${SANTA_DIR}/.venv/bin/python"
 
 export DATA_DIR=${SANTA_DIR}/data
 export RUN_TAG=${RUN_TAG:-}
+if [[ -z "${RUN_TAG}" ]]; then
+    echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (runs/finetune), not a tagged experiment folder." >&2
+fi
 export PRETRAIN_CHECKPOINT=${PRETRAIN_CHECKPOINT:-${SANTA_DIR}/runs/pretrain${RUN_TAG}/checkpoints/best_dev}
 export OUTPUT=${SANTA_DIR}/runs/finetune${RUN_TAG}
 

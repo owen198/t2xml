@@ -13,6 +13,9 @@ REPO_ROOT="$(dirname "${SANTA_DIR}")"
 PYTHON="${SANTA_DIR}/.venv/bin/python"
 
 export RUN_TAG=${RUN_TAG:-}
+if [[ -z "${RUN_TAG}" ]]; then
+    echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (results/), not a tagged experiment folder." >&2
+fi
 export MODEL_PATH=${MODEL_PATH:-${SANTA_DIR}/runs/pretrain${RUN_TAG}/checkpoints}
 export RESULTS_PATH=${RESULTS_PATH:-${REPO_ROOT}/results${RUN_TAG}/best_dev_pretrain.json}
 

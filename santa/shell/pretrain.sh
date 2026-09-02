@@ -11,6 +11,9 @@ PYTHON="${SANTA_DIR}/.venv/bin/python"
 export DATA_DIR=${SANTA_DIR}/data
 export MODEL=${MODEL:-Salesforce/codet5-base}
 export RUN_TAG=${RUN_TAG:-}
+if [[ -z "${RUN_TAG}" ]]; then
+    echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (runs/pretrain), not a tagged experiment folder." >&2
+fi
 export OUTPUT=${SANTA_DIR}/runs/pretrain${RUN_TAG}
 
 # See SANTA's own shell/pretrain-code.sh for why max_steps is computed
