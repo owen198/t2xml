@@ -19,10 +19,10 @@ in two ways SANTA's own Adv/ESCI-small benchmarks don't have to deal with
      "correct," so this stage collapses them to one corpus entry per unique
      document (by content hash).
   2. Non-discriminative queries: some generic-tier fallback descriptions
-     (e.g. "dm ref ident element.", used whenever an element has no
-     dedicated template and no prose text) are identical across hundreds of
+     (e.g. "dm ref element.", used whenever an element has no dedicated
+     template and no prose text) are identical across hundreds of
      structurally different documents -- checked empirically, one such text
-     maps to 622 distinct documents in the train split alone. Such a query
+     maps to 355 distinct documents in the train split alone. Such a query
      has no well-defined right answer and is dropped rather than kept with
      a made-up "correct" pick.
 

@@ -41,3 +41,24 @@ manuscript/*.pdf
 *~
 *.swp
 *.tmp
+
+# Secrets
+.env
+
+# Python virtual environments
+.venv/
+__pycache__/
+
+poincare/
+
+# Model checkpoints / training runs
+**/runs/
+**/checkpoints/
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+
+# Local caches and results
+.preprocess_cache/
+results/
