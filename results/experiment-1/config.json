@@ -1,0 +1,40 @@
+{
+  "model": "Salesforce/codet5-base",
+  "seed": 42,
+  "pretrain": {
+    "script": "santa/shell/pretrain.sh",
+    "data": "pretrain/{sda,mep}_pairs.{train,dev,test}.jsonl (via santa/prepare_data.py -> santa/data/pretrain.*.jsonl)",
+    "train_n_passages": 1,
+    "learning_rate": 5e-05,
+    "num_train_epochs": 10.0,
+    "max_steps": 2110,
+    "per_device_train_batch_size": 16,
+    "gradient_accumulation_steps": 8,
+    "bf16": true,
+    "q_max_len": 50,
+    "p_max_len": 256,
+    "l_max_len": 64,
+    "save_steps": 1000,
+    "save_total_limit": 3,
+    "use_generate": true
+  },
+  "finetune": {
+    "script": "santa/shell/finetune.sh",
+    "data": "retrieval/{corpus,queries}.*.jsonl + qrels.*.tsv (via santa/prepare_data.py -> santa/data/finetune.*.jsonl)",
+    "pretrain_checkpoint": "runs/pretrain/checkpoints/best_dev",
+    "train_n_passages": 1,
+    "learning_rate": 2e-05,
+    "num_train_epochs": 12.0,
+    "max_steps": 2352,
+    "per_device_train_batch_size": 16,
+    "gradient_accumulation_steps": 8,
+    "bf16": true,
+    "q_max_len": 50,
+    "p_max_len": 256,
+    "l_max_len": 64,
+    "save_steps": 1000,
+    "save_total_limit": 3,
+    "use_generate": false
+  },
+  "_source": "learning_rate/num_train_epochs/max_steps/batch_size/bf16/seed/save_steps/save_total_limit read back from each run's saved training_args.bin (ground truth of what actually ran); q_max_len/p_max_len/l_max_len/train_n_passages/use_generate/model taken from santa/shell/{pretrain,finetune}.sh since those aren't persisted to disk by the trainer."
+}

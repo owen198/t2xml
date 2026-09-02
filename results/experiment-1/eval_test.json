@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 0.8767130078527136,
+  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/test_inference.trec",
+  "qrels_path": "/workspace/t2xml/retrieval/qrels.test.tsv"
+}

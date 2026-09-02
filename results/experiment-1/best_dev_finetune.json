@@ -1,0 +1,9 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/checkpoints",
+  "best_dev_mrr": 0.885639768755514,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/checkpoints": 0.885639768755514,
+    "/workspace/t2xml/santa/runs/finetune/checkpoints/checkpoint-1000": 0.8795885248486782,
+    "/workspace/t2xml/santa/runs/finetune/checkpoints/checkpoint-2000": 0.885216830408507
+  }
+}
