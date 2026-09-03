@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [
+]>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_6/xml_schema_flat/wrngflds.xsd">
+   <identAndStatusSection>
+      <dmAddress>
+         <dmIdent>
+            <dmCode modelIdentCode="S1000DBIKE"
+                    systemDiffCode="AAA"
+                    systemCode="D00"
+                    subSystemCode="0"
+                    subSubSystemCode="0"
+                    assyCode="00"
+                    disassyCode="00"
+                    disassyCodeVariant="AA"
+                    infoCode="029"
+                    infoCodeVariant="A"
+                    itemLocationCode="D"/>
+            <language countryIsoCode="US" languageIsoCode="en"/>
+            <issueInfo issueNumber="001" inWork="00"/>
+         </dmIdent>
+         <dmAddressItems>
+            <issueDate year="2024" month="06" day="19"/>
+            <dmTitle>
+               <techName>Bicycle</techName>
+               <infoName>Configuration and declaration of the elements of the wiring data Schema</infoName>
+            </dmTitle>
+         </dmAddressItems>
+      </dmAddress>
+      <dmStatus issueType="new">
+         <security caveat="cv51"
+                   commercialClassification="cc51"
+                   securityClassification="01"/>
+         <dataRestrictions>
+            <restrictionInstructions>
+               <dataDistribution>To be made available to all S1000D users.</dataDistribution>
+               <exportControl>
+                  <exportRegistrationStmt>
+                     <simplePara>Export of this data module to all countries that are the residence of organizations that are users of S1000D is permitted. Storage of this data module is to be at the discretion of the organization.</simplePara>
+                  </exportRegistrationStmt>
+               </exportControl>
+               <dataHandling>There are no specific handling instructions for this data module.</dataHandling>
+               <dataDestruction>Users may destroy this data module in accordance with their own local procedures.</dataDestruction>
+               <dataDisclosure>There are no dissemination limitations that apply to this data module.</dataDisclosure>
+            </restrictionInstructions>
+            <restrictionInfo>
+               <copyright>
+                  <copyrightPara>
+                     <emphasis>Copyright (C) 2024</emphasis> by AeroSpace, Security and Defence Industries Association of Europe - ASD</copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Publishers:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf01">
+                        <listItem>
+                           <para>Aerospace, Security and Defence Industries Association of Europe</para>
+                        </listItem>
+                        <listItem>
+                           <para>Aerospace Industries Association of America</para>
+                        </listItem>
+                        <listItem>
+                           <para>ATA e-Business Program</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Limitations of liability:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf02">
+                        <listItem>
+                           <para>This material is provided "As is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Revisions to this document may occur after its issuance. The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable.</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>The details for copyright can be found in the S1000D Specification.</copyrightPara>
+               </copyright>
+               <policyStatement>S1000D-SC-2016-017-002-00 Steering Committee TOR</policyStatement>
+               <dataConds>There are no known conditions that would change the data restrictions for, or security classification of, this data module.</dataConds>
+            </restrictionInfo>
+         </dataRestrictions>
+         <responsiblePartnerCompany enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </originator>
+         <applicCrossRefTableRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="00W"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </applicCrossRefTableRef>
+         <applic>
+            <displayText>
+               <simplePara>Mountain bicycle and (Mountain storm Mk1 or Brook trekker Mk9)</simplePara>
+            </displayText>
+            <evaluate andOr="and">
+               <assert applicPropertyIdent="type"
+                       applicPropertyType="prodattr"
+                       applicPropertyValues="Mountain bicycle"/>
+               <evaluate andOr="or">
+                  <evaluate andOr="and">
+                     <assert applicPropertyIdent="model"
+                             applicPropertyType="prodattr"
+                             applicPropertyValues="Mountain storm"/>
+                     <assert applicPropertyIdent="version"
+                             applicPropertyType="prodattr"
+                             applicPropertyValues="Mk1"/>
+                  </evaluate>
+                  <evaluate andOr="and">
+                     <assert applicPropertyIdent="model"
+                             applicPropertyType="prodattr"
+                             applicPropertyValues="Brook trekker"/>
+                     <assert applicPropertyIdent="version"
+                             applicPropertyType="prodattr"
+                             applicPropertyValues="Mk9"/>
+                  </evaluate>
+               </evaluate>
+            </evaluate>
+         </applic>
+         <techStandard>
+            <authorityInfoAndTp>
+               <authorityInfo>20010131</authorityInfo>
+               <techPubBase>Bike book</techPubBase>
+            </authorityInfoAndTp>
+            <authorityExceptions/>
+            <authorityNotes/>
+         </techStandard>
+         <brexDmRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="022"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </brexDmRef>
+         <qualityAssurance>
+            <firstVerification verificationType="tabtop"/>
+         </qualityAssurance>
+         <remarks>
+            <simplePara>CPF_2020-040EPWG Bike Enhancement with elements and attributes missing in the samples</simplePara>
+            <simplePara>descrAccessDoorOrPanel, descrAccessory, descrAccessoryPartNumber, descrAltPartNumber, descrAmperage, descrAssy, descrAttenuation, descrBlockGroupingValue, descrCircuitIdent, descrCoaxialCableFlag, descrConduit, descrConnectionListClass, descrConnector, descrContact, descrContactCount, descrContactDiameter, descrContactSize, descrDistributionPart, descrElectricalContact, descrElectricalEquip, descrElectricalStateDescr, descrEmcCode, descrEquipDescrRef, descrEquipName, descrFeedThru, descrFinishingInfo, descrFrequency, descrFunctionalDescrRef, descrFunctionalItemRef, descrGroupCode, descrHarness, descrHarnessEnvironment, descrHarnessIdent, descrHarnessName, descrHarnessVariantIdent, descrHarnessVariantIssue, descrIdentSleeve, descrIllustrationRef, descrImpedance, descrInstallationLocation, descrLength, descrManufacturerCode, descrMass, descrMaterial, descrMaxDiameter, descrMaxHarnessSize, descrMaxMountingPositions, descrMaxTemperature, descrMinDiameter, descrMinHarnessSize, descrMinTemperature, descrNetworkAnalysisCode, descrNextHigherAssy, descrNumberOfCores, descrOrientation, descrOuterDiameter, descrOuterJacketColor, descrPartNumber, descrPositionOnNextHigherAssy, descrPreparationInfo, descrRack, descrReqQuantity, descrResistance, descrResponsiblePartnerCompany, descrRestriction, descrRouting, descrScreen, descrScreenCount, descrSectionIdent, descrShrinkSleeve, descrShuntGroupingValue, descrSiblingPlugIdent, descrSignalInfo, descrSize, descrSleeve, descrSolderSleeve, descrSpecialTerminal, descrStandardPartGroup, descrSurfaceProtection, descrSystemBreakdownCode, descrTerminationModuleGroupingValue, descrThermoCoupleMinus, descrThermoCouplePlus, descrTransverseLink, descrTriaxialCableFlag, descrTwist, descrVoltage, descrWallThickness, descrWire, descrWireColor, descrWireConnectionCode, descrWireGauge, descrWireInfoCircuitIdent, descrWireInfoSectionIdent, descrWireMaterial, descrWireNumber, descrWireRoute, descrWireSeqNumber, descrWireType, fieldName, wiringFields</simplePara>
+         </remarks>
+      </dmStatus>
+   </identAndStatusSection>
+   <content id="SPEC-0001">
+      <wiringFields>
+         <descrWire>
+            <descrCircuitIdent>
+               <fieldName>Circuit code</fieldName>
+               <descr>Circuit code identifies the system or circuit to which the wire belongs.</descr>
+            </descrCircuitIdent>
+            <descrWireNumber>
+               <fieldName>Wire number</fieldName>
+               <descr>Wire number contains the most specific part of the identification of a wire.</descr>
+            </descrWireNumber>
+            <descrSectionIdent>
+               <fieldName>Wire section identification</fieldName>
+               <descr>Wire section identification identifies different sections of wires which are connected by non-functional breaks.</descr>
+            </descrSectionIdent>
+            <descrWireType>
+               <fieldName>Wire type</fieldName>
+               <descr>Wire type gives information on the type of a wire.</descr>
+            </descrWireType>
+            <descrWireGauge>
+               <fieldName>Wire gauge</fieldName>
+               <descr>Wire gauge contains the gauge of a wire.</descr>
+            </descrWireGauge>
+            <descrPartNumber>
+               <fieldName>Wire part number</fieldName>
+               <descr>Wire part number contains the project specific part number of a wire.</descr>
+            </descrPartNumber>
+            <descrHarnessIdent>
+               <fieldName>Harness identification</fieldName>
+               <descr>Harness identification contains the identification of the harness to which a wire belongs.</descr>
+            </descrHarnessIdent>
+            <descrWireSeqNumber>
+               <fieldName>Wire sequential number</fieldName>
+               <descr>Wire sequential number contains the sequential number of a wire, which can be part of the entire wire identification.</descr>
+            </descrWireSeqNumber>
+            <descrWireInfoCircuitIdent>
+               <fieldName>Wire information circuit code</fieldName>
+               <descr>Wire information circuit code contains the identification of the system or circuit to which the wire belongs.</descr>
+            </descrWireInfoCircuitIdent>
+            <descrWireInfoSectionIdent>
+               <fieldName>Wire section identification (for the wire information branch)</fieldName>
+               <descr>Wire section identification (for the wire information branch) contains the identification of different sections of wires which are connected by non-functional breaks.</descr>
+            </descrWireInfoSectionIdent>
+            <descrEmcCode>
+               <fieldName>Electromagnetic compatibility code</fieldName>
+               <descr>Electromagnetic compatibility code identifies the electromagnetic compatibility (EMC) classification of a wire.</descr>
+            </descrEmcCode>
+            <descrLength>
+               <fieldName>Wire length</fieldName>
+               <descr>Wire length contains the length of a wire.</descr>
+            </descrLength>
+            <descrWireColor>
+               <fieldName>Wire color</fieldName>
+               <descr>Wire color identifies the color of a wire.</descr>
+            </descrWireColor>
+            <descrTwist>
+               <fieldName>Twist information</fieldName>
+               <descr>Twist information contain information about the twisting of a wire. Twist information can be different on both sides of a wire.</descr>
+            </descrTwist>
+            <descrCoaxialCableFlag>
+               <fieldName>Coaxial cable flag</fieldName>
+               <descr>Coaxial cable flag identifies a wire as coaxial cable.</descr>
+            </descrCoaxialCableFlag>
+            <descrTriaxialCableFlag>
+               <fieldName>Tri-axial cable flag</fieldName>
+               <descr>Tri-axial cable flag identifies a wire as tri-axial cable.</descr>
+            </descrTriaxialCableFlag>
+            <descrSignalInfo>
+               <fieldName>Signal information</fieldName>
+               <descr>Signal information identifies the signals on a wire. This can be the signal name, the effective voltage, the effective current or the waveform of the signal.</descr>
+            </descrSignalInfo>
+            <descrFunctionalItemRef>
+               <fieldName>Functional item reference</fieldName>
+               <descr>Functional item reference identifies an electrical equipment to which a wire extremity is connected.</descr>
+            </descrFunctionalItemRef>
+            <descrContact>
+               <fieldName>Contact</fieldName>
+               <descr>Contact describes the contact identification.</descr>
+            </descrContact>
+            <descrWireConnectionCode>
+               <fieldName>Wire connection code</fieldName>
+               <descr>Wire connection code is used for generic identification of the electrical potential to which a wire end is connected in the related sub elements. It is used for data processing purposes.</descr>
+            </descrWireConnectionCode>
+            <descrNetworkAnalysisCode>
+               <fieldName>Network analysis code</fieldName>
+               <descr>Network analysis code describes the behavior of the wire end in the network connection analysis in relation to other wires via the equipment. It is used for data processing purposes.</descr>
+            </descrNetworkAnalysisCode>
+            <descrGroupCode>
+               <fieldName>Group code</fieldName>
+               <descr>Group code indicates the physical grouping of wires connected to the same contact.</descr>
+            </descrGroupCode>
+            <descrScreen>
+               <fieldName>Screen information</fieldName>
+               <descr>Screen information contains information about the type of the wire in a shielding situation and the identification of the screen to which the wire end is connected.</descr>
+            </descrScreen>
+            <descrPreparationInfo>
+               <fieldName>Preparation information</fieldName>
+               <descr>Preparation information gives the preparation information for wires before connecting to a contact.</descr>
+            </descrPreparationInfo>
+            <descrFinishingInfo>
+               <fieldName>Finishing information</fieldName>
+               <descr>Finishing information gives the finishing information for the connection of wires to a contact.</descr>
+            </descrFinishingInfo>
+            <descrResponsiblePartnerCompany>
+               <fieldName>Responsible partner company information</fieldName>
+               <descr>Responsible partner company information indicates the company or the organization, which is responsible for the wire data.</descr>
+            </descrResponsiblePartnerCompany>
+            <descrRouting>
+               <fieldName>Routing</fieldName>
+               <descr>Routing gives routing information of a wire via clipping points and special components (eg, current transformers, panels or bungs), through which wires pass in the related sub elements.</descr>
+            </descrRouting>
+            <descrFeedThru>
+               <fieldName>Feed-thru information</fieldName>
+               <descr>Feed-thru information identifies equipment through which a wire passes.</descr>
+            </descrFeedThru>
+            <descrWireRoute>
+               <fieldName>Wire route lane code</fieldName>
+               <descr>Wire route lane code identifies the lane of the primary systems with a code where the wire is routed.</descr>
+            </descrWireRoute>
+            <descrRestriction>
+               <fieldName>Restriction</fieldName>
+               <descr>Restriction gives restrictions concerning the wire.</descr>
+            </descrRestriction>
+            <descrNextHigherAssy>
+               <fieldName>Next higher assembly information</fieldName>
+               <descr>Next higher assembly information identifies the physical or logical assembly of which a wire is a part.</descr>
+            </descrNextHigherAssy>
+            <descrFunctionalDescrRef>
+               <fieldName>Functional description reference</fieldName>
+               <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a wire.</descr>
+            </descrFunctionalDescrRef>
+            <descrIllustrationRef>
+               <fieldName>Illustration reference</fieldName>
+               <descr>Illustration reference gives references to other parts of the electrical system publications, which show wiring illustrations (eg, circuit or wiring diagrams).</descr>
+            </descrIllustrationRef>
+         </descrWire>
+         <descrHarness>
+            <descrHarnessIdent>
+               <fieldName>Harness identification</fieldName>
+               <descr>Harness identification contains the identification of a harness.</descr>
+            </descrHarnessIdent>
+            <descrPartNumber>
+               <fieldName>Harness part number</fieldName>
+               <descr>Harness part number contains the project specific part number of a harness.</descr>
+            </descrPartNumber>
+            <descrAltPartNumber>
+               <fieldName>Alternative harness part number</fieldName>
+               <descr>Alternative harness part number identifies part numbers that can be used alternatively for a harness.</descr>
+            </descrAltPartNumber>
+            <descrManufacturerCode>
+               <fieldName>Harness manufacturer code</fieldName>
+               <descr>Harness manufacturer code gives the manufacturer for an alternative harness part number.</descr>
+            </descrManufacturerCode>
+            <descrHarnessVariantIdent>
+               <fieldName>Harness variant identification</fieldName>
+               <descr>Harness variant identification contains the variant of a harness. Improvements during series production or engineering requirements are reasons why different harnesses are used in one type of system.</descr>
+            </descrHarnessVariantIdent>
+            <descrHarnessVariantIssue>
+               <fieldName>Harness variant issue</fieldName>
+               <descr>Harness variant issue contains the issue of a harness variant.</descr>
+            </descrHarnessVariantIssue>
+            <descrHarnessName>
+               <fieldName>Harness name</fieldName>
+               <descr>Harness name contains the name of a harness.</descr>
+            </descrHarnessName>
+            <descrEmcCode>
+               <fieldName>Electromagnetic compatibility code</fieldName>
+               <descr>Electromagnetic compatibility code identifies the electromagnetic compatibility (EMC) classification of a harness.</descr>
+            </descrEmcCode>
+            <descrMinTemperature>
+               <fieldName>Minimum temperature</fieldName>
+               <descr>Minimum temperature describes the minimum temperature, for which the harness is approved.</descr>
+            </descrMinTemperature>
+            <descrMaxTemperature>
+               <fieldName>Maximum temperature</fieldName>
+               <descr>Maximum temperature describes the maximum temperature, for which the harness is approved.</descr>
+            </descrMaxTemperature>
+            <descrHarnessEnvironment>
+               <fieldName>Harness environment</fieldName>
+               <descr>Harness environment contains information concerning the environment in which a harness is located.</descr>
+            </descrHarnessEnvironment>
+            <descrSleeve>
+               <fieldName>Harness sleeve</fieldName>
+               <descr>Harness sleeve contains the project specific part number of the harness sleeve.</descr>
+            </descrSleeve>
+            <descrRouting>
+               <fieldName>Routing</fieldName>
+               <descr>Routing gives routing information of a harness via clipping points and special components (eg, panels or bungs).</descr>
+            </descrRouting>
+            <descrFeedThru>
+               <fieldName>Feed-thru information</fieldName>
+               <descr>Feed-thru information identifies equipment through which a harness passes.</descr>
+            </descrFeedThru>
+            <descrResponsiblePartnerCompany>
+               <fieldName>Responsible partner company information</fieldName>
+               <descr>Responsible partner company information indicates the company or the organization, which is responsible for the harness data.</descr>
+            </descrResponsiblePartnerCompany>
+            <descrFunctionalDescrRef>
+               <fieldName>Functional description reference</fieldName>
+               <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a harness.</descr>
+            </descrFunctionalDescrRef>
+            <descrIllustrationRef>
+               <fieldName>Illustration reference</fieldName>
+               <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the harness (eg, the routing of the harness).</descr>
+            </descrIllustrationRef>
+         </descrHarness>
+         <descrElectricalEquip>
+            <descrFunctionalItemRef>
+               <fieldName>Functional item reference</fieldName>
+               <descr>Functional item reference identifies an electrical equipment.</descr>
+            </descrFunctionalItemRef>
+            <descrPartNumber>
+               <fieldName>Electrical equipment part number</fieldName>
+               <descr>Electrical equipment part number contains the project specific part number of an electrical equipment.</descr>
+            </descrPartNumber>
+            <descrAltPartNumber>
+               <fieldName>Alternative electrical equipment part number</fieldName>
+               <descr>Alternative electrical equipment part number identifies part numbers that can be used alternatively for an electrical equipment.</descr>
+            </descrAltPartNumber>
+            <descrManufacturerCode>
+               <fieldName>Electrical equipment manufacturer code</fieldName>
+               <descr>Electrical equipment manufacturer code gives the manufacturer for an alternative electrical equipment part number.</descr>
+            </descrManufacturerCode>
+            <descrInstallationLocation>
+               <fieldName>Installation location</fieldName>
+               <descr>Installation location contains the installation location information of the electrical equipment.</descr>
+            </descrInstallationLocation>
+            <descrAccessDoorOrPanel>
+               <fieldName>Access door or panel</fieldName>
+               <descr>Access door or panel identifies doors or panels to be opened for getting access to the electrical equipment.</descr>
+            </descrAccessDoorOrPanel>
+            <descrAssy>
+               <fieldName>Electrical equipment assembly</fieldName>
+               <descr>Electrical equipment assembly contains assembly information for electrical components in the related sub elements.</descr>
+            </descrAssy>
+            <descrNextHigherAssy>
+               <fieldName>Next higher assembly information</fieldName>
+               <descr>Next higher assembly information identifies the physical or logical assembly of which an electrical equipment is a part.</descr>
+            </descrNextHigherAssy>
+            <descrPositionOnNextHigherAssy>
+               <fieldName>Position on next higher assembly</fieldName>
+               <descr>Position on next higher assembly identifies the position of the electrical equipment within the box or panel. The position is indicated either by a direct position or by grid coordinates.</descr>
+            </descrPositionOnNextHigherAssy>
+            <descrMaxMountingPositions>
+               <fieldName>Maximum number of mounting positions</fieldName>
+               <descr>Maximum number of mounting positions contains the number of mounting positions on a next higher assembly.</descr>
+            </descrMaxMountingPositions>
+            <descrSystemBreakdownCode>
+               <fieldName>System breakdown code</fieldName>
+               <descr>System breakdown code identifies the breakdown of the electrical equipment in the system.</descr>
+            </descrSystemBreakdownCode>
+            <descrSiblingPlugIdent>
+               <fieldName>Sibling plug identification</fieldName>
+               <descr>Sibling plug identification contains the identification of the functional item of the mate connector.</descr>
+            </descrSiblingPlugIdent>
+            <descrTransverseLink>
+               <fieldName>Transverse link information</fieldName>
+               <descr>Transverse link information provides information about internally or externally realized electrical connections of different contacts/bolts of equipment.</descr>
+            </descrTransverseLink>
+            <descrConnectionListClass>
+               <fieldName>Connection list class</fieldName>
+               <descr>Connection list class assigns electrical items to specific classes, eg connectors, switches, relays etc. It is used for data processing purposes.</descr>
+            </descrConnectionListClass>
+            <descrElectricalContact>
+               <fieldName>Contact identification</fieldName>
+               <descr>Contact identification gives the identification of an electrical contact.</descr>
+            </descrElectricalContact>
+            <descrElectricalStateDescr>
+               <fieldName>Electrical state description</fieldName>
+               <descr>Electrical state description gives the narrative description of an electrical state, for example "ENERGIZED".</descr>
+            </descrElectricalStateDescr>
+            <descrResponsiblePartnerCompany>
+               <fieldName>Responsible partner company information</fieldName>
+               <descr>Responsible partner company information indicates the company or the organization, which is responsible for the electrical equipment data.</descr>
+            </descrResponsiblePartnerCompany>
+            <descrEquipName>
+               <fieldName>Electrical equipment name</fieldName>
+               <descr>Electrical equipment name gives the nomenclature of an electrical equipment, eg CONNECTOR or FRONT LIGHT.</descr>
+            </descrEquipName>
+            <descrReqQuantity>
+               <fieldName>Quantity information</fieldName>
+               <descr>Quantity information contains the number of multiple occurrence electrical equipment installed on the Product.</descr>
+            </descrReqQuantity>
+            <descrEquipDescrRef>
+               <fieldName>Electrical equipment description reference</fieldName>
+               <descr>Electrical equipment description reference gives references to other parts of the electrical system publications for description of an electrical equipment in the related sub element.</descr>
+            </descrEquipDescrRef>
+            <descrFunctionalDescrRef>
+               <fieldName>Functional description reference</fieldName>
+               <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about an electrical equipment.</descr>
+            </descrFunctionalDescrRef>
+            <descrIllustrationRef>
+               <fieldName>Illustration reference</fieldName>
+               <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the electrical equipment.</descr>
+            </descrIllustrationRef>
+         </descrElectricalEquip>
+         <descrStandardPartGroup>
+            <descrConnector>
+               <descrPartNumber>
+                  <fieldName>Connector part number</fieldName>
+                  <descr>Connector part number contains the project specific part number of a connector.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative connector part number</fieldName>
+                  <descr>Alternative connector part number identifies part numbers that can be used alternatively for a connector.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Connector manufacturer code</fieldName>
+                  <descr>Connector manufacturer code gives the manufacturer for an alternative connector part number.</descr>
+               </descrManufacturerCode>
+               <descrMass>
+                  <fieldName>Connector mass</fieldName>
+                  <descr>Connector mass gives the mass of the connector.</descr>
+               </descrMass>
+               <descrOrientation>
+                  <fieldName>Orientation</fieldName>
+                  <descr>Orientation gives the orientation/polarization information of a connector. The polarization code is the angle between the main keyway and the other keyways of the connector.</descr>
+               </descrOrientation>
+               <descrAssy>
+                  <fieldName>Connector assembly</fieldName>
+                  <descr>Connector assembly contains assembly information for electrical components in the related sub elements.</descr>
+               </descrAssy>
+               <descrRack>
+                  <fieldName>Rack</fieldName>
+                  <descr>Rack identifies the insert of rack &amp; panel connectors in case all inserts are given the part number of the complete connector.</descr>
+               </descrRack>
+               <descrContactCount>
+                  <fieldName>Contact count</fieldName>
+                  <descr>Contact count gives the number of contacts of the connector.</descr>
+               </descrContactCount>
+               <descrContact>
+                  <fieldName>Contact</fieldName>
+                  <descr>Contact describes the contact identification.</descr>
+               </descrContact>
+               <descrContactDiameter>
+                  <fieldName>Contact diameter</fieldName>
+                  <descr>Contact diameter gives the diameter of a contact.</descr>
+               </descrContactDiameter>
+               <descrFinishingInfo>
+                  <fieldName>Finishing information</fieldName>
+                  <descr>Finishing information gives the finishing information for the connection of connectors to a contact.</descr>
+               </descrFinishingInfo>
+               <descrThermoCouplePlus>
+                  <fieldName>Thermocouple plus</fieldName>
+                  <descr>Thermocouple plus identifies the positive contact of a thermocouple with an 'Y', otherwise with an 'N'.</descr>
+               </descrThermoCouplePlus>
+               <descrThermoCoupleMinus>
+                  <fieldName>Thermocouple minus</fieldName>
+                  <descr>Thermocouple minus identifies the negative contact of a thermocouple with an 'Y', otherwise with an 'N'.</descr>
+               </descrThermoCoupleMinus>
+               <descrSpecialTerminal>
+                  <fieldName>Special terminal information</fieldName>
+                  <descr>Special terminal information identifies special terminals. A special terminal is identified with 'Y', otherwise the element is not used.</descr>
+               </descrSpecialTerminal>
+               <descrCoaxialCableFlag>
+                  <fieldName>Coaxial cable flag</fieldName>
+                  <descr>Coaxial cable flag identifies a connector as coaxial connector.</descr>
+               </descrCoaxialCableFlag>
+               <descrTriaxialCableFlag>
+                  <fieldName>Tri-axial cable flag</fieldName>
+                  <descr>Tri-axial cable flag identifies a connector as tri-axial connector.</descr>
+               </descrTriaxialCableFlag>
+               <descrTerminationModuleGroupingValue>
+                  <fieldName>Termination module grouping information</fieldName>
+                  <descr>Termination module grouping information provides grouping information for contacts that belong to the same module of a termination module assembly.</descr>
+               </descrTerminationModuleGroupingValue>
+               <descrBlockGroupingValue>
+                  <fieldName>Block grouping information</fieldName>
+                  <descr>Block grouping information identifies contacts of an equipment that belong to the same block of a termination module assembly or the same pole of a switch or a relay.</descr>
+               </descrBlockGroupingValue>
+               <descrShuntGroupingValue>
+                  <fieldName>Shunt grouping information</fieldName>
+                  <descr>Shunt grouping information identifies contacts of an equipment that belong to the same shunt/bus of a termination module or the same position of a switch or a relay.</descr>
+               </descrShuntGroupingValue>
+               <descrElectricalContact>
+                  <fieldName>Contact identification</fieldName>
+                  <descr>Contact identification gives the identification of an electrical contact.</descr>
+               </descrElectricalContact>
+               <descrElectricalStateDescr>
+                  <fieldName>Electrical state description</fieldName>
+                  <descr>Electrical state description gives the narrative description of an electrical state, for example "ENERGIZED".</descr>
+               </descrElectricalStateDescr>
+               <descrAccessoryPartNumber>
+                  <fieldName>Accessory part number</fieldName>
+                  <descr>Accessory part number identifies accessories with the project specific part number.</descr>
+               </descrAccessoryPartNumber>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a connector.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the connector (eg, the insert arrangement of the connector).</descr>
+               </descrIllustrationRef>
+            </descrConnector>
+            <descrDistributionPart>
+               <descrPartNumber>
+                  <fieldName>Distribution part part number</fieldName>
+                  <descr>Distribution part part number contains the project specific part number of a distribution part.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative distribution part part number</fieldName>
+                  <descr>Alternative distribution part part number identifies part numbers that can be used alternatively for a distribution part.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Distribution part manufacturer code</fieldName>
+                  <descr>Distribution part manufacturer code gives the manufacturer for an alternative distribution part part number.</descr>
+               </descrManufacturerCode>
+               <descrContactSize>
+                  <fieldName>Contact size</fieldName>
+                  <descr>Contact size gives the size of the contact.</descr>
+               </descrContactSize>
+               <descrMaterial>
+                  <fieldName>Distribution part material</fieldName>
+                  <descr>Distribution part material describes the material of which the distribution part is made.</descr>
+               </descrMaterial>
+               <descrMass>
+                  <fieldName>Distribution part mass</fieldName>
+                  <descr>Distribution part mass gives the mass of the distribution part.</descr>
+               </descrMass>
+               <descrWireColor>
+                  <fieldName>Distribution part color</fieldName>
+                  <descr>Distribution part color identifies the color of a distribution part.</descr>
+               </descrWireColor>
+               <descrSurfaceProtection>
+                  <fieldName>Protection</fieldName>
+                  <descr>Protection gives the protection information applied to the surface of a distribution part.</descr>
+               </descrSurfaceProtection>
+               <descrContactDiameter>
+                  <fieldName>Contact diameter</fieldName>
+                  <descr>Contact diameter gives the diameter of a contact.</descr>
+               </descrContactDiameter>
+               <descrMinTemperature>
+                  <fieldName>Minimum temperature</fieldName>
+                  <descr>Minimum temperature describes the minimum temperature, for which the distribution part is approved.</descr>
+               </descrMinTemperature>
+               <descrMaxTemperature>
+                  <fieldName>Maximum temperature</fieldName>
+                  <descr>Maximum temperature describes the maximum temperature, for which the distribution part is approved.</descr>
+               </descrMaxTemperature>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a distribution part.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the distribution part.</descr>
+               </descrIllustrationRef>
+            </descrDistributionPart>
+            <descrAccessory>
+               <descrPartNumber>
+                  <fieldName>Accessory part number</fieldName>
+                  <descr>Accessory part number contains the project specific part number of an accessory.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative accessory part number</fieldName>
+                  <descr>Alternative accessory part number identifies part numbers that can be used alternatively for an accessory.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Accessory manufacturer code</fieldName>
+                  <descr>Accessory manufacturer code gives the manufacturer for an alternative accessory part number.</descr>
+               </descrManufacturerCode>
+               <descrMass>
+                  <fieldName>Accessory mass</fieldName>
+                  <descr>Accessory mass gives the mass of the accessory.</descr>
+               </descrMass>
+               <descrOrientation>
+                  <fieldName>Orientation</fieldName>
+                  <descr>Orientation gives the orientation information of an accessory. The orientation is the angle of a cable clamp.</descr>
+               </descrOrientation>
+               <descrAssy>
+                  <fieldName>Accessory assembly</fieldName>
+                  <descr>Accessory assembly contains assembly information for electrical components in the related sub elements.</descr>
+               </descrAssy>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about an accessory.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the accessory.</descr>
+               </descrIllustrationRef>
+            </descrAccessory>
+            <descrSolderSleeve>
+               <descrPartNumber>
+                  <fieldName>Solder sleeve part number</fieldName>
+                  <descr>Solder sleeve part number contains the project specific part number of a solder sleeve.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative solder sleeve part number</fieldName>
+                  <descr>Alternative solder sleeve part number identifies part numbers that can be used alternatively for a solder sleeve.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Solder sleeve manufacturer code</fieldName>
+                  <descr>Solder sleeve manufacturer code gives the manufacturer for an alternative solder sleeve part number.</descr>
+               </descrManufacturerCode>
+               <descrLength>
+                  <fieldName>Solder sleeve length</fieldName>
+                  <descr>Solder sleeve length contains the length of a solder sleeve.</descr>
+               </descrLength>
+               <descrMaterial>
+                  <fieldName>Solder sleeve material</fieldName>
+                  <descr>Solder sleeve material describes the material of which the solder sleeve is made.</descr>
+               </descrMaterial>
+               <descrMass>
+                  <fieldName>Solder sleeve mass</fieldName>
+                  <descr>Solder sleeve mass gives the mass of the solder sleeve.</descr>
+               </descrMass>
+               <descrMinDiameter>
+                  <fieldName>Minimum sleeve diameter</fieldName>
+                  <descr>Minimum sleeve diameter gives the minimum diameter of the solder sleeve.</descr>
+               </descrMinDiameter>
+               <descrMaxDiameter>
+                  <fieldName>Maximum sleeve diameter</fieldName>
+                  <descr>Maximum sleeve diameter gives the maximum diameter of the solder sleeve.</descr>
+               </descrMaxDiameter>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a solder sleeve.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the solder sleeve.</descr>
+               </descrIllustrationRef>
+            </descrSolderSleeve>
+            <descrShrinkSleeve>
+               <descrPartNumber>
+                  <fieldName>Shrink sleeve part number</fieldName>
+                  <descr>Shrink sleeve part number contains the project specific part number of a skrink sleeve.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative shrink sleeve part number</fieldName>
+                  <descr>Alternative shrink sleeve part number identifies part numbers that can be used alternatively for a shrink sleeve.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Shrink sleeve manufacturer code</fieldName>
+                  <descr>Shrink sleeve manufacturer code gives the manufacturer for an alternative shrink sleeve part number.</descr>
+               </descrManufacturerCode>
+               <descrSize>
+                  <fieldName>Shrink sleeve size</fieldName>
+                  <descr>Shrink sleeve size gives the size information of the shrink sleeve.</descr>
+               </descrSize>
+               <descrMass>
+                  <fieldName>Shrink sleeve mass</fieldName>
+                  <descr>Shrink sleeve mass gives the mass of the shrink sleeve.</descr>
+               </descrMass>
+               <descrWireColor>
+                  <fieldName>Shrink sleeve color</fieldName>
+                  <descr>Shrink sleeve color identifies the color of a shrink sleeve.</descr>
+               </descrWireColor>
+               <descrMinDiameter>
+                  <fieldName>Minimum sleeve diameter</fieldName>
+                  <descr>Minimum sleeve diameter gives the minimum diameter of the shrink sleeve.</descr>
+               </descrMinDiameter>
+               <descrMaxDiameter>
+                  <fieldName>Maximum sleeve diameter</fieldName>
+                  <descr>Maximum sleeve diameter gives the maximum diameter of the shrink sleeve.</descr>
+               </descrMaxDiameter>
+               <descrMinTemperature>
+                  <fieldName>Minimum temperature</fieldName>
+                  <descr>Minimum temperature describes the minimum temperature, for which the shrink sleeve is approved.</descr>
+               </descrMinTemperature>
+               <descrMaxTemperature>
+                  <fieldName>Maximum temperature</fieldName>
+                  <descr>Maximum temperature describes the maximum temperature, for which the shrink sleeve is approved.</descr>
+               </descrMaxTemperature>
+               <descrMinHarnessSize>
+                  <fieldName>Minimum harness size</fieldName>
+                  <descr>Minimum harness size gives the minimum size of the harness, to which the shrink sleeve may be applied.</descr>
+               </descrMinHarnessSize>
+               <descrMaxHarnessSize>
+                  <fieldName>Maximum harness size</fieldName>
+                  <descr>Maximum harness size gives the maximum size of the harness, to which the shrink sleeve may be applied.</descr>
+               </descrMaxHarnessSize>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a shrink sleeve.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the shrink sleeve.</descr>
+               </descrIllustrationRef>
+            </descrShrinkSleeve>
+            <descrIdentSleeve>
+               <descrPartNumber>
+                  <fieldName>Identification sleeve part number</fieldName>
+                  <descr>Identification sleeve part number contains the project specific part number of an identification sleeve.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative identification sleeve part number</fieldName>
+                  <descr>Alternative identification sleeve part number identifies part numbers that can be used alternatively for an identification sleeve.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Identification sleeve manufacturer code</fieldName>
+                  <descr>Identification sleeve manufacturer code gives the manufacturer for an alternative identification sleeve part number.</descr>
+               </descrManufacturerCode>
+               <descrLength>
+                  <fieldName>Identification sleeve length</fieldName>
+                  <descr>Identification sleeve length contains the length of an identification sleeve.</descr>
+               </descrLength>
+               <descrMaterial>
+                  <fieldName>Identification sleeve material</fieldName>
+                  <descr>Identification sleeve material describes the material of which the identification sleeve is made.</descr>
+               </descrMaterial>
+               <descrMass>
+                  <fieldName>Identification sleeve mass</fieldName>
+                  <descr>Identification sleeve mass gives the mass of the identification sleeve.</descr>
+               </descrMass>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about an identification sleeve.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the identification sleeve.</descr>
+               </descrIllustrationRef>
+            </descrIdentSleeve>
+            <descrConduit>
+               <descrPartNumber>
+                  <fieldName>Conduit part number</fieldName>
+                  <descr>Conduit part number contains the project specific part number of a conduit.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative conduit part number</fieldName>
+                  <descr>Alternative conduit part number identifies part numbers that can be used alternatively for a conduit.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Conduit manufacturer code</fieldName>
+                  <descr>Conduit manufacturer code gives the manufacturer for an alternative conduit part number.</descr>
+               </descrManufacturerCode>
+               <descrSize>
+                  <fieldName>Conduit size</fieldName>
+                  <descr>Conduit size gives the size information of the conduit.</descr>
+               </descrSize>
+               <descrMass>
+                  <fieldName>Conduit mass</fieldName>
+                  <descr>Conduit mass gives the mass of the conduit.</descr>
+               </descrMass>
+               <descrWireColor>
+                  <fieldName>Conduit color</fieldName>
+                  <descr>Conduit color identifies the color of a conduit.</descr>
+               </descrWireColor>
+               <descrWallThickness>
+                  <fieldName>Wall thickness</fieldName>
+                  <descr>Wall thickness identifies the wall thickness of a conduit.</descr>
+               </descrWallThickness>
+               <descrMinTemperature>
+                  <fieldName>Minimum temperature</fieldName>
+                  <descr>Minimum temperature describes the minimum temperature, for which the conduit is approved.</descr>
+               </descrMinTemperature>
+               <descrMaxTemperature>
+                  <fieldName>Maximum temperature</fieldName>
+                  <descr>Maximum temperature describes the maximum temperature, for which the conduit is approved.</descr>
+               </descrMaxTemperature>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a conduit.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the conduit.</descr>
+               </descrIllustrationRef>
+            </descrConduit>
+            <descrWireMaterial>
+               <descrPartNumber>
+                  <fieldName>Wire material part number</fieldName>
+                  <descr>Wire material part number contains the project specific part number of a wire material.</descr>
+               </descrPartNumber>
+               <descrAltPartNumber>
+                  <fieldName>Alternative wire material part number</fieldName>
+                  <descr>Alternative wire material part number identifies part numbers that can be used alternatively for a wire material.</descr>
+               </descrAltPartNumber>
+               <descrManufacturerCode>
+                  <fieldName>Wire material manufacturer code</fieldName>
+                  <descr>Wire material manufacturer code gives the manufacturer for an alternative wire material part number.</descr>
+               </descrManufacturerCode>
+               <descrWireType>
+                  <fieldName>Wire type</fieldName>
+                  <descr>Wire type gives information on the type of a wire material.</descr>
+               </descrWireType>
+               <descrWireGauge>
+                  <fieldName>Wire gauge</fieldName>
+                  <descr>Wire gauge contains the gauge of a wire material.</descr>
+               </descrWireGauge>
+               <descrNumberOfCores>
+                  <fieldName>Core</fieldName>
+                  <descr>Core gives the number of cores of the wire material.</descr>
+               </descrNumberOfCores>
+               <descrSize>
+                  <fieldName>Wire material size</fieldName>
+                  <descr>Wire material size gives the size information of the wire material.</descr>
+               </descrSize>
+               <descrMass>
+                  <fieldName>Wire material mass</fieldName>
+                  <descr>Wire material mass gives the mass of the wire material.</descr>
+               </descrMass>
+               <descrWireColor>
+                  <fieldName>Wire material color</fieldName>
+                  <descr>Wire material color identifies the color of a wire material.</descr>
+               </descrWireColor>
+               <descrOuterJacketColor>
+                  <fieldName>Outer jacket color</fieldName>
+                  <descr>Outer jacket color gives the color information of the outer jacket of the wire material.</descr>
+               </descrOuterJacketColor>
+               <descrOuterDiameter>
+                  <fieldName>Outer diameter</fieldName>
+                  <descr>Outer diameter gives the outer diameter of the wire material.</descr>
+               </descrOuterDiameter>
+               <descrResistance>
+                  <fieldName>Resistance</fieldName>
+                  <descr>Resistance gives the direct current resistance information of wire material.</descr>
+               </descrResistance>
+               <descrVoltage>
+                  <fieldName>Voltage</fieldName>
+                  <descr>Voltage gives the maximum operating voltage of the wire material.</descr>
+               </descrVoltage>
+               <descrAmperage>
+                  <fieldName>Amperage</fieldName>
+                  <descr>Amperage indicates the maximum value of amperes with which the wire material can be loaded.</descr>
+               </descrAmperage>
+               <descrMinTemperature>
+                  <fieldName>Minimum temperature</fieldName>
+                  <descr>Minimum temperature describes the minimum temperature, for which the wire material is approved.</descr>
+               </descrMinTemperature>
+               <descrMaxTemperature>
+                  <fieldName>Maximum temperature</fieldName>
+                  <descr>Maximum temperature describes the maximum temperature, for which the wire material is approved.</descr>
+               </descrMaxTemperature>
+               <descrScreenCount>
+                  <fieldName>Screen count</fieldName>
+                  <descr>Screen count contains the number of screens of the wire material.</descr>
+               </descrScreenCount>
+               <descrCoaxialCableFlag>
+                  <fieldName>Coaxial cable flag</fieldName>
+                  <descr>Coaxial cable flag identifies a wire material as coaxial wire material.</descr>
+               </descrCoaxialCableFlag>
+               <descrTriaxialCableFlag>
+                  <fieldName>Tri-axial cable flag</fieldName>
+                  <descr>Tri-axial cable flag identifies a wire material as tri-axial wire material.</descr>
+               </descrTriaxialCableFlag>
+               <descrImpedance>
+                  <fieldName>Impedance</fieldName>
+                  <descr>Impedance gives the alternating current impedance of wire material, normally of a cable.</descr>
+               </descrImpedance>
+               <descrFrequency>
+                  <fieldName>Frequency</fieldName>
+                  <descr>Frequency gives the frequency information in relation to the attenuation of the wire material.</descr>
+               </descrFrequency>
+               <descrAttenuation>
+                  <fieldName>Attenuation</fieldName>
+                  <descr>Attenuation indicates the nominal attenuation of the cable at a given frequency.</descr>
+               </descrAttenuation>
+               <descrFunctionalDescrRef>
+                  <fieldName>Functional description reference</fieldName>
+                  <descr>Functional description reference gives references to other parts of the electrical system publications for further functional information about a wire material.</descr>
+               </descrFunctionalDescrRef>
+               <descrIllustrationRef>
+                  <fieldName>Illustration reference</fieldName>
+                  <descr>Illustration reference gives references to other parts of the electrical system publications, which show illustrations of the wire material.</descr>
+               </descrIllustrationRef>
+            </descrWireMaterial>
+         </descrStandardPartGroup>
+      </wiringFields>
+   </content>
+</dmodule>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [
+]>
+<dmodule xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_6/xml_schema_flat/descript.xsd">
+   <identAndStatusSection>
+      <dmAddress>
+         <dmIdent>
+            <dmCode modelIdentCode="S1000DBIKE"
+                    systemDiffCode="AAA"
+                    systemCode="D00"
+                    subSystemCode="0"
+                    subSubSystemCode="0"
+                    assyCode="00"
+                    disassyCode="00"
+                    disassyCodeVariant="AA"
+                    infoCode="021"
+                    infoCodeVariant="A"
+                    itemLocationCode="D"/>
+            <language countryIsoCode="US" languageIsoCode="en"/>
+            <issueInfo issueNumber="001" inWork="00"/>
+         </dmIdent>
+         <dmAddressItems>
+            <issueDate year="2024" month="06" day="19"/>
+            <dmTitle>
+               <techName>S1000DBIKE</techName>
+               <infoName>Copyright</infoName>
+            </dmTitle>
+         </dmAddressItems>
+      </dmAddress>
+      <dmStatus issueType="new">
+         <security securityClassification="01"/>
+         <dataRestrictions>
+            <restrictionInstructions>
+               <dataDistribution>To be made available to all S1000D users.</dataDistribution>
+               <exportControl>
+                  <exportRegistrationStmt>
+                     <simplePara>Export of this data module to all countries that are the residence of organizations that are users of S1000D is permitted. Storage of this data module is to be at the discretion of the organization.</simplePara>
+                  </exportRegistrationStmt>
+               </exportControl>
+               <dataHandling>There are no specific handling instructions for this data module.</dataHandling>
+               <dataDestruction>Users may destroy this data module in accordance with their own local procedures.</dataDestruction>
+               <dataDisclosure>There are no dissemination limitations that apply to this data module.</dataDisclosure>
+            </restrictionInstructions>
+            <restrictionInfo>
+               <copyright>
+                  <copyrightPara>For Copyright information, refer to <dmRef>
+                        <dmRefIdent>
+                           <dmCode modelIdentCode="S1000DBIKE"
+                                   systemDiffCode="AAA"
+                                   systemCode="D00"
+                                   subSystemCode="0"
+                                   subSubSystemCode="0"
+                                   assyCode="00"
+                                   disassyCode="00"
+                                   disassyCodeVariant="AA"
+                                   infoCode="021"
+                                   infoCodeVariant="A"
+                                   itemLocationCode="D"/>
+                        </dmRefIdent>
+                     </dmRef>
+                  </copyrightPara>
+               </copyright>
+               <policyStatement>S1000D-SC-2016-017-002-00 Steering Committee TOR</policyStatement>
+               <dataConds>There are no known conditions that would change the data restrictions for, or security classification of, this data module.</dataConds>
+            </restrictionInfo>
+         </dataRestrictions>
+         <responsiblePartnerCompany enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </originator>
+         <applic>
+            <displayText>
+               <simplePara>All</simplePara>
+            </displayText>
+         </applic>
+         <brexDmRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="022"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </brexDmRef>
+         <qualityAssurance>
+            <firstVerification verificationType="tabtop"/>
+         </qualityAssurance>
+         <remarks>
+            <simplePara>CPF_2020-040EPWG Bike Enhancement with elements and attributes missing in the samples</simplePara>
+            <simplePara>copyright data module</simplePara>
+         </remarks>
+      </dmStatus>
+   </identAndStatusSection>
+   <content>
+      <description>
+         <para>
+            <emphasis>Copyright (C) 2024</emphasis> by AeroSpace, Security and Defence Industries Association of Europe - ASD</para>
+         <para>
+            <emphasis>Publishers:</emphasis>
+         </para>
+         <para>
+            <randomList listItemPrefix="pf01">
+               <listItem>
+                  <para>Aerospace, Security and Defence Industries Association of Europe</para>
+               </listItem>
+               <listItem>
+                  <para>Aerospace Industries Association of America</para>
+               </listItem>
+               <listItem>
+                  <para>ATA e-Business Program</para>
+               </listItem>
+            </randomList>
+         </para>
+         <para>
+            <emphasis>Limitations of liability:</emphasis>
+         </para>
+         <para>
+            <randomList listItemPrefix="pf02">
+               <listItem>
+                  <para>This material is provided "As is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.</para>
+               </listItem>
+               <listItem>
+                  <para>Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.</para>
+               </listItem>
+               <listItem>
+                  <para>Revisions to this document may occur after its issuance. The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable.</para>
+               </listItem>
+            </randomList>
+         </para>
+         <para>The details for copyright can be found in the S1000D Specification.</para>
+      </description>
+   </content>
+</dmodule>

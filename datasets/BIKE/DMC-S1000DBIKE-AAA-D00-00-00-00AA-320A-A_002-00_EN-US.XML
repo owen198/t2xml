@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dmodule [
+]>
+<dmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_6/xml_schema_flat/checklist.xsd">
+   <identAndStatusSection>
+      <dmAddress>
+         <dmIdent>
+            <dmCode modelIdentCode="S1000DBIKE"
+                    systemDiffCode="AAA"
+                    systemCode="D00"
+                    subSystemCode="0"
+                    subSubSystemCode="0"
+                    assyCode="00"
+                    disassyCode="00"
+                    disassyCodeVariant="AA"
+                    infoCode="320"
+                    infoCodeVariant="A"
+                    itemLocationCode="A"/>
+            <language languageIsoCode="en" countryIsoCode="US"/>
+            <issueInfo issueNumber="002" inWork="00"/>
+         </dmIdent>
+         <dmAddressItems>
+            <issueDate year="2024" month="06" day="19"/>
+            <dmTitle>
+               <techName>Bicycle</techName>
+               <infoName>Operation test</infoName>
+            </dmTitle>
+         </dmAddressItems>
+      </dmAddress>
+      <dmStatus issueType="status">
+         <security securityClassification="01"/>
+         <dataRestrictions>
+            <restrictionInstructions>
+               <dataDistribution>To be made available to all S1000D users.</dataDistribution>
+               <exportControl>
+                  <exportRegistrationStmt>
+                     <simplePara>Export of this data module to all countries that are the residence of organizations that are users of S1000D is permitted. Storage of this data module is to be at the discretion of the organization.</simplePara>
+                  </exportRegistrationStmt>
+               </exportControl>
+               <dataHandling>There are no specific handling instructions for this data module.</dataHandling>
+               <dataDestruction>Users may destroy this data module in accordance with their own local procedures.</dataDestruction>
+               <dataDisclosure>There are no dissemination limitations that apply to this data module.</dataDisclosure>
+            </restrictionInstructions>
+            <restrictionInfo>
+               <copyright>
+                  <copyrightPara>
+                     <emphasis>Copyright (C) 2024</emphasis> by AeroSpace, Security and Defence Industries Association of Europe - ASD</copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Publishers:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf01">
+                        <listItem>
+                           <para>Aerospace, Security and Defence Industries Association of Europe</para>
+                        </listItem>
+                        <listItem>
+                           <para>Aerospace Industries Association of America</para>
+                        </listItem>
+                        <listItem>
+                           <para>ATA e-Business Program</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <emphasis>Limitations of liability:</emphasis>
+                  </copyrightPara>
+                  <copyrightPara>
+                     <randomList listItemPrefix="pf02">
+                        <listItem>
+                           <para>This material is provided "As is" and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Neither ASD nor any person who has contributed to the creation, revision or maintenance of this material shall be liable for any direct, indirect, special or consequential damages or any other liability arising from any use of this material.</para>
+                        </listItem>
+                        <listItem>
+                           <para>Revisions to this document may occur after its issuance. The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable.</para>
+                        </listItem>
+                     </randomList>
+                  </copyrightPara>
+                  <copyrightPara>The details for copyright can be found in the S1000D Specification.</copyrightPara>
+               </copyright>
+               <!--<policyStatement>S1000D-SC-2016-017-002-00 Steering Committee TOR</policyStatement>--><dataConds>There are no known conditions that would change the data restrictions for, or security classification of, this data module.</dataConds>
+            </restrictionInfo>
+         </dataRestrictions>
+         <responsiblePartnerCompany enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </originator>
+         <applicCrossRefTableRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="00W"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </applicCrossRefTableRef>
+         <applic>
+            <displayText>
+               <simplePara>Mountain bicycle and Mountain storm Mk1</simplePara>
+            </displayText>
+            <evaluate andOr="and">
+               <assert applicPropertyIdent="type"
+                       applicPropertyType="prodattr"
+                       applicPropertyValues="Mountain bicycle"/>
+               <evaluate andOr="and">
+                  <assert applicPropertyIdent="model"
+                          applicPropertyType="prodattr"
+                          applicPropertyValues="Mountain storm"/>
+                  <assert applicPropertyIdent="version"
+                          applicPropertyType="prodattr"
+                          applicPropertyValues="Mk1"/>
+               </evaluate>
+            </evaluate>
+         </applic>
+         <brexDmRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="022"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </brexDmRef>
+         <qualityAssurance>
+            <firstVerification verificationType="tabtop"/>
+         </qualityAssurance>
+         <reasonForUpdate id="rfu_general" updateReasonType="urt03">
+            <simplePara>S1000D upissued</simplePara>
+         </reasonForUpdate>
+      </dmStatus>
+   </identAndStatusSection>
+   <content>
+      <checkList>
+         <preliminaryRqmts>
+            <reqCondGroup>
+               <noConds/>
+            </reqCondGroup>
+            <reqSupportEquips><!-- Optional tools --><supportEquipDescrGroup>
+                  <supportEquipDescr id="seq-0001">
+                     <name>1/4-Inch Drive Click Torque Wrench (20-150 in.-lb, 2.5-15 Nm)</name>
+                     <identNumber>
+                        <manufacturerCode>Amazon Basics</manufacturerCode>
+                        <partAndSerialNumber>
+                           <partNumber>DS-DTW-1</partNumber>
+                        </partAndSerialNumber>
+                     </identNumber>
+                     <reqQuantity>1</reqQuantity>
+                  </supportEquipDescr>
+                  <supportEquipDescr id="seq-0002">
+                     <name>Bike Repair Bag</name>
+                     <identNumber>
+                        <manufacturerCode>Enkrio</manufacturerCode>
+                        <partAndSerialNumber>
+                           <partNumber>ENOT000153</partNumber>
+                        </partAndSerialNumber>
+                     </identNumber>
+                     <reqQuantity>1</reqQuantity>
+                     <embeddedSupportEquipDescr id="seq-0003">
+                        <name>Multi Screwdriver Repair Tool</name>
+                        <identNumber>
+                           <manufacturerCode>Enkrio</manufacturerCode>
+                        </identNumber>
+                        <reqQuantity>1</reqQuantity>
+                     </embeddedSupportEquipDescr>
+                     <embeddedSupportEquipDescr id="seq-0004">
+                        <name>Tire Pry Rods</name>
+                        <identNumber>
+                           <manufacturerCode>Enkrio</manufacturerCode>
+                        </identNumber>
+                        <reqQuantity>1</reqQuantity>
+                     </embeddedSupportEquipDescr>
+                     <embeddedSupportEquipDescr id="seq-0005">
+                        <name>Tire Glue-free Repair Tools</name>
+                        <identNumber>
+                           <manufacturerCode>Enkrio</manufacturerCode>
+                        </identNumber>
+                        <reqQuantity>10</reqQuantity>
+                     </embeddedSupportEquipDescr>
+                  </supportEquipDescr>
+               </supportEquipDescrGroup>
+            </reqSupportEquips>
+            <reqSupplies>
+               <noSupplies/>
+            </reqSupplies>
+            <reqSpares>
+               <noSpares/>
+            </reqSpares>
+            <reqSafety>
+               <noSafety/>
+            </reqSafety>
+         </preliminaryRqmts>
+         <checkListInfo>
+            <checkListItems>
+               <checkListItem>
+                  <checkListProcedure>
+                     <checkListStep id="stp-0001">
+                        <para>Check condition of the bike before every ride.</para>
+                     </checkListStep>
+                     <checkListStep id="stp-0002">
+                        <para>Check all fasteners.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>No fasteners are loose.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Fasteners are not all tight.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Loose fastener</para>
+                                 <remedyAction>
+                                    <warning>
+                                       <warningAndCautionPara>Incorrect tightening force can result in component failure, leading to loss of control.</warningAndCautionPara>
+                                    </warning>
+                                    <para>Tighten and torque fastener according to specific maintenance instruction for the related component.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0003">
+                        <para>Lift the front wheel off the ground 2 to 3 inches and let it bounce on the ground.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Nothing rattles or appears to be loose.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Bike rattles or parts appear to be loose.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Part of the bike is loosely attached.</para>
+                                 <remedyAction>
+                                    <para>Secure the loose part according to the specific maintenance instruction for the related part.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0004">
+                        <para>Check the tire pressure.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Tire pressure is correct according to the specification printed on the side of the tire.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Tire pressure is not within the specification printed on the side of the tire.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Pressure is high.</para>
+                                 <remedyAction>
+                                    <para>Bleed air from the tire until it reaches maximum pressure printed on the side of the tire.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Pressure is low.</para>
+                                 <remedyAction>
+                                    <para>Add air to the tire not to exceed the maximum pressure printed on the side of the tire.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0005">
+                        <para>Inspect tire for cuts or cracks.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Tire has no cuts or cracks.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Tire has visible damage.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Tire is damaged.</para>
+                                 <remedyAction>
+                                    <warning>
+                                       <warningAndCautionPara>Riding the bike on a tire that has visible damage could cause the tire to fail, leading to loss of control.</warningAndCautionPara>
+                                    </warning>
+                                    <para>Replace tire before riding.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0006">
+                        <para>Ensure wheels are true spinning, without wobble.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Wheels do not wobble when spinning.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Wheels wobble when spinning.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Wheel is not true.</para>
+                                 <remedyAction>
+                                    <caution>
+                                       <warningAndCautionPara>Wheels must be true for rim brakes to work effectively.</warningAndCautionPara>
+                                    </caution>
+                                    <para>Have the bike serviced and have the wheels made true.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0007">
+                        <para>Inspect tire rims for wear.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>No wear indictor marks are visible on the rim.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>The rim has visible wear indicator marks.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Rim is beyond its service life.</para>
+                                 <remedyAction>
+                                    <warning>
+                                       <warningAndCautionPara>Riding a wheel that is at the end of its usable life can result in wheel failure and loss of control.</warningAndCautionPara>
+                                    </warning>
+                                    <para>Replace the wheel.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                     <checkListStep id="stp-0008">
+                        <para>Squeeze the brake levers.</para>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Front and back brakes securely grip wheel rim.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Front and back brakes do not close fully.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Brake pads do not touch wheel rim.</para>
+                                 <remedyAction>
+                                    <para>Tighten brakes according to maintenance procedure.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Control cables are not seated.</para>
+                                 <remedyAction>
+                                    <para>If cable is broken, replace cable.</para>
+                                 </remedyAction>
+                                 <remedyAction>
+                                    <para>If cable is intact, tighten brakes according to maintenance procedure.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="normal">
+                              <para>Brakes engage within 1 inch of brake lever movement.</para>
+                           </condition>
+                        </indicationGroup>
+                        <indicationGroup>
+                           <condition conditionType="abnormal">
+                              <para>Brake lever must move more than 1 inch to engage brakes.</para>
+                           </condition>
+                           <actionGroup>
+                              <malfunction>
+                                 <para>Brake levers touch handlebar before brakes engage.</para>
+                                 <remedyAction>
+                                    <para>Tighten brakes according to maintenance procedure.</para>
+                                 </remedyAction>
+                              </malfunction>
+                           </actionGroup>
+                        </indicationGroup>
+                     </checkListStep>
+                  </checkListProcedure>
+               </checkListItem>
+            </checkListItems>
+         </checkListInfo>
+      </checkList>
+   </content>
+</dmodule>
