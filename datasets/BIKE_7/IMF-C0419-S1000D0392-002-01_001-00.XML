@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<icnMetadataFile xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/icnmetadata.xsd">
+   <imfIdentAndStatusSection>
+      <imfAddress>
+         <imfIdent>
+            <imfCode imfIdentIcn="C0419-S1000D0392-002-01"/>
+            <issueInfo issueNumber="001" inWork="00"/>
+         </imfIdent>
+         <imfAddressItems>
+            <icnTitle/>
+         </imfAddressItems>
+      </imfAddress>
+      <imfStatus>
+         <security securityClassification="01"/>
+         <responsiblePartnerCompany enterpriseCode="1G6E8">
+            <enterpriseName>PENTECOM, INC.</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="1G6E8">
+            <enterpriseName>PENTECOM, INC.</enterpriseName>
+         </originator>
+         <qualityAssurance>
+            <unverified/>
+         </qualityAssurance>
+         <remarks>
+            <simplePara>CPF-2023-001US</simplePara>
+         </remarks>
+      </imfStatus>
+   </imfIdentAndStatusSection>
+   <imfContent>
+      <icnVariation>
+         <icnFlow>
+            <icnComponent id="text37-7" icnObjectIdents="text37-7" icnObjectTitle="Battery +"/>
+            <icnComponent id="path193" icnObjectIdents="path193"/>
+            <icnComponent id="path194" icnObjectIdents="path194"/>
+            <icnComponent id="text205" icnObjectIdents="text205" icnObjectTitle="VV1 3+"/>
+            <icnComponent id="path148-0" icnObjectIdents="path148-0"/>
+            <icnComponent id="text37-7-9"
+                          icnObjectIdents="text37-7-9"
+                          icnObjectTitle="Generator +"/>
+            <icnOneWayController icnObjectIdents="C_33AZXA" icnObjectTitle="Diode">
+               <icnOneWayInConnector id="C_33AZXA_IN"/>
+               <icnOneWayOutConnector id="C_33AZXA_OUT"/>
+            </icnOneWayController>
+            <icnComponent id="text37-7-9-5" icnObjectIdents="text37-7-9-5"/>
+            <icnComponent id="C_P02YN2" icnObjectIdents="C_P02YN2"/>
+            <icnComponent id="text203" icnObjectIdents="text203" icnObjectTitle="VV1 1+"/>
+            <icnComponent id="text204" icnObjectIdents="text204" icnObjectTitle="VV1 2+"/>
+            <icnComponent id="text206" icnObjectIdents="text206" icnObjectTitle="VV1 4+"/>
+            <icnComponent id="text37-7-8"
+                          icnObjectIdents="text37-7-8"
+                          icnObjectTitle="Battery -"/>
+            <icnComponent id="text37-7-4"
+                          icnObjectIdents="text37-7-4"
+                          icnObjectTitle="Generator GND"/>
+            <icnComponent id="path46" icnObjectIdents="path46"/>
+            <icnComponent id="text37-7-8-1"
+                          icnObjectIdents="text37-7-8-1"
+                          icnObjectTitle="Relay -"/>
+            <icnComponent id="text207" icnObjectIdents="text207" icnObjectTitle="VV1 1-"/>
+            <icnComponent id="text208" icnObjectIdents="text208" icnObjectTitle="VV1 2-"/>
+            <icnComponent id="text209" icnObjectIdents="text209" icnObjectTitle="VV1 3-"/>
+            <icnComponent id="text210" icnObjectIdents="text210" icnObjectTitle="VV1 4-"/>
+            <icnComponent id="C_GWH5ZF" icnObjectIdents="C_GWH5ZF"/>
+            <icnController id="S_V87V1O" icnObjectIdents="S_V87V1O" icnObjectTitle="Switch 1">
+               <icnPosition id="path34" icnPositionIdents="path34"/>
+               <icnPosition id="path1" icnPositionIdents="path1"/>
+            </icnController>
+            <icnController id="S_KZ0423"
+                           icnObjectIdents="S_KZ0423"
+                           icnObjectTitle="Generator relay">
+               <icnPosition id="polyline12" icnPositionIdents="polyline12"/>
+               <icnPosition id="path3" icnPositionIdents="path3"/>
+            </icnController>
+            <icnOffSheet id="text202" icnObjectIdents="text202" icnObjectTitle="SHEET 2">
+               <icnOffSheetTarget offSheetIcnBaseName="ICN-C0419-S1000D0NNN" offSheetRefIdent="text216">
+                  <icnOffSheetConnection offSheetComponentRefIdent="path225"
+                                         icnComponentRefId="text203"
+                                         icnConnectionDirection="both"/>
+                  <icnOffSheetConnection offSheetComponentRefIdent="path219"
+                                         icnComponentRefId="text204"
+                                         icnConnectionDirection="both"/>
+                  <icnOffSheetConnection offSheetComponentRefIdent="text51-6-9"
+                                         icnComponentRefId="text207"
+                                         icnConnectionDirection="both"/>
+                  <icnOffSheetConnection offSheetComponentRefIdent="text51-6-0"
+                                         icnComponentRefId="text208"
+                                         icnConnectionDirection="both"/>
+               </icnOffSheetTarget>
+            </icnOffSheet>
+            <icnConnection icnConnectedFromRefId="text37-7"
+                           icnConnectedToRefId="S_V87V1O"
+                           icnConnectionPathObjectIdents="path109 text33 polyline31"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire BA1AA"/>
+            <icnConnection icnConnectedFromRefId="path193"
+                           icnConnectedToRefId="path194"
+                           icnConnectionPathObjectIdents="polyline29 path200 text34"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire BA1AB"/>
+            <icnConnection icnConnectedFromRefId="text205"
+                           icnConnectedToRefId="S_KZ0423"
+                           icnConnectionPathObjectIdents="path166 text41 path202"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire LL1AA"/>
+            <icnConnection icnConnectedFromRefId="path193"
+                           icnConnectedToRefId="path1"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="path194"
+                           icnConnectedToRefId="polyline12"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="path148-0"
+                           icnConnectedToRefId="path3"
+                           icnConnectionPathObjectIdents="path168-7 path156 text35 polyline6"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire GE1AA"/>
+            <icnConnection icnConnectedFromRefId="text37-7-9"
+                           icnConnectedToRefId="path148-0"
+                           icnConnectionPathObjectIdents="path159"
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="path148-0"
+                           icnConnectedToRefId="C_33AZXA_IN"
+                           icnConnectionPathObjectIdents="path158 text36 polyline25"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire GE3AA"/>
+            <icnConnection icnConnectedFromRefId="text37-7-9-5"
+                           icnConnectedToRefId="C_33AZXA_OUT"
+                           icnConnectionPathObjectIdents="path187 text37 polyline24"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire GE5AA"/>
+            <icnConnection icnConnectedFromRefId="text205"
+                           icnConnectedToRefId="C_P02YN2"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="text203"
+                           icnConnectedToRefId="C_P02YN2"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="text204"
+                           icnConnectedToRefId="C_P02YN2"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="text206"
+                           icnConnectedToRefId="C_P02YN2"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="text203"
+                           icnConnectedToRefId="text202"
+                           icnConnectionPathObjectIdents="path204 text42 path182"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire SS1AA"/>
+            <icnConnection icnConnectedFromRefId="text204"
+                           icnConnectedToRefId="text202"
+                           icnConnectionPathObjectIdents="path206 text43 path183"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire SS2AA"/>
+            <icnConnection icnConnectedFromRefId="text37-7-4"
+                           icnConnectedToRefId="path46"
+                           icnConnectionPathObjectIdents="polyline17"
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="path46"
+                           icnConnectedToRefId="text37-7-8-1"
+                           icnConnectionPathObjectIdents="polyline23 text38 path189"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire GE4AA"/>
+            <icnConnection icnConnectedFromRefId="path46"
+                           icnConnectedToRefId="text209"
+                           icnConnectionPathObjectIdents="path191 text39 path164"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire GE2AA"/>
+            <icnConnection icnConnectedFromRefId="text37-7-8"
+                           icnConnectedToRefId="text210"
+                           icnConnectionPathObjectIdents="path196 text40 polyline32"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire BA2AA"/>
+            <icnConnection icnConnectedFromRefId="C_GWH5ZF"
+                           icnConnectedToRefId="text209"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="C_GWH5ZF"
+                           icnConnectedToRefId="text210"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="C_GWH5ZF"
+                           icnConnectedToRefId="text208"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="C_GWH5ZF"
+                           icnConnectedToRefId="text207"
+                           icnConnectionPathObjectIdents=""
+                           icnConnectionDirection="both"/>
+            <icnConnection icnConnectedFromRefId="text207"
+                           icnConnectedToRefId="text202"
+                           icnConnectionPathObjectIdents="path208 text44 path184"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire FL2AA"/>
+            <icnConnection icnConnectedFromRefId="text208"
+                           icnConnectedToRefId="text202"
+                           icnConnectionPathObjectIdents="path210 text45 path185"
+                           icnConnectionDirection="both"
+                           icnObjectTitle="Wire RL2AA"/>
+         </icnFlow>
+      </icnVariation>
+   </imfContent>
+</icnMetadataFile>

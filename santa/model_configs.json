@@ -1,0 +1,17 @@
+{
+  "folders": ["BIKE_7", "FOSSIG", "S1000D_spec_sample", "s1kd-tools-doc"],
+  "models": [
+    {"name": "BIKE_7_to_FOSSIG", "pretrain_source": "BIKE_7", "finetune_source": "FOSSIG"},
+    {"name": "BIKE_7_to_S1000D_spec_sample", "pretrain_source": "BIKE_7", "finetune_source": "S1000D_spec_sample"},
+    {"name": "BIKE_7_to_s1kd-tools-doc", "pretrain_source": "BIKE_7", "finetune_source": "s1kd-tools-doc"},
+    {"name": "FOSSIG_to_BIKE_7", "pretrain_source": "FOSSIG", "finetune_source": "BIKE_7"},
+    {"name": "FOSSIG_to_S1000D_spec_sample", "pretrain_source": "FOSSIG", "finetune_source": "S1000D_spec_sample"},
+    {"name": "FOSSIG_to_s1kd-tools-doc", "pretrain_source": "FOSSIG", "finetune_source": "s1kd-tools-doc"},
+    {"name": "S1000D_spec_sample_to_BIKE_7", "pretrain_source": "S1000D_spec_sample", "finetune_source": "BIKE_7"},
+    {"name": "S1000D_spec_sample_to_FOSSIG", "pretrain_source": "S1000D_spec_sample", "finetune_source": "FOSSIG"},
+    {"name": "S1000D_spec_sample_to_s1kd-tools-doc", "pretrain_source": "S1000D_spec_sample", "finetune_source": "s1kd-tools-doc"},
+    {"name": "s1kd-tools-doc_to_BIKE_7", "pretrain_source": "s1kd-tools-doc", "finetune_source": "BIKE_7"},
+    {"name": "s1kd-tools-doc_to_FOSSIG", "pretrain_source": "s1kd-tools-doc", "finetune_source": "FOSSIG"},
+    {"name": "s1kd-tools-doc_to_S1000D_spec_sample", "pretrain_source": "s1kd-tools-doc", "finetune_source": "S1000D_spec_sample"}
+  ]
+}

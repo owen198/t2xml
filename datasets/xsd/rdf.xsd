@@ -1,19 +1,23 @@
-<?xml version="1.0"?>
-<xs:schema xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dc="http://www.purl.org/dc/elements/1.1/" targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#" elementFormDefault="qualified" attributeFormDefault="qualified">
-	<xs:annotation id="version">
-		<xs:documentation>Issue number: 6</xs:documentation>
-		<xs:documentation>Issue date: 2024-06-19</xs:documentation>
-		<xs:documentation>URL: http://www.s1000d.org/S1000D_6/xml_schema_flat/rdf.xsd</xs:documentation>
-		<xs:documentation>Root element: dmodule</xs:documentation>
-		<xs:documentation>Remarks: none</xs:documentation>
-	</xs:annotation>
-	<xs:annotation id="copyright">
-		<xs:documentation>Copyright © 2024 by Aerospace, Security and Defence Industries Association of Europe - ASD
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           elementFormDefault="qualified"
+           attributeFormDefault="qualified">
+    <xs:annotation id="version">
+      <xs:documentation>Issue number: 7</xs:documentation>
+      <xs:documentation>Issue date: 2026-07-16</xs:documentation>
+      <xs:documentation>URL: http://www.s1000d.org/S1000D_7/xml_schema_flat/rdf.xsd</xs:documentation>
+      <xs:documentation>Remarks: none</xs:documentation>
+    </xs:annotation>
+    <xs:annotation id="copyright">
+      <xs:documentation>Copyright (C) 2026 by Aerospace, Security and Defence Industries Association of Europe - ASD
 
 Publishers:
-Aerospace, Security and Defence Industries Association of Europe
-Aerospace Industries Association of America
-ATA e-Business Program
+ 1) Aerospace, Security and Defence Industries Association of Europe
+ 2) Aerospace Industries Association of America
+ 3) ATA e-Business Program
 
 Limitations of Liability:
 1.  This material is provided 'As Is' and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.
@@ -21,13 +25,16 @@ Limitations of Liability:
 3.  Revisions to this document may occur after its issuance. The user is responsible for determining if revisions to the material contained in this document have occurred and are applicable.
 
 The details for copyright can be found in the S1000D Specification.</xs:documentation>
+    </xs:annotation>
+    <xs:annotation id="changes">
 	</xs:annotation>
-	<xs:import namespace="http://www.purl.org/dc/elements/1.1/" schemaLocation="dc.xsd"/>
-	<xs:element name="Description">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:group ref="dc:DCMES" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+    <xs:import namespace="http://www.purl.org/dc/elements/1.1/"
+               schemaLocation="dc.xsd"/>
+    <xs:element name="Description">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group ref="dc:DCMES" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>

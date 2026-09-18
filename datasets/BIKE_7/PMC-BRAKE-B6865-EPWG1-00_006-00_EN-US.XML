@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pm xmlns:dc="http://www.purl.org/dc/elements/1.1/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.s1000d.org/S1000D_7/xml_schema_flat/pm.xsd">
+   <identAndStatusSection>
+      <pmAddress>
+         <pmIdent>
+            <pmCode modelIdentCode="BRAKE"
+                    pmIssuer="B6865"
+                    pmNumber="EPWG1"
+                    pmVolume="00"/>
+            <language countryIsoCode="US" languageIsoCode="en"/>
+            <issueInfo issueNumber="006" inWork="00"/>
+         </pmIdent>
+         <pmAddressItems>
+            <issueDate year="2026" month="07" day="16"/>
+            <pmTitle>publication including all BRAKE data modules in ascending order</pmTitle>
+            <shortPmTitle>BRAKE</shortPmTitle>
+         </pmAddressItems>
+      </pmAddress>
+      <pmStatus issueType="new">
+         <security securityClassification="01"
+                   commercialClassification="cc51"
+                   caveat="cv51"/>
+         <dataRestrictions>
+            <restrictionInstructions>
+               <dataDistribution>To be made available to all S1000D users.</dataDistribution>
+               <exportControl>
+                  <exportRegistrationStmt>
+                     <simplePara>Export of this data module to all countries that are the residence of
+                            organizations that are users of S1000D is permitted. Storage of this data module
+                            is to be at the discretion of the organization.</simplePara>
+                  </exportRegistrationStmt>
+               </exportControl>
+               <dataHandling>There are no specific handling instructions for this data
+                    module.</dataHandling>
+               <dataDestruction>Users may destroy this data module in accordance with their own local
+                    procedures.</dataDestruction>
+               <dataDisclosure>There are no dissemination limitations that apply to this data
+                    module.</dataDisclosure>
+            </restrictionInstructions>
+            <restrictionInfo>
+               <copyright>
+                  <copyrightPara>For Copyright information, refer to <dmRef>
+                        <dmRefIdent>
+                           <dmCode modelIdentCode="S1000DBIKE"
+                                   systemDiffCode="AAA"
+                                   systemCode="D00"
+                                   subSystemCode="0"
+                                   subSubSystemCode="0"
+                                   assyCode="00"
+                                   disassyCode="00"
+                                   disassyCodeVariant="AA"
+                                   infoCode="021"
+                                   infoCodeVariant="A"
+                                   itemLocationCode="D"/>
+                        </dmRefIdent>
+                     </dmRef>
+                  </copyrightPara>
+               </copyright>
+               <policyStatement>S1000D-SC-2016-017-002-00 Steering Committee TOR</policyStatement>
+               <dataConds>There are no known conditions that would change the data restrictions for, or
+                    security classification of, this data module.</dataConds>
+            </restrictionInfo>
+         </dataRestrictions>
+         <responsiblePartnerCompany enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </responsiblePartnerCompany>
+         <originator enterpriseCode="B6865">
+            <enterpriseName>AEROSPACE, SECURITY AND DEFENCE INDUSTRIES ASSOCIATION OF EUROPE</enterpriseName>
+         </originator>
+         <applicCrossRefTableRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="BRAKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="00W"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </applicCrossRefTableRef>
+         <applic>
+            <displayText>
+               <simplePara>all Brakes model BR01, BR02 and SS-11</simplePara>
+            </displayText>
+            <assert applicPropertyIdent="model"
+                    applicPropertyType="prodattr"
+                    applicPropertyValues="BR01|BR02|SS-11"/>
+         </applic>
+         <brexDmRef>
+            <dmRef>
+               <dmRefIdent>
+                  <dmCode modelIdentCode="S1000DBIKE"
+                          systemDiffCode="AAA"
+                          systemCode="D00"
+                          subSystemCode="0"
+                          subSubSystemCode="0"
+                          assyCode="00"
+                          disassyCode="00"
+                          disassyCodeVariant="AA"
+                          infoCode="022"
+                          infoCodeVariant="A"
+                          itemLocationCode="D"/>
+               </dmRefIdent>
+            </dmRef>
+         </brexDmRef>
+         <qualityAssurance>
+            <unverified/>
+         </qualityAssurance>
+      </pmStatus>
+   </identAndStatusSection>
+   <content>
+      <pmEntry>
+         <pmEntryTitle>publication including all BRAKEdata modules in ascending order</pmEntryTitle>
+         <dmRef>
+            <dmRefIdent>
+               <dmCode modelIdentCode="BRAKE"
+                       systemDiffCode="AAA"
+                       systemCode="D00"
+                       subSystemCode="0"
+                       subSubSystemCode="0"
+                       assyCode="00"
+                       disassyCode="00"
+                       disassyCodeVariant="AA"
+                       infoCode="00W"
+                       infoCodeVariant="A"
+                       itemLocationCode="D"/>
+               <issueInfo issueNumber="005" inWork="00"/>
+               <language countryIsoCode="US" languageIsoCode="en"/>
+            </dmRefIdent>
+            <dmRefAddressItems>
+               <dmTitle>
+                  <techName>Mountain bicycle</techName>
+                  <infoName>Applicability cross-reference table</infoName>
+               </dmTitle>
+            </dmRefAddressItems>
+         </dmRef>
+         <dmRef>
+            <dmRefIdent>
+               <dmCode modelIdentCode="BRAKE"
+                       systemDiffCode="AAA"
+                       systemCode="DA1"
+                       subSystemCode="0"
+                       subSubSystemCode="0"
+                       assyCode="00"
+                       disassyCode="00"
+                       disassyCodeVariant="AA"
+                       infoCode="041"
+                       infoCodeVariant="A"
+                       itemLocationCode="A"/>
+               <issueInfo issueNumber="005" inWork="00"/>
+               <language countryIsoCode="US" languageIsoCode="en"/>
+            </dmRefIdent>
+            <dmRefAddressItems>
+               <dmTitle>
+                  <techName>Brake system</techName>
+                  <infoName>Description of how it is made</infoName>
+               </dmTitle>
+            </dmRefAddressItems>
+         </dmRef>
+         <dmRef>
+            <dmRefIdent>
+               <dmCode modelIdentCode="BRAKE"
+                       systemDiffCode="AAA"
+                       systemCode="DA1"
+                       subSystemCode="0"
+                       subSubSystemCode="0"
+                       assyCode="00"
+                       disassyCode="00"
+                       disassyCodeVariant="AA"
+                       infoCode="341"
+                       infoCodeVariant="A"
+                       itemLocationCode="A"/>
+               <issueInfo issueNumber="005" inWork="00"/>
+               <language countryIsoCode="US" languageIsoCode="en"/>
+            </dmRefIdent>
+            <dmRefAddressItems>
+               <dmTitle>
+                  <techName>Brake system</techName>
+                  <infoName>Manual test</infoName>
+               </dmTitle>
+            </dmRefAddressItems>
+         </dmRef>
+         <dmRef>
+            <dmRefIdent>
+               <dmCode modelIdentCode="BRAKE"
+                       systemDiffCode="AAA"
+                       systemCode="DA1"
+                       subSystemCode="1"
+                       subSubSystemCode="0"
+                       assyCode="00"
+                       disassyCode="00"
+                       disassyCodeVariant="AA"
+                       infoCode="251"
+                       infoCodeVariant="A"
+                       itemLocationCode="A"/>
+               <issueInfo issueNumber="005" inWork="00"/>
+               <language countryIsoCode="US" languageIsoCode="en"/>
+            </dmRefIdent>
+            <dmRefAddressItems>
+               <dmTitle>
+                  <techName>Brake pads</techName>
+                  <infoName>Clean with rubbing alcohol</infoName>
+               </dmTitle>
+            </dmRefAddressItems>
+         </dmRef>
+      </pmEntry>
+   </content>
+</pm>

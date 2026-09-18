@@ -1,30 +1,28 @@
 #!/usr/bin/env python3
-"""Stage 3: build a SANTA-style retrieval finetuning/evaluation dataset from
-Stage 1's (description, XML snippet) pairs.
+"""Stage 3: build a SANTA-style retrieval finetuning/evaluation dataset, per
+dataset folder, from Stage 1's (description, whole XML file) pairs.
 
 Mirrors SANTA's finetuning benchmarks (Adv for code, ESCI (small) for
 product -- Table 1 of the paper): a query is a natural-language description,
-its positive document is a structured data snippet, and retrieval is scored
-by ranking documents from a fixed per-split candidate corpus.
+its positive document is a whole structured XML document, and retrieval is
+scored by ranking documents from a fixed per-split candidate corpus.
 
-Why this can't just be a reformatting of sda_pairs.*.jsonl: Stage 1
-intentionally keeps up to --dedup-cap/--sibling-cap near-identical snippets
-across the corpus (fine for contrastive *alignment* pretraining, where
-seeing the same boilerplate shape repeatedly is useful signal). A retrieval
-*evaluation* needs "the correct document" to be well-defined, which breaks
+Why this can't just be a reformatting of sda_pairs.*.jsonl: a retrieval
+*evaluation* needs "the correct document" to be well-defined, which can break
 in two ways SANTA's own Adv/ESCI-small benchmarks don't have to deal with
 (they're separately curated, deduplicated datasets):
-  1. Exact-duplicate documents: the same content appearing under multiple
-     source files/xpaths would make several corpus entries equally
+  1. Exact-duplicate documents: the same whole-file content appearing under
+     multiple source files would make several corpus entries equally
      "correct," so this stage collapses them to one corpus entry per unique
-     document (by content hash).
-  2. Non-discriminative queries: some generic-tier fallback descriptions
-     (e.g. "dm ref element.", used whenever an element has no dedicated
-     template and no prose text) are identical across hundreds of
-     structurally different documents -- checked empirically, one such text
-     maps to 355 distinct documents in the train split alone. Such a query
-     has no well-defined right answer and is dropped rather than kept with
-     a made-up "correct" pick.
+     document (by content hash). Now that each sda_pairs record is a whole
+     file rather than a nested per-element snippet, the previous concern
+     about parent/child snippet nesting producing near-duplicate documents
+     is moot by construction -- there's no more nesting to produce it.
+  2. Non-discriminative queries: two different whole files could still
+     coincidentally get near-identical LLM-generated descriptions. Any query
+     text mapping to more than one distinct document has no well-defined
+     right answer and is dropped rather than kept with a made-up "correct"
+     pick.
 
 Output format follows the queries.jsonl / corpus.jsonl / qrels.tsv layout
 BEIR and OpenMatch (SANTA's own training/eval toolkit) expect, so it plugs
@@ -45,8 +43,7 @@ PRETRAIN_DIR = REPO_ROOT / "pretrain"
 
 def content_hash(xml_snippet: str) -> str:
     # Matches preprocess.py's own normalization so a document that was
-    # deduplicated there under the same rule is recognized as the same
-    # document here too.
+    # flagged as a duplicate there is recognized as the same document here.
     normalized = re.sub(r"\s+", " ", xml_snippet).strip()
     return hashlib.sha256(normalized.encode("utf-8")).hexdigest()
 
@@ -70,7 +67,7 @@ def build_split(in_path: Path, corpus_out: Path, queries_out: Path, qrels_out: P
                 "docid": hash_to_docid[h],
                 "structured": rec["structured"],
                 "element": rec.get("element"),
-                "xpath": rec.get("xpath"),
+                "dataset": rec.get("dataset"),
                 "source_file": rec.get("source_file"),
             })
     stats["corpus_size"] = len(corpus_rows)
@@ -100,7 +97,7 @@ def build_split(in_path: Path, corpus_out: Path, queries_out: Path, qrels_out: P
             "qid": qid,
             "text": text,
             "element": rec.get("element"),
-            "xpath": rec.get("xpath"),
+            "dataset": rec.get("dataset"),
             "source_file": rec.get("source_file"),
         })
         qrels_rows.append((qid, docid))
@@ -121,37 +118,54 @@ def build_split(in_path: Path, corpus_out: Path, queries_out: Path, qrels_out: P
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Build a retrieval finetuning/eval dataset (queries/corpus/qrels) from SDA pairs."
+        description="Build a retrieval finetuning/eval dataset (queries/corpus/qrels) from SDA pairs, per dataset folder."
     )
-    parser.add_argument("--input-dir", type=str, default=str(PRETRAIN_DIR))
-    parser.add_argument("--output-dir", type=str, default=str(REPO_ROOT / "retrieval"))
+    parser.add_argument("--pretrain-root", type=str, default=str(PRETRAIN_DIR),
+                        help="Directory containing one subdir per dataset folder, each with sda_pairs.{train,dev,test}.jsonl.")
+    parser.add_argument("--output-root", type=str, default=str(REPO_ROOT / "retrieval"),
+                        help="Directory to mirror the per-folder corpus/queries/qrels files into.")
+    parser.add_argument("--datasets", nargs="+", default=None,
+                        help="Folder slugs under --pretrain-root to process (default: every subdir containing sda_pairs.*.jsonl).")
     parser.add_argument("--splits", nargs="+", default=["train", "dev", "test"])
     args = parser.parse_args()
 
-    in_dir = Path(args.input_dir)
-    out_dir = Path(args.output_dir)
+    pretrain_root = Path(args.pretrain_root)
+    output_root = Path(args.output_root)
 
-    for split in args.splits:
-        in_path = in_dir / f"sda_pairs.{split}.jsonl"
-        if not in_path.exists():
-            print(f"warning: missing {in_path}, skipping split {split}", file=sys.stderr)
-            continue
-        stats = {}
-        build_split(
-            in_path,
-            out_dir / f"corpus.{split}.jsonl",
-            out_dir / f"queries.{split}.jsonl",
-            out_dir / f"qrels.{split}.tsv",
-            stats,
-        )
-        print(f"--- {split} ---")
-        print(f"sda pairs in:              {stats['records_in']}")
-        print(f"corpus size (unique docs): {stats['corpus_size']}")
-        print(f"ambiguous texts dropped:   {stats['ambiguous_texts_dropped']}")
-        print(f"queries out (1:1 qrels):   {stats['queries_out']}")
-        print(f"-> {out_dir / f'corpus.{split}.jsonl'}")
-        print(f"-> {out_dir / f'queries.{split}.jsonl'}")
-        print(f"-> {out_dir / f'qrels.{split}.tsv'}")
+    slugs = args.datasets or sorted(
+        p.name for p in pretrain_root.iterdir()
+        if p.is_dir() and any(p.glob("sda_pairs.*.jsonl"))
+    )
+    if not slugs:
+        print(f"warning: no dataset folders with sda_pairs.*.jsonl found under {pretrain_root}", file=sys.stderr)
+
+    for slug in slugs:
+        in_dir = pretrain_root / slug
+        out_dir = output_root / slug
+        print(f"=== {slug} ===")
+        for split in args.splits:
+            in_path = in_dir / f"sda_pairs.{split}.jsonl"
+            if not in_path.exists():
+                print(f"warning: missing {in_path}, skipping split {split}", file=sys.stderr)
+                continue
+            stats = {}
+            build_split(
+                in_path,
+                out_dir / f"corpus.{split}.jsonl",
+                out_dir / f"queries.{split}.jsonl",
+                out_dir / f"qrels.{split}.tsv",
+                stats,
+            )
+            print(f"--- {split} ---")
+            print(f"sda pairs in:              {stats['records_in']}")
+            print(f"corpus size (unique docs): {stats['corpus_size']}")
+            print(f"ambiguous texts dropped:   {stats['ambiguous_texts_dropped']}")
+            print(f"queries out (1:1 qrels):   {stats['queries_out']}")
+            if stats["corpus_size"] == 0 or stats["queries_out"] == 0:
+                print(f"warning: {slug}/{split} produced an EMPTY corpus or query set", file=sys.stderr)
+            print(f"-> {out_dir / f'corpus.{split}.jsonl'}")
+            print(f"-> {out_dir / f'queries.{split}.jsonl'}")
+            print(f"-> {out_dir / f'qrels.{split}.tsv'}")
 
 
 if __name__ == "__main__":

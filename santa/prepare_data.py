@@ -3,16 +3,20 @@
 {query, positives, negatives, labels} JSONL schema train_santa.py expects
 (see trainer.py's Sdataset.create_one_example / get_process_fn).
 
-Pretrain rows join sda_pairs.*.jsonl (query text) with mep_pairs.*.jsonl
-(masked positive + entity label) on (source_file, element, xpath). SANTA's
-own processing/Code/build_code_entity.py builds both signals onto a single
-row from one source document; t2xml built them as two separate files that
-happen to share that same key, so joining reproduces the same row shape.
+Each SANTA model in model_configs.json pairs one dataset folder as its
+pretrain source with a *different* dataset folder as its finetune source --
+no cross-folder mixing within a single model.
 
-Finetune rows come straight from retrieval/{corpus,queries,qrels}: one row
-per qrels-positive pair, no masking, negatives left empty -- SANTA's own
-first-round finetune (shell/finetune-code.sh) does the same and relies on
-in-batch negatives.
+Pretrain rows join <pretrain-root>/<pretrain_source>/sda_pairs.*.jsonl (query
+text) with the matching mep_pairs.*.jsonl (masked positive + tag label) on
+source_file -- whole-file granularity means exactly one SDA and one MEP
+record per source file, so source_file alone is a unique join key (no more
+need for the old per-element (source_file, element, xpath) disambiguators).
+
+Finetune rows come straight from <retrieval-root>/<finetune_source>/
+{corpus,queries,qrels}: one row per qrels-positive pair, no masking,
+negatives left empty -- SANTA's own first-round finetune (shell/finetune-
+code.sh) does the same and relies on in-batch negatives.
 """
 import argparse
 import csv
@@ -24,6 +28,7 @@ from transformers import AutoTokenizer
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 DEFAULT_OUT = SCRIPT_DIR / "data"
+DEFAULT_MODEL_CONFIG = SCRIPT_DIR / "model_configs.json"
 
 # Offline safety-net cap so pathological documents don't blow up the output
 # file; the real truncation happens at train time via --q_max_len/--p_max_len
@@ -38,19 +43,23 @@ def encode(tokenizer, text):
     )["input_ids"]
 
 
+def load_model_configs(path: Path) -> dict[str, dict]:
+    cfg = json.loads(Path(path).read_text())
+    return {m["name"]: m for m in cfg["models"]}
+
+
 def build_pretrain_split(tokenizer, split, pretrain_dir, out_dir):
     sda_path = pretrain_dir / f"sda_pairs.{split}.jsonl"
     mep_path = pretrain_dir / f"mep_pairs.{split}.jsonl"
     if not sda_path.exists() or not mep_path.exists():
-        print(f"warning: missing sda/mep pairs for split {split}, skipping")
+        print(f"warning: missing sda/mep pairs for split {split} under {pretrain_dir}, skipping")
         return
 
     sda_text_by_key = {}
     with sda_path.open() as f:
         for line in f:
             rec = json.loads(line)
-            key = (rec["source_file"], rec["element"], rec["xpath"])
-            sda_text_by_key[key] = rec["text"]
+            sda_text_by_key[rec["source_file"]] = rec["text"]
 
     n_in, n_matched = 0, 0
     out_path = out_dir / f"pretrain.{split}.jsonl"
@@ -58,8 +67,7 @@ def build_pretrain_split(tokenizer, split, pretrain_dir, out_dir):
         for line in f:
             n_in += 1
             rec = json.loads(line)
-            key = (rec["source_file"], rec["element"], rec["xpath"])
-            text = sda_text_by_key.get(key)
+            text = sda_text_by_key.get(rec["source_file"])
             if text is None:
                 continue
             n_matched += 1
@@ -78,7 +86,7 @@ def build_finetune_split(tokenizer, split, retrieval_dir, out_dir):
     queries_path = retrieval_dir / f"queries.{split}.jsonl"
     qrels_path = retrieval_dir / f"qrels.{split}.tsv"
     if not (corpus_path.exists() and queries_path.exists() and qrels_path.exists()):
-        print(f"warning: missing retrieval files for split {split}, skipping")
+        print(f"warning: missing retrieval files for split {split} under {retrieval_dir}, skipping")
         return
 
     corpus_text = {}
@@ -115,22 +123,42 @@ def build_finetune_split(tokenizer, split, retrieval_dir, out_dir):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model_name_or_path", default="t5-base")
-    parser.add_argument("--pretrain-dir", default=str(REPO_ROOT / "pretrain"))
-    parser.add_argument("--retrieval-dir", default=str(REPO_ROOT / "retrieval"))
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUT))
+    parser.add_argument("--pretrain-root", default=str(REPO_ROOT / "pretrain"),
+                         help="Directory containing one subdir per dataset folder (sda_pairs/mep_pairs).")
+    parser.add_argument("--retrieval-root", default=str(REPO_ROOT / "retrieval"),
+                         help="Directory containing one subdir per dataset folder (corpus/queries/qrels).")
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUT),
+                         help="Directory under which one subdir per model is written.")
+    parser.add_argument("--model-config", default=str(DEFAULT_MODEL_CONFIG))
+    parser.add_argument("--models", nargs="+", default=None,
+                         help="Model names from model_configs.json to build (default: all).")
     parser.add_argument("--splits", nargs="+", default=["train", "dev", "test"])
     args = parser.parse_args()
 
-    out_dir = Path(args.output_dir)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    configs = load_model_configs(args.model_config)
+    if args.models:
+        unknown = [m for m in args.models if m not in configs]
+        if unknown:
+            raise SystemExit(f"unknown model name(s) not in {args.model_config}: {unknown}")
+        targets = {n: configs[n] for n in args.models}
+    else:
+        targets = configs
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path, use_fast=False)
 
-    pretrain_dir = Path(args.pretrain_dir)
-    retrieval_dir = Path(args.retrieval_dir)
-    for split in args.splits:
-        build_pretrain_split(tokenizer, split, pretrain_dir, out_dir)
-        build_finetune_split(tokenizer, split, retrieval_dir, out_dir)
+    pretrain_root = Path(args.pretrain_root)
+    retrieval_root = Path(args.retrieval_root)
+    out_root = Path(args.output_dir)
+
+    for name, cfg in targets.items():
+        model_out_dir = out_root / name
+        model_out_dir.mkdir(parents=True, exist_ok=True)
+        pretrain_dir = pretrain_root / cfg["pretrain_source"]
+        retrieval_dir = retrieval_root / cfg["finetune_source"]
+        print(f"=== {name} (pretrain={cfg['pretrain_source']}, finetune={cfg['finetune_source']}) ===")
+        for split in args.splits:
+            build_pretrain_split(tokenizer, split, pretrain_dir, model_out_dir)
+            build_finetune_split(tokenizer, split, retrieval_dir, model_out_dir)
 
 
 if __name__ == "__main__":

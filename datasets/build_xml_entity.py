@@ -1,22 +1,21 @@
 #!/usr/bin/env python3
-"""Stage 2 of the SANTA-style pipeline: build Masked Entity Prediction (MEP)
-examples from the (description, XML snippet) pairs emitted by preprocess.py.
+"""Stage 2 of the SANTA-style pipeline: build Masked Tag Prediction (MEP/MTP)
+examples from the (description, XML document) pairs emitted by preprocess.py.
 
-Mirrors SANTA's own entity scripts (OpenMatch/SANTA, processing/Code/build_code_entity.py
-and processing/Product/build_product_entity.py): identify "entity" tokens, replace
-each distinct entity with a T5 sentinel token (same string -> same sentinel), and
-emit a span-corruption-style label sequence for the model to reconstruct.
+Mirrors SANTA's own entity-masking scripts in spirit (replace a chosen subset
+of "identifier" occurrences with T5 sentinel tokens, emit a span-corruption
+label sequence), but the identifier here is the element *tag name*, not an
+attribute/text value: for each whole-file structured snippet, a random subset
+of element tag occurrences (default 50%) is replaced by a shared sentinel,
+and the model must reconstruct the original tag name for each occurrence.
 
-The key adaptation for XML: SANTA never masks a code function or a product title in
-its entirety -- it masks identifier tokens inside the code (variable/function/class
-names) or proper nouns inside the product text, leaving keywords/operators/punctuation
-(code) or common words (product) untouched as context. The XML analog of an
-"identifier" is an attribute value that names/codes something (modelIdentCode,
-systemCode, issueNumber, ...) or a proper-noun-ish token inside prose text content --
-never the element tag itself. Masking whole tags would remove the structure that
-gives the model something to condition on; masking every identifier-like value still
-leaves every tag name, attribute name, and piece of markup as context, exactly as
-masking every code identifier still leaves every keyword and operator in place.
+Unlike value-masking (where the same identifier *string* recurring in a
+document is masked to one shared sentinel, since repetition signals it's the
+same entity), tag masking never dedups by tag name: every selected element
+*occurrence* gets its own sentinel/label slot, because repeated tag names
+(e.g. five sibling <step> elements) are structurally normal, not an identity
+signal. The document root is never masked -- it has no parent/sibling context
+to recover it from.
 """
 import argparse
 import copy
@@ -32,31 +31,15 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 PRETRAIN_DIR = REPO_ROOT / "pretrain"
 
+sys.path.insert(0, str(SCRIPT_DIR))
+from preprocess import build_element_whitelist, strip_ns  # noqa: E402
+
 # T5's sentinel vocabulary is <extra_id_0> .. <extra_id_99>. One sentinel is
 # reserved as the trailing terminator of the label sequence (matching SANTA's
 # own convention of appending one extra, content-less sentinel at the end).
 SENTINEL_BUDGET = 100
 MAX_ENTITIES = SENTINEL_BUDGET - 1
 DEFAULT_MASK_RATIO = 0.5
-
-IDENTIFIER_ATTR_RE = re.compile(r"(?i)(code|ident|number|classification|isocode)")
-EXTRA_IDENTIFIER_ATTRS = {"inWork", "year", "month", "day"}
-
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z0-9'\-]*")
-# The hyphen/slash alternative requires a digit somewhere in the token (the
-# lookahead) so it matches real codes like "ICN-C0419-S1000D0382-001-01" but
-# not an ordinary hyphenated English word like "cross-reference".
-CODE_LIKE_RE = re.compile(r"^(?:[A-Z]{2,}[0-9]*|(?=[A-Za-z0-9]*\d)[A-Za-z0-9]+[-/][A-Za-z0-9/-]+)$")
-
-_NLTK_READY = False
-try:
-    import nltk
-    nltk.data.find("taggers/averaged_perceptron_tagger_eng")
-    nltk.data.find("tokenizers/punkt_tab")
-    _NLTK_READY = True
-except Exception:
-    nltk = None
-    _NLTK_READY = False
 
 
 def sentinel(i: int) -> str:
@@ -65,187 +48,98 @@ def sentinel(i: int) -> str:
 
 def placeholder(i: int) -> str:
     # ET.tostring() XML-escapes literal "<"/">" inside attribute values and
-    # text (e.g. "<extra_id_0>" -> "&lt;extra_id_0&gt;"), which would stop the
-    # T5 tokenizer from recognizing it as the real sentinel token. So sentinels
-    # are stood in for with this escaping-safe placeholder during tree
-    # mutation, and swapped to the real "<extra_id_N>" string after
-    # serialization (see build_mep_example).
-    return f"EXTRA_ID_{i}"
+    # text, and can't render an arbitrary string as a tag name safely either
+    # -- so a masked element's tag is temporarily set to this escaping/
+    # XML-safe placeholder during tree mutation, and swapped to the real
+    # "<extra_id_N>" string in the serialized text afterward (see
+    # build_mtp_example).
+    return f"EXTRAIDPLACEHOLDER{i}TAG"
 
 
-def is_identifier_attr(name: str) -> bool:
-    return bool(IDENTIFIER_ATTR_RE.search(name)) or name in EXTRA_IDENTIFIER_ATTRS
-
-
-def text_entity_tokens(text: str) -> list[str]:
-    """Entity-like tokens inside a text node: a capitalization/code-pattern
-    heuristic, supplemented by NLTK POS-tagged proper nouns when available.
-
-    Most S1000D text nodes are short title/label fragments (<techName>,
-    <infoName>, ...) that use Title Case as a *style convention* -- every
-    major word capitalized, regardless of its grammatical role. Checked
-    directly: NLTK correctly tags "Management" and "Error" as plain NN (not
-    NNP) in fragments like "Service bulletin - Management information",
-    because grammatically they *are* common nouns -- Title Case isn't a
-    grammatical signal NLTK knows about. So POS tagging alone silently drops
-    exactly the label words this heuristic most needs to catch, which is why
-    the capitalization/position rule (mirroring SANTA's product-text rule in
-    spirit, adapted to this domain's title-fragment style) is the primary
-    signal, not NLTK. NLTK is layered on only as a supplement: any NNP/NNPS
-    token it finds beyond position 0 that the primary rule missed (e.g. a
-    genuine multi-word proper noun in flowing prose) is added, but nothing
-    the primary rule already found is ever removed by it."""
-    text = text.strip()
-    if not text:
-        return []
-
-    words = WORD_RE.findall(text)
-    tokens = []
-    for i, w in enumerate(words):
-        if len(w) < 2:
-            continue
-        if CODE_LIKE_RE.match(w) or (w[0].isupper() and i > 0):
-            tokens.append(w)
-
-    if _NLTK_READY:
-        try:
-            tagged = nltk.pos_tag(nltk.word_tokenize(text))
-            seen_lower = {t.lower() for t in tokens}
-            for i, (tok, pos) in enumerate(tagged):
-                if i == 0 or len(tok) < 2 or tok.lower() in seen_lower:
-                    continue
-                if pos in ("NNP", "NNPS"):
-                    tokens.append(tok)
-                    seen_lower.add(tok.lower())
-        except Exception:
-            pass
-
-    return tokens
-
-
-def collect_candidates(root: ET.Element):
-    """Walk the tree in document order, collecting entity candidates without
-    mutating anything yet. Returns:
-      attr_hits: list of (elem, attr_name, value)
-      text_hits: list of (elem, "text"|"tail", full_string, [entity tokens in it])
-    """
-    attr_hits = []
-    text_hits = []
-
-    def visit_text(elem, which, value):
-        if value and value.strip():
-            toks = text_entity_tokens(value)
-            if toks:
-                text_hits.append((elem, which, value, toks))
+def collect_taggable_elements(root: ET.Element, whitelist: set[str] | None) -> list[ET.Element]:
+    """Document-order list of non-root elements eligible for tag masking. The
+    root is always excluded. When whitelist is given, only S1000D-whitelisted
+    tags are eligible (keeps the objective scoped to genuine S1000D structural
+    vocabulary rather than incidental namespace plumbing like xlink/rdf)."""
+    out = []
 
     def walk(elem: ET.Element):
-        for name, value in elem.attrib.items():
-            if is_identifier_attr(name) and value.strip():
-                attr_hits.append((elem, name, value))
-        visit_text(elem, "text", elem.text)
         for child in elem:
+            if whitelist is None or strip_ns(child.tag) in whitelist:
+                out.append(child)
             walk(child)
-            visit_text(child, "tail", child.tail)
 
     walk(root)
-    return attr_hits, text_hits
+    return out
 
 
-def build_mep_example(xml_snippet: str, mask_ratio: float, rng: random.Random):
+def build_mtp_example(xml_snippet: str, mask_ratio: float, rng: random.Random,
+                       whitelist: set[str] | None):
     try:
         root = ET.fromstring(xml_snippet)
     except ET.ParseError:
         return None, "parse_error"
 
-    attr_hits, text_hits = collect_candidates(root)
-
-    # First-seen order across the whole document, deduped by exact string --
-    # same identifier value anywhere in the snippet gets the same sentinel,
-    # exactly like SANTA replaces every occurrence of the same code identifier
-    # (or the same product entity word) with one shared special token.
-    order = []
-    seen = set()
-    for _, _, value in attr_hits:
-        if value not in seen:
-            seen.add(value)
-            order.append(value)
-    for _, _, _, toks in text_hits:
-        for t in toks:
-            if t not in seen:
-                seen.add(t)
-                order.append(t)
-
-    if not order:
-        return None, "no_entities"
+    candidates = collect_taggable_elements(root, whitelist)
+    if not candidates:
+        return None, "no_candidates"
 
     # Ratio + hard cap, mirroring SANTA's own downsampling of identifier
-    # occurrences (they keep ~50%, or 10% for identifier-dense JavaScript) --
-    # without this, an attribute-heavy metadata element could have every
-    # single value masked out, leaving nothing for the model to condition on.
-    keep_n = max(1, min(MAX_ENTITIES, round(len(order) * mask_ratio)))
-    if keep_n < len(order):
-        kept = set(rng.sample(order, keep_n))
-        order = [e for e in order if e in kept]
+    # occurrences -- without the cap, a huge document could exceed the T5
+    # sentinel budget.
+    n = len(candidates)
+    keep_n = max(1, min(MAX_ENTITIES, round(n * mask_ratio)))
+    if keep_n < n:
+        chosen_idx = sorted(rng.sample(range(n), keep_n))
+    else:
+        chosen_idx = list(range(n))
 
-    # Mutate the tree with escaping-safe placeholders, not the real
-    # "<extra_id_N>" sentinel strings directly -- ET.tostring() would
-    # XML-escape their "<"/">" into "&lt;"/"&gt;", which the T5 tokenizer
-    # would then no longer recognize as the actual sentinel token.
-    entity_to_placeholder = {ent: placeholder(i) for i, ent in enumerate(order)}
-
+    # Mutate a deep copy so the original `structured` text is never touched.
     masked_root = copy.deepcopy(root)
-    m_attr_hits, m_text_hits = collect_candidates(masked_root)
+    masked_candidates = collect_taggable_elements(masked_root, whitelist)
 
-    for elem, name, value in m_attr_hits:
-        if value in entity_to_placeholder:
-            elem.set(name, entity_to_placeholder[value])
-
-    def mask_string(s: str, toks: list[str]) -> str:
-        for t in sorted(set(toks), key=len, reverse=True):
-            if t not in entity_to_placeholder:
-                continue
-            s = re.sub(rf"(?<!\w){re.escape(t)}(?!\w)", entity_to_placeholder[t], s)
-        return s
-
-    for elem, which, value, toks in m_text_hits:
-        new_value = mask_string(value, toks)
-        if which == "text":
-            elem.text = new_value
-        else:
-            elem.tail = new_value
+    labels = []
+    for out_i, idx in enumerate(chosen_idx):
+        orig_tag = strip_ns(candidates[idx].tag)
+        # Setting elem.tag on the copy masks both its open and close tag "for
+        # free" via ElementTree's own serialization -- no separate open/close
+        # bookkeeping needed.
+        masked_candidates[idx].tag = placeholder(out_i)
+        labels.append(orig_tag)
 
     masked_root.tail = None
     masked_structured = ET.tostring(masked_root, encoding="unicode")
-    # (?!\d): "EXTRA_ID_1" is a literal substring of "EXTRA_ID_10", so a plain
-    # .replace() done in ascending index order would corrupt the latter before
-    # its own turn came up. The negative lookahead makes each substitution
-    # match only its exact, complete placeholder.
-    for i in range(len(order)):
-        masked_structured = re.sub(rf"{placeholder(i)}(?!\d)", sentinel(i), masked_structured)
+    # (?!\d): "EXTRAIDPLACEHOLDER1TAG" is a literal substring of
+    # "EXTRAIDPLACEHOLDER10TAG", so substituting in ascending index order
+    # without this guard would corrupt the latter before its own turn came
+    # up. The negative lookahead makes each substitution match only its
+    # exact, complete placeholder.
+    for i in range(len(labels)):
+        masked_structured = re.sub(rf"{placeholder(i)}(?!\d)", f"extra_id_{i}", masked_structured)
 
     label_parts = []
-    for i, ent in enumerate(order):
+    for i, tag in enumerate(labels):
         label_parts.append(sentinel(i))
-        label_parts.append(ent)
-    label_parts.append(sentinel(len(order)))
+        label_parts.append(tag)
+    label_parts.append(sentinel(len(labels)))
     label = " ".join(label_parts)
 
     return {
         "masked_structured": masked_structured,
         "label": label,
-        "num_entities": len(order),
-        "num_attr_entities": sum(1 for v in order if v in {v2 for _, _, v2 in attr_hits}),
+        "num_masked_tags": len(labels),
     }, "ok"
 
 
-def process_split(in_path: Path, out_path: Path, mask_ratio: float, seed: int, stats: Counter):
+def process_split(in_path: Path, out_path: Path, mask_ratio: float, seed: int,
+                   whitelist: set[str] | None, stats: Counter):
     rng = random.Random(seed)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with in_path.open() as fin, out_path.open("w") as fout:
         for line in fin:
             rec = json.loads(line)
             stats["records"] += 1
-            result, status = build_mep_example(rec["structured"], mask_ratio, rng)
+            result, status = build_mtp_example(rec["structured"], mask_ratio, rng, whitelist)
             stats[status] += 1
             if result is None:
                 continue
@@ -253,63 +147,74 @@ def process_split(in_path: Path, out_path: Path, mask_ratio: float, seed: int, s
                 "structured": rec["structured"],
                 "masked_structured": result["masked_structured"],
                 "label": result["label"],
-                "num_entities": result["num_entities"],
+                "num_masked_tags": result["num_masked_tags"],
                 "source_file": rec.get("source_file"),
+                "dataset": rec.get("dataset"),
                 "element": rec.get("element"),
-                "xpath": rec.get("xpath"),
             }
             fout.write(json.dumps(out_rec) + "\n")
-            stats["entities_total"] += result["num_entities"]
-            stats["attr_entities_total"] += result["num_attr_entities"]
+            stats["masked_tags_total"] += result["num_masked_tags"]
             stats["emitted"] += 1
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Build Masked Entity Prediction (MEP) examples from SDA pairs."
+        description="Build Masked Tag Prediction (MEP) examples from SDA pairs, per dataset folder."
     )
-    parser.add_argument("--input-dir", type=str, default=str(PRETRAIN_DIR),
-                        help="Directory containing sda_pairs.{train,dev,test}.jsonl.")
-    parser.add_argument("--output-dir", type=str, default=str(PRETRAIN_DIR),
-                        help="Directory to write mep_pairs.{train,dev,test}.jsonl into.")
+    parser.add_argument("--pretrain-root", type=str, default=str(PRETRAIN_DIR),
+                        help="Directory containing one subdir per dataset folder, each with sda_pairs.{train,dev,test}.jsonl.")
+    parser.add_argument("--output-root", type=str, default=None,
+                        help="Directory to mirror the per-folder mep_pairs.{train,dev,test}.jsonl into (default: same as --pretrain-root).")
+    parser.add_argument("--datasets", nargs="+", default=None,
+                        help="Folder slugs under --pretrain-root to process (default: every subdir containing sda_pairs.*.jsonl).")
     parser.add_argument("--splits", nargs="+", default=["train", "dev", "test"])
     parser.add_argument("--mask-ratio", type=float, default=DEFAULT_MASK_RATIO,
-                        help="Fraction of unique candidate entities to actually mask, capped at 99 regardless.")
+                        help="Fraction of tag occurrences to mask, capped at 99 regardless.")
     parser.add_argument("--random-seed", type=int, default=42)
+    parser.add_argument("--tag-whitelist", action=argparse.BooleanOptionalAction, default=True,
+                        help="Restrict maskable tags to the S1000D schema element whitelist (default: on).")
     args = parser.parse_args()
 
-    if not _NLTK_READY:
-        print("warning: NLTK POS tagger/tokenizer not available; using regex "
-              "capitalization/code-pattern heuristic for text entities", file=sys.stderr)
+    whitelist = build_element_whitelist() if args.tag_whitelist else None
 
-    in_dir = Path(args.input_dir)
-    out_dir = Path(args.output_dir)
+    pretrain_root = Path(args.pretrain_root)
+    output_root = Path(args.output_root) if args.output_root else pretrain_root
+
+    slugs = args.datasets or sorted(
+        p.name for p in pretrain_root.iterdir()
+        if p.is_dir() and any(p.glob("sda_pairs.*.jsonl"))
+    )
+    if not slugs:
+        print(f"warning: no dataset folders with sda_pairs.*.jsonl found under {pretrain_root}", file=sys.stderr)
+
     overall = Counter()
+    for slug in slugs:
+        in_dir = pretrain_root / slug
+        out_dir = output_root / slug
+        print(f"=== {slug} ===")
+        for split in args.splits:
+            in_path = in_dir / f"sda_pairs.{split}.jsonl"
+            if not in_path.exists():
+                print(f"warning: missing {in_path}, skipping split {split}", file=sys.stderr)
+                continue
+            out_path = out_dir / f"mep_pairs.{split}.jsonl"
+            stats = Counter()
+            process_split(in_path, out_path, args.mask_ratio, args.random_seed, whitelist, stats)
+            overall.update(stats)
 
-    for split in args.splits:
-        in_path = in_dir / f"sda_pairs.{split}.jsonl"
-        if not in_path.exists():
-            print(f"warning: missing {in_path}, skipping split {split}", file=sys.stderr)
-            continue
-        out_path = out_dir / f"mep_pairs.{split}.jsonl"
-        stats = Counter()
-        process_split(in_path, out_path, args.mask_ratio, args.random_seed, stats)
-        overall.update(stats)
-
-        print(f"--- {split} ---")
-        print(f"records read:          {stats['records']}")
-        print(f"skipped (parse error): {stats['parse_error']}")
-        print(f"skipped (no entities): {stats['no_entities']}")
-        print(f"emitted:               {stats['emitted']} -> {out_path}")
-        if stats["emitted"]:
-            print(f"avg entities/example:  {stats['entities_total'] / stats['emitted']:.2f}")
+            print(f"--- {split} ---")
+            print(f"records read:          {stats['records']}")
+            print(f"skipped (parse error): {stats['parse_error']}")
+            print(f"skipped (no candidates): {stats['no_candidates']}")
+            print(f"emitted:               {stats['emitted']} -> {out_path}")
+            if stats["emitted"]:
+                print(f"avg masked tags/example: {stats['masked_tags_total'] / stats['emitted']:.2f}")
 
     print("=== overall ===")
     print(f"records read:          {overall['records']}")
     print(f"emitted:               {overall['emitted']}")
     if overall["emitted"]:
-        print(f"avg entities/example:  {overall['entities_total'] / overall['emitted']:.2f}")
-        print(f"attr-entity share:     {overall['attr_entities_total'] / overall['entities_total']:.1%}")
+        print(f"avg masked tags/example: {overall['masked_tags_total'] / overall['emitted']:.2f}")
 
 
 if __name__ == "__main__":

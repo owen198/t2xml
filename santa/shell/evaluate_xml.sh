@@ -12,11 +12,16 @@ SANTA_DIR="$(dirname "${SCRIPT_DIR}")"
 REPO_ROOT="$(dirname "${SANTA_DIR}")"
 PYTHON="${SANTA_DIR}/.venv/bin/python"
 
-export RUN_TAG=${RUN_TAG:-}
+export MODEL_NAME=${MODEL_NAME:-}
+export RUN_TAG=${RUN_TAG:-${MODEL_NAME:+/${MODEL_NAME}}}
 if [[ -z "${RUN_TAG}" ]]; then
     echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (results/), not a tagged experiment folder." >&2
 fi
-export QRELS_PATH=${REPO_ROOT}/retrieval/qrels.${SPLIT}.tsv
+# FINETUNE_SOURCE = the folder slug after "_to_" in MODEL_NAME, e.g.
+# BIKE_7_to_FOSSIG -> FOSSIG. No folder slug contains the substring "_to_",
+# so this round-trips cleanly.
+export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
+export QRELS_PATH=${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.${SPLIT}.tsv
 export TREC_PATH=${TREC_PATH:-${SANTA_DIR}/runs/retrieve${RUN_TAG}/${SPLIT}_inference.trec}
 export RESULTS_PATH=${RESULTS_PATH:-${REPO_ROOT}/results${RUN_TAG}/eval_${SPLIT}.json}
 

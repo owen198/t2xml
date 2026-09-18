@@ -14,18 +14,23 @@ SANTA_DIR="$(dirname "${SCRIPT_DIR}")"
 REPO_ROOT="$(dirname "${SANTA_DIR}")"
 PYTHON="${SANTA_DIR}/.venv/bin/python"
 
-export RUN_TAG=${RUN_TAG:-}
+export MODEL_NAME=${MODEL_NAME:-}
+export RUN_TAG=${RUN_TAG:-${MODEL_NAME:+/${MODEL_NAME}}}
 if [[ -z "${RUN_TAG}" ]]; then
     echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (runs/retrieve), not a tagged experiment folder." >&2
 fi
+# FINETUNE_SOURCE = the folder slug after "_to_" in MODEL_NAME, e.g.
+# BIKE_7_to_FOSSIG -> FOSSIG. No folder slug contains the substring "_to_",
+# so this round-trips cleanly.
+export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
 export MODEL_PATH=${MODEL_PATH:-${SANTA_DIR}/runs/finetune${RUN_TAG}/checkpoints/best_dev}
 export TREC_PATH=${TREC_PATH:-${SANTA_DIR}/runs/retrieve${RUN_TAG}/${SPLIT}_inference.trec}
 
 cd "${SANTA_DIR}/evaluate_xml"
 "${PYTHON}" index_xml.py \
     --model_name_or_path ${MODEL_PATH} \
-    --corpus_path ${REPO_ROOT}/retrieval/corpus.${SPLIT}.jsonl \
-    --query_path ${REPO_ROOT}/retrieval/queries.${SPLIT}.jsonl \
+    --corpus_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.${SPLIT}.jsonl \
+    --query_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.${SPLIT}.jsonl \
     --trec_save_path ${TREC_PATH} \
     --per_device_eval_batch_size 64 \
     --q_max_len 50 \

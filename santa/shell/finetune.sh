@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 # Usage: bash finetune.sh
+#    or: MODEL_NAME=<name from model_configs.json> bash finetune.sh
 # Finetunes a pretrained SANTA checkpoint on t2xml's retrieval benchmark
-# (data/finetune.*.jsonl, built from retrieval/corpus+queries+qrels).
+# (data/<MODEL_NAME>/finetune.*.jsonl, built from retrieval/<finetune_source>/
+# corpus+queries+qrels).
 #
 # PRETRAIN_CHECKPOINT defaults to shell/best-dev-pretrain.sh's output -- run
 # that first so .../checkpoints/best_dev exists (mirrors SANTA_v2's own
@@ -14,16 +16,24 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SANTA_DIR="$(dirname "${SCRIPT_DIR}")"
 PYTHON="${SANTA_DIR}/.venv/bin/python"
 
-export DATA_DIR=${SANTA_DIR}/data
-export RUN_TAG=${RUN_TAG:-}
+# Default to a single GPU: with >1 GPU visible and no torchrun/distributed
+# launcher, the HF Trainer here auto-enters a distributed code path that
+# hangs forever waiting for a peer process that never joins. Override this
+# yourself (e.g. "0,1") if you're launching under torchrun for real multi-GPU.
+export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
+export MODEL_NAME=${MODEL_NAME:-}
+export DATA_DIR=${DATA_DIR:-${SANTA_DIR}/data${MODEL_NAME:+/${MODEL_NAME}}}
+export RUN_TAG=${RUN_TAG:-${MODEL_NAME:+/${MODEL_NAME}}}
 if [[ -z "${RUN_TAG}" ]]; then
     echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (runs/finetune), not a tagged experiment folder." >&2
 fi
 export PRETRAIN_CHECKPOINT=${PRETRAIN_CHECKPOINT:-${SANTA_DIR}/runs/pretrain${RUN_TAG}/checkpoints/best_dev}
 export OUTPUT=${SANTA_DIR}/runs/finetune${RUN_TAG}
 
-export N=$(wc -l < ${DATA_DIR}/finetune.train.jsonl)
-export MAX_STEPS=$(${PYTHON} -c "import math; n=${N}; micro=math.ceil(n/16); spe=micro//8; print(math.ceil(12*spe))")
+# max_steps is intentionally left unset (HF TrainingArguments default -1) so
+# --num_train_epochs alone governs training length -- see pretrain.sh for why
+# the previous explicit steps-per-epoch formula broke (computed 0 steps) for
+# most of t2xml's per-folder train splits.
 
 cd "${SANTA_DIR}"
 "${PYTHON}" train_santa.py \
@@ -44,6 +54,5 @@ cd "${SANTA_DIR}"
     --p_max_len 256 \
     --l_max_len 64 \
     --num_train_epochs 12 \
-    --max_steps ${MAX_STEPS} \
     --use_generate False \
     --logging_dir ${OUTPUT}/logs

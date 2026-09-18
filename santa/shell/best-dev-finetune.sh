@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
 # Usage: bash best-dev-finetune.sh
+#    or: MODEL_NAME=<name from model_configs.json> bash best-dev-finetune.sh
 # Evaluates every checkpoint from finetune.sh's run (checkpoint-N subdirs, plus
-# the final save at the run root) against retrieval/*.dev.jsonl, then copies
-# whichever scored highest into checkpoints/best_dev -- SANTA's own
+# the final save at the run root) against <finetune_source>/*.dev.jsonl, then
+# copies whichever scored highest into checkpoints/best_dev -- SANTA's own
 # code_best_dev/product_best_dev pattern, adapted for t2xml's retrieval format.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -11,19 +12,24 @@ SANTA_DIR="$(dirname "${SCRIPT_DIR}")"
 REPO_ROOT="$(dirname "${SANTA_DIR}")"
 PYTHON="${SANTA_DIR}/.venv/bin/python"
 
-export RUN_TAG=${RUN_TAG:-}
+export MODEL_NAME=${MODEL_NAME:-}
+export RUN_TAG=${RUN_TAG:-${MODEL_NAME:+/${MODEL_NAME}}}
 if [[ -z "${RUN_TAG}" ]]; then
     echo "WARNING: RUN_TAG is not set -- writing to the untagged default path (results/), not a tagged experiment folder." >&2
 fi
+# FINETUNE_SOURCE = the folder slug after "_to_" in MODEL_NAME, e.g.
+# BIKE_7_to_FOSSIG -> FOSSIG. No folder slug contains the substring "_to_",
+# so this round-trips cleanly.
+export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
 export MODEL_PATH=${MODEL_PATH:-${SANTA_DIR}/runs/finetune${RUN_TAG}/checkpoints}
 export RESULTS_PATH=${RESULTS_PATH:-${REPO_ROOT}/results${RUN_TAG}/best_dev_finetune.json}
 
 cd "${SANTA_DIR}/best_dev"
 "${PYTHON}" evaluate_xml_finetune.py \
     --model_path ${MODEL_PATH} \
-    --corpus_path ${REPO_ROOT}/retrieval/corpus.dev.jsonl \
-    --query_path ${REPO_ROOT}/retrieval/queries.dev.jsonl \
-    --qrels_path ${REPO_ROOT}/retrieval/qrels.dev.tsv \
+    --corpus_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.dev.jsonl \
+    --query_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.dev.jsonl \
+    --qrels_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.dev.tsv \
     --per_device_eval_batch_size 64 \
     --q_max_len 50 \
     --p_max_len 256 \

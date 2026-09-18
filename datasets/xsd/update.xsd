@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema attributeFormDefault="qualified"
-    elementFormDefault="qualified"
-    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
-    <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="xlink.xsd"/>
+<xs:schema xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:annotation id="version">
-        <xs:documentation>Issue number: 6</xs:documentation>
-        <xs:documentation>Issue date: 2024-06-19</xs:documentation>
-        <xs:documentation>URL: http://www.s1000d.org/S1000D_6/xml_schema_flat/update.xsd</xs:documentation>
-        <xs:documentation>Root element: dataUpdateFile</xs:documentation>
-        <xs:documentation>Remarks: none</xs:documentation>
+      <xs:documentation>Issue number: 7</xs:documentation>
+      <xs:documentation>Issue date: 2026-07-16</xs:documentation>
+      <xs:documentation>URL: http://www.s1000d.org/S1000D_7/xml_schema_flat/update.xsd</xs:documentation>
+      <xs:documentation>Root element: dataUpdateFile</xs:documentation>
+      <xs:documentation>Remarks: none</xs:documentation>
     </xs:annotation>
     <xs:annotation id="copyright">
-        <xs:documentation>Copyright © 2024 by Aerospace, Security and Defence Industries Association of Europe - ASD
+      <xs:documentation>Copyright (C) 2026 by Aerospace, Security and Defence Industries Association of Europe - ASD
 
 Publishers:
-Aerospace, Security and Defence Industries Association of Europe
-Aerospace Industries Association of America
-ATA e-Business Program
+ 1) Aerospace, Security and Defence Industries Association of Europe
+ 2) Aerospace Industries Association of America
+ 3) ATA e-Business Program
 
 Limitations of Liability:
 1.  This material is provided 'As Is' and neither ASD nor any person who has contributed to the creation, revision or maintenance of the material makes any representations or warranties, express or implied, including but not limited to, warranties of merchantability or fitness for any particular purpose.
@@ -26,6 +24,12 @@ Limitations of Liability:
 
 The details for copyright can be found in the S1000D Specification.</xs:documentation>
     </xs:annotation>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+                schemaLocation="xml.xsd"/>
+    <xs:import namespace="http://www.w3.org/1999/xlink"
+                schemaLocation="xlink.xsd"/>
+    <xs:import namespace="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                schemaLocation="rdf.xsd"/>
     <xs:element name="dataUpdateFile" type="dataUpdateFileElemType"/>
     <xs:complexType name="dataUpdateFileElemType">
         <xs:sequence>
@@ -51,7 +55,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="updateIdent" type="updateIdentElemType"/>
     <xs:complexType name="updateIdentElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="identExtension"/>
+            <xs:element ref="identExtension" minOccurs="0"/>
             <xs:element ref="updateCode"/>
             <xs:element ref="language"/>
             <xs:element ref="issueInfo"/>
@@ -236,13 +240,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:element ref="responsiblePartnerCompany"/>
             <xs:element ref="originator"/>
             <xs:element ref="brexDmRef"/>
-            <xs:element maxOccurs="unbounded" ref="qualityAssurance"/>
+            <xs:element ref="qualityAssurance" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="sourceDmIdent" type="sourceDmIdentGenericElemType"/>
     <xs:complexType name="sourceDmIdentGenericElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="identExtension"/>
+            <xs:element ref="identExtension" minOccurs="0"/>
             <xs:element ref="dmCode"/>
             <xs:element ref="language"/>
             <xs:element ref="issueInfo"/>
@@ -284,7 +288,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="responsiblePartnerCompany" type="responsiblePartnerCompanyElemType"/>
     <xs:complexType name="responsiblePartnerCompanyElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="enterpriseName"/>
+            <xs:element ref="enterpriseName" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="enterpriseCode"/>
         <xs:attribute ref="id"/>
@@ -295,7 +299,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="originator" type="originatorElemType"/>
     <xs:complexType name="originatorElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="enterpriseName"/>
+            <xs:element ref="enterpriseName" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="enterpriseCode"/>
         <xs:attribute ref="id"/>
@@ -310,8 +314,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="dmRefElemType">
         <xs:sequence>
             <xs:element ref="dmRefIdent"/>
-            <xs:element minOccurs="0" ref="dmRefAddressItems"/>
-            <xs:element minOccurs="0" ref="behavior"/>
+            <xs:element ref="dmRefAddressItems" minOccurs="0"/>
+            <xs:element ref="behavior" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="referredFragment"/>
         <xs:attribute ref="applicRefId"/>
@@ -319,35 +323,39 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="referenceUsage" use="optional"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT"/>
+        <xs:attribute ref="xlink:type" default="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="replace"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="dmRefIdent" type="dmRefIdentElemType"/>
     <xs:complexType name="dmRefIdentElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="identExtension"/>
+            <xs:element ref="identExtension" minOccurs="0"/>
             <xs:element ref="dmCode"/>
-            <xs:element minOccurs="0" ref="issueInfo"/>
-            <xs:element minOccurs="0" ref="language"/>
+            <xs:element ref="issueInfo" minOccurs="0"/>
+            <xs:element ref="language" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="dmRefAddressItems" type="dmRefAddressItemsElemType"/>
     <xs:complexType name="dmRefAddressItemsElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="dmTitle"/>
-            <xs:element minOccurs="0" ref="issueDate"/>
+            <xs:element ref="dmTitle" minOccurs="0"/>
+            <xs:element ref="issueDate" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="dmTitle" type="dmTitleElemType"/>
     <xs:complexType name="dmTitleElemType">
         <xs:sequence>
             <xs:element ref="techName"/>
-            <xs:element minOccurs="0" ref="infoName"/>
-            <xs:element minOccurs="0" ref="infoNameVariant"/>
+            <xs:element ref="infoName" minOccurs="0"/>
+            <xs:element ref="infoNameVariant" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="techName" type="techNameElemType"/>
-    <xs:complexType mixed="true" name="techNameElemType">
+    <xs:complexType name="techNameElemType" mixed="true">
         <xs:attributeGroup ref="securityAttGroup"/>
     </xs:complexType>
     <xs:attributeGroup name="securityAttGroup">
@@ -673,7 +681,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:attribute name="derivativeClassificationRefId" type="xs:IDREF"/>
     <xs:element name="infoName" type="infoNameElemType"/>
-    <xs:complexType mixed="true" name="infoNameElemType">
+    <xs:complexType name="infoNameElemType" mixed="true">
         <xs:attributeGroup ref="securityAttGroup"/>
     </xs:complexType>
     <xs:element name="infoNameVariant" type="infoNameElemType"/>
@@ -831,7 +839,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:element ref="unverified"/>
             <xs:sequence>
                 <xs:element ref="firstVerification"/>
-                <xs:element minOccurs="0" ref="secondVerification"/>
+                <xs:element ref="secondVerification" minOccurs="0"/>
             </xs:sequence>
         </xs:choice>
         <xs:attribute ref="applicRefId"/>
@@ -858,32 +866,32 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="targetDmStatus" type="dmStatusGenericElemType"/>
     <xs:complexType name="dmStatusGenericElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="sourceDmIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="repositorySourceDmIdent"/>
+            <xs:element ref="sourceDmIdent" minOccurs="0"/>
+            <xs:element ref="repositorySourceDmIdent" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="security"/>
-            <xs:element minOccurs="0" ref="derivativeClassification"/>
-            <xs:element minOccurs="0" ref="controlAuthorityGroup"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="dataRestrictions"/>
-            <xs:element minOccurs="0" ref="logo"/>
+            <xs:element ref="derivativeClassification" minOccurs="0"/>
+            <xs:element ref="controlAuthorityGroup" minOccurs="0"/>
+            <xs:element ref="dataRestrictions" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="logo" minOccurs="0"/>
             <xs:element ref="responsiblePartnerCompany"/>
             <xs:element ref="originator"/>
-            <xs:element minOccurs="0" ref="applicCrossRefTableRef"/>
+            <xs:element ref="applicCrossRefTableRef" minOccurs="0"/>
             <xs:choice>
                 <xs:element ref="applic"/>
                 <xs:element ref="applicRef"/>
             </xs:choice>
-            <xs:element minOccurs="0" ref="techStandard"/>
+            <xs:element ref="techStandard" minOccurs="0"/>
             <xs:element ref="brexDmRef"/>
-            <xs:element maxOccurs="unbounded" ref="qualityAssurance"/>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="qualityAssurance" maxOccurs="unbounded"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element ref="systemBreakdownCode"/>
                 <xs:element ref="functionalItemCode"/>
                 <xs:element ref="functionalItemRef"/>
             </xs:choice>
-            <xs:element minOccurs="0" ref="skillLevel"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="reasonForUpdate"/>
-            <xs:element minOccurs="0" ref="productSafety"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="remarks"/>
+            <xs:element ref="skillLevel" minOccurs="0"/>
+            <xs:element ref="reasonForUpdate" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="productSafety" minOccurs="0"/>
+            <xs:element ref="remarks" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="issueType"/>
@@ -898,20 +906,20 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="derivativeClassification" type="derivativeClassificationElemType"/>
     <xs:complexType name="derivativeClassificationElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="classificationActionGroup"/>
+            <xs:element ref="classificationActionGroup" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="classificationActionGroup" type="classificationActionGroupElemType"/>
     <xs:complexType name="classificationActionGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="classificationAction"/>
+            <xs:element ref="classificationAction" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
     </xs:complexType>
     <xs:element name="classificationAction" type="classificationActionElemType"/>
     <xs:complexType name="classificationActionElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="valueAfterAction"/>
+            <xs:element ref="valueAfterAction" minOccurs="0"/>
             <xs:element ref="businessUnit"/>
             <xs:element ref="derivativeSource"/>
         </xs:sequence>
@@ -1031,8 +1039,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="businessUnitElemType">
         <xs:sequence>
             <xs:element ref="businessUnitName"/>
-            <xs:element minOccurs="0" ref="businessUnitAddress"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="contactPerson"/>
+            <xs:element ref="businessUnitAddress" minOccurs="0"/>
+            <xs:element ref="contactPerson" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -1043,21 +1051,21 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="businessUnitAddress" type="addressElemType"/>
     <xs:complexType name="addressElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="department"/>
-            <xs:element minOccurs="0" ref="street"/>
-            <xs:element minOccurs="0" ref="postOfficeBox"/>
-            <xs:element minOccurs="0" ref="postalZipCode"/>
+            <xs:element ref="department" minOccurs="0"/>
+            <xs:element ref="street" minOccurs="0"/>
+            <xs:element ref="postOfficeBox" minOccurs="0"/>
+            <xs:element ref="postalZipCode" minOccurs="0"/>
             <xs:element ref="city"/>
             <xs:element ref="country"/>
-            <xs:element minOccurs="0" ref="state"/>
-            <xs:element minOccurs="0" ref="province"/>
-            <xs:element minOccurs="0" ref="building"/>
-            <xs:element minOccurs="0" ref="room"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="phoneNumber"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="faxNumber"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="email"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="internet"/>
-            <xs:element minOccurs="0" ref="SITA"/>
+            <xs:element ref="state" minOccurs="0"/>
+            <xs:element ref="province" minOccurs="0"/>
+            <xs:element ref="building" minOccurs="0"/>
+            <xs:element ref="room" minOccurs="0"/>
+            <xs:element ref="phoneNumber" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="faxNumber" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="email" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="internet" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="SITA" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -1075,20 +1083,20 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="building" type="xs:string"/>
     <xs:element name="room" type="xs:string"/>
     <xs:element name="phoneNumber" type="phoneNumberElemType"/>
-    <xs:complexType mixed="true" name="phoneNumberElemType">
+    <xs:complexType name="phoneNumberElemType" mixed="true">
         <xs:attribute ref="contactRole"/>
     </xs:complexType>
     <xs:attribute name="contactRole" type="xs:string"/>
     <xs:element name="faxNumber" type="faxNumberElemType"/>
-    <xs:complexType mixed="true" name="faxNumberElemType">
+    <xs:complexType name="faxNumberElemType" mixed="true">
         <xs:attribute ref="contactRole"/>
     </xs:complexType>
     <xs:element name="email" type="emailElemType"/>
-    <xs:complexType mixed="true" name="emailElemType">
+    <xs:complexType name="emailElemType" mixed="true">
         <xs:attribute ref="contactRole"/>
     </xs:complexType>
     <xs:element name="internet" type="internetElemType"/>
-    <xs:complexType mixed="true" name="internetElemType">
+    <xs:complexType name="internetElemType" mixed="true">
         <xs:attribute ref="contactRole"/>
     </xs:complexType>
     <xs:element name="SITA" type="xs:string"/>
@@ -1096,10 +1104,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="contactPersonElemType">
         <xs:sequence>
             <xs:element ref="lastName"/>
-            <xs:element minOccurs="0" ref="middleName"/>
-            <xs:element minOccurs="0" ref="firstName"/>
-            <xs:element minOccurs="0" ref="jobTitle"/>
-            <xs:element minOccurs="0" ref="contactPersonAddress"/>
+            <xs:element ref="middleName" minOccurs="0"/>
+            <xs:element ref="firstName" minOccurs="0"/>
+            <xs:element ref="jobTitle" minOccurs="0"/>
+            <xs:element ref="contactPersonAddress" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="personPrefix"/>
@@ -1117,7 +1125,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="controlAuthorityGroup" type="controlAuthorityGroupElemType"/>
     <xs:complexType name="controlAuthorityGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="controlAuthority"/>
+            <xs:element ref="controlAuthority" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -1128,10 +1136,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="controlAuthorityElemType">
         <xs:sequence>
             <xs:choice>
-                <xs:element minOccurs="0" ref="controlAuthorityText"/>
-                <xs:element minOccurs="0" ref="dmRef"/>
+                <xs:element ref="controlAuthorityText" minOccurs="0"/>
+                <xs:element ref="dmRef" minOccurs="0"/>
             </xs:choice>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id" use="required"/>
@@ -1146,9 +1154,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:sequence>
     </xs:complexType>
     <xs:element name="para" type="paraElemType"/>
-    <xs:complexType mixed="true" name="paraElemType">
+    <xs:complexType name="paraElemType" mixed="true">
         <xs:sequence>
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="paraContentElemGroup"/>
+            <xs:group ref="paraContentElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -1186,9 +1194,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalItemRef" type="functionalItemRefElemType"/>
     <xs:complexType name="functionalItemRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="functionalItemNumber" use="required"/>
         <xs:attribute ref="functionalItemType"/>
@@ -1201,12 +1209,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="name" type="nameElemType"/>
-    <xs:complexType mixed="true" name="nameElemType">
+    <xs:complexType name="nameElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="shortName" type="shortNameElemType"/>
-    <xs:complexType mixed="true" name="shortNameElemType">
+    <xs:complexType name="shortNameElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
@@ -1222,24 +1230,28 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="pmRefElemType">
         <xs:sequence>
             <xs:element ref="pmRefIdent"/>
-            <xs:element minOccurs="0" ref="pmRefAddressItems"/>
-            <xs:element minOccurs="0" ref="behavior"/>
+            <xs:element ref="pmRefAddressItems" minOccurs="0"/>
+            <xs:element ref="behavior" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
         <xs:attribute ref="referenceUsage" use="optional"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT"/>
+        <xs:attribute ref="xlink:type" default="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="replace"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="pmRefIdent" type="pmRefIdentElemType"/>
     <xs:complexType name="pmRefIdentElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="identExtension"/>
+            <xs:element ref="identExtension" minOccurs="0"/>
             <xs:element ref="pmCode"/>
-            <xs:element minOccurs="0" ref="issueInfo"/>
-            <xs:element minOccurs="0" ref="language"/>
+            <xs:element ref="issueInfo" minOccurs="0"/>
+            <xs:element ref="language" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="pmCode" type="pmCodeElemType"/>
@@ -1270,14 +1282,18 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="pmRefAddressItems" type="pmRefAddressItemsElemType"/>
     <xs:complexType name="pmRefAddressItemsElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="pmTitle"/>
-            <xs:element minOccurs="0" ref="issueDate"/>
-            <xs:element minOccurs="0" ref="security"/>
-            <xs:element minOccurs="0" ref="responsiblePartnerCompany"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="pubMedia"/>
-            <xs:element minOccurs="0" ref="shortPmTitle"/>
+            <xs:element ref="pmTitle" minOccurs="0"/>
+            <xs:element ref="issueDate" minOccurs="0"/>
+            <xs:element ref="security" minOccurs="0"/>
+            <xs:element ref="responsiblePartnerCompany" minOccurs="0"/>
+            <xs:element ref="pubMedia" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="shortPmTitle" minOccurs="0"/>
         </xs:sequence>
-        <xs:attributeGroup ref="xlink:XLINKATT"/>
+        <xs:attribute ref="xlink:type" default="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="replace"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
     </xs:complexType>
     <xs:element name="pmTitle" type="xs:string"/>
     <xs:element name="pubMedia" type="pubMediaElemType"/>
@@ -1296,8 +1312,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="externalPubRefElemType">
         <xs:sequence>
             <xs:element ref="externalPubRefIdent"/>
-            <xs:element minOccurs="0" ref="externalPubRefAddressItems"/>
-            <xs:element minOccurs="0" ref="behavior"/>
+            <xs:element ref="externalPubRefAddressItems" minOccurs="0"/>
+            <xs:element ref="behavior" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="extEntityIdent" use="optional"/>
         <xs:attribute ref="applicRefId"/>
@@ -1305,20 +1321,24 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="referenceUsage" use="optional"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT4"/>
+        <xs:attribute ref="xlink:type" default="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="new"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="externalPubRefIdent" type="externalPubRefIdentElemType"/>
     <xs:complexType name="externalPubRefIdentElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="externalPubCode"/>
-            <xs:element minOccurs="0" ref="externalPubTitle"/>
-            <xs:element minOccurs="0" ref="externalPubIssueInfo"/>
+            <xs:element ref="externalPubCode" minOccurs="0"/>
+            <xs:element ref="externalPubTitle" minOccurs="0"/>
+            <xs:element ref="externalPubIssueInfo" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="externalPubCode" type="externalPubCodeElemType"/>
-    <xs:complexType mixed="true" name="externalPubCodeElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="externalPubCodeElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="indexFlag"/>
             <xs:element ref="subScript"/>
             <xs:element ref="superScript"/>
@@ -1354,8 +1374,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="acronymTerm" type="acronymTermElemType"/>
-    <xs:complexType mixed="true" name="acronymTermElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="acronymTermElemType" mixed="true">
+        <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attribute ref="internalRefId"/>
     </xs:complexType>
     <xs:group name="subOrSuperScriptElemGroup">
@@ -1366,14 +1386,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:group>
     <xs:attribute name="internalRefId" type="xs:IDREF"/>
     <xs:element name="acronymDefinition" type="acronymDefinitionElemType"/>
-    <xs:complexType mixed="true" name="acronymDefinitionElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="acronymDefinitionElemType" mixed="true">
+        <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="at01" name="acronymType" type="acronymTypeAttType"/>
+    <xs:attribute name="acronymType" type="acronymTypeAttType" default="at01"/>
     <xs:simpleType name="acronymTypeAttType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="at01"/>
@@ -1478,9 +1498,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="verbatimText" type="verbatimTextElemType"/>
-    <xs:complexType mixed="true" name="verbatimTextElemType">
+    <xs:complexType name="verbatimTextElemType" mixed="true">
         <xs:attribute ref="verbatimStyle"/>
-        <xs:attribute fixed="preserve" ref="xml:space"/>
+        <xs:attribute ref="xml:space" fixed="preserve"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -1592,8 +1612,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:attribute name="pubCodingScheme" type="xs:string"/>
     <xs:element name="externalPubTitle" type="externalPubTitleElemType"/>
-    <xs:complexType mixed="true" name="externalPubTitleElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="externalPubTitleElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="indexFlag"/>
             <xs:element ref="subScript"/>
             <xs:element ref="superScript"/>
@@ -1603,14 +1623,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:choice>
     </xs:complexType>
     <xs:element name="externalPubIssueInfo" type="externalPubIssueInfoElemType"/>
-    <xs:complexType mixed="true" name="externalPubIssueInfoElemType">
+    <xs:complexType name="externalPubIssueInfoElemType" mixed="true">
         <xs:sequence>
             <xs:element ref="externalPubIssue"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="externalPubIssue" type="externalPubIssueElemType"/>
-    <xs:complexType mixed="true" name="externalPubIssueElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="externalPubIssueElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="indexFlag"/>
             <xs:element ref="subScript"/>
             <xs:element ref="superScript"/>
@@ -1622,15 +1642,15 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="externalPubRefAddressItems" type="externalPubRefAddressItemsElemType"/>
     <xs:complexType name="externalPubRefAddressItemsElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="externalPubIssueDate"/>
-            <xs:element minOccurs="0" ref="security"/>
-            <xs:element minOccurs="0" ref="responsiblePartnerCompany"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="pubMedia"/>
-            <xs:element minOccurs="0" ref="shortExternalPubTitle"/>
+            <xs:element ref="externalPubIssueDate" minOccurs="0"/>
+            <xs:element ref="security" minOccurs="0"/>
+            <xs:element ref="responsiblePartnerCompany" minOccurs="0"/>
+            <xs:element ref="pubMedia" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="shortExternalPubTitle" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="externalPubIssueDate" type="externalPubIssueDateElemType"/>
-    <xs:complexType mixed="true" name="externalPubIssueDateElemType">
+    <xs:complexType name="externalPubIssueDateElemType" mixed="true">
         <xs:attributeGroup ref="externalPubIssueDateAttGroup"/>
     </xs:complexType>
     <xs:attributeGroup name="externalPubIssueDateAttGroup">
@@ -1639,8 +1659,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="day"/>
     </xs:attributeGroup>
     <xs:element name="shortExternalPubTitle" type="shortExternalPubTitleElemType"/>
-    <xs:complexType mixed="true" name="shortExternalPubTitleElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="shortExternalPubTitleElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="indexFlag"/>
             <xs:element ref="subScript"/>
             <xs:element ref="superScript"/>
@@ -1870,9 +1890,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="circuitBreakerRef" type="circuitBreakerRefElemType"/>
     <xs:complexType name="circuitBreakerRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="circuitBreakerNumber" use="required"/>
         <xs:attribute ref="circuitBreakerType"/>
@@ -2005,9 +2025,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="controlIndicatorRef" type="controlIndicatorRefElemType"/>
     <xs:complexType name="controlIndicatorRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="controlIndicatorNumber"/>
         <xs:attribute ref="id"/>
@@ -2017,7 +2037,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="controlIndicatorNumber" type="xs:string"/>
     <xs:element name="inlineSignificantData" type="inlineSignificantDataElemType"/>
-    <xs:complexType mixed="true" name="inlineSignificantDataElemType">
+    <xs:complexType name="inlineSignificantDataElemType" mixed="true">
         <xs:attribute ref="significantParaDataType" use="required"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
@@ -2127,9 +2147,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="quantity" type="quantityElemType"/>
-    <xs:complexType mixed="true" name="quantityElemType">
+    <xs:complexType name="quantityElemType" mixed="true">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantityGroup"/>
+            <xs:element ref="quantityGroup" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="quantityType"/>
         <xs:attribute ref="quantityTypeSpecifics"/>
@@ -2140,11 +2160,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="quantityGroupElemType">
         <xs:choice>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="quantityValue"/>
-                <xs:element maxOccurs="2" minOccurs="0" ref="quantityTolerance"/>
+                <xs:element ref="quantityValue" maxOccurs="unbounded"/>
+                <xs:element ref="quantityTolerance" minOccurs="0" maxOccurs="2"/>
             </xs:sequence>
             <xs:sequence>
-                <xs:element maxOccurs="2" ref="quantityTolerance"/>
+                <xs:element ref="quantityTolerance" maxOccurs="2"/>
             </xs:sequence>
         </xs:choice>
         <xs:attribute ref="quantityGroupType"/>
@@ -3543,7 +3563,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    <xs:attribute default="plusorminus" name="quantityToleranceType" type="quantityToleranceTypeAttType"/>
+    <xs:attribute name="quantityToleranceType" type="quantityToleranceTypeAttType" default="plusorminus"/>
     <xs:simpleType name="quantityToleranceTypeAttType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="plus"/>
@@ -3551,7 +3571,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:enumeration value="plusorminus"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:attribute default="nominal" name="quantityGroupType" type="quantityGroupTypeAttType"/>
+    <xs:attribute name="quantityGroupType" type="quantityGroupTypeAttType" default="nominal"/>
     <xs:simpleType name="quantityGroupTypeAttType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="nominal"/>
@@ -3665,9 +3685,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:attribute name="quantityTypeSpecifics" type="xs:string"/>
     <xs:element name="internalRef" type="internalRefElemType"/>
-    <xs:complexType mixed="true" name="internalRefElemType">
+    <xs:complexType name="internalRefElemType" mixed="true">
         <xs:sequence>
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+            <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="internalRefId"/>
         <xs:attribute ref="internalRefTargetType"/>
@@ -3675,7 +3695,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="targetTitle"/>
         <xs:attribute ref="applicRefId"/>
         <xs:attributeGroup ref="changeAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT3"/>
+        <xs:attribute ref="xlink:type" fixed="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="replace"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:attribute name="internalRefTargetType" type="internalRefTargetTypeAttType"/>
@@ -3784,9 +3808,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:attribute name="targetTitle" type="xs:string"/>
     <xs:element name="changeInline" type="changeInlineElemType"/>
-    <xs:complexType mixed="true" name="changeInlineElemType">
+    <xs:complexType name="changeInlineElemType" mixed="true">
         <xs:sequence maxOccurs="unbounded">
-            <xs:group minOccurs="0" ref="textElemGroup"/>
+            <xs:group ref="textElemGroup" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -3794,13 +3818,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="emphasis" type="emphasisElemType"/>
-    <xs:complexType mixed="true" name="emphasisElemType">
+    <xs:complexType name="emphasisElemType" mixed="true">
         <xs:sequence maxOccurs="unbounded">
-            <xs:group minOccurs="0" ref="textElemGroup"/>
+            <xs:group ref="textElemGroup" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="emphasisType"/>
     </xs:complexType>
-    <xs:attribute default="em01" name="emphasisType" type="emphasisTypeAttType"/>
+    <xs:attribute name="emphasisType" type="emphasisTypeAttType" default="em01"/>
     <xs:simpleType name="emphasisTypeAttType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="em01"/>
@@ -3912,7 +3936,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="reproductionHeight"/>
         <xs:attribute ref="reproductionScale"/>
         <xs:attribute ref="applicRefId"/>
-        <xs:attributeGroup ref="xlink:XLINKATT1"/>
+        <xs:attribute ref="xlink:type" fixed="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" fixed="embed"/>
+        <xs:attribute ref="xlink:actuate" fixed="onLoad"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:attribute name="infoEntityIdent" type="xs:ENTITY"/>
@@ -3934,8 +3962,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="sequentialList" type="sequentialListElemType"/>
     <xs:complexType name="sequentialListElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="title"/>
-            <xs:element maxOccurs="unbounded" ref="listItem"/>
+            <xs:element ref="title" minOccurs="0"/>
+            <xs:element ref="listItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -3944,8 +3972,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="title" type="titleElemType"/>
-    <xs:complexType mixed="true" name="titleElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="textElemGroup"/>
+    <xs:complexType name="titleElemType" mixed="true">
+        <xs:group ref="textElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
@@ -3965,7 +3993,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="note" type="noteElemType"/>
     <xs:complexType name="noteElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
             <xs:choice maxOccurs="unbounded">
                 <xs:element ref="notePara"/>
                 <xs:element ref="attentionSequentialList"/>
@@ -3981,8 +4009,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="notePara" type="noteParaElemType"/>
-    <xs:complexType mixed="true" name="noteParaElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="noteParaElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="attentionText"/>
             <xs:element ref="attentionSequentialList"/>
             <xs:element ref="attentionRandomList"/>
@@ -4017,8 +4045,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="attentionSequentialList" type="attentionSequentialListElemType"/>
     <xs:complexType name="attentionSequentialListElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="title"/>
-            <xs:element maxOccurs="unbounded" ref="attentionSequentialListItem"/>
+            <xs:element ref="title" minOccurs="0"/>
+            <xs:element ref="attentionSequentialListItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4029,8 +4057,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="attentionSequentialListItem" type="attentionSequentialListItemElemType"/>
     <xs:complexType name="attentionSequentialListItemElemType">
         <xs:choice maxOccurs="unbounded">
-            <xs:element minOccurs="0" ref="attentionListItemPara"/>
-            <xs:element minOccurs="0" ref="attentionRandomList"/>
+            <xs:element ref="attentionListItemPara" minOccurs="0"/>
+            <xs:element ref="attentionRandomList" minOccurs="0"/>
         </xs:choice>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4039,9 +4067,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="attentionListItemPara" type="attentionListItemParaElemType"/>
-    <xs:complexType mixed="true" name="attentionListItemParaElemType">
+    <xs:complexType name="attentionListItemParaElemType" mixed="true">
         <xs:sequence>
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="attentionText"/>
+            <xs:group ref="attentionText" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4052,7 +4080,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="attentionRandomList" type="attentionRandomListElemType"/>
     <xs:complexType name="attentionRandomListElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="attentionRandomListItem"/>
+            <xs:element ref="attentionRandomListItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="listItemPrefix"/>
         <xs:attribute ref="applicRefId"/>
@@ -4072,7 +4100,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="pf02" name="listItemPrefix" type="listItemPrefixAttType"/>
+    <xs:attribute name="listItemPrefix" type="listItemPrefixAttType" default="pf02"/>
     <xs:simpleType name="listItemPrefixAttType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="pf01"/>
@@ -4180,8 +4208,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="randomList" type="randomListElemType"/>
     <xs:complexType name="randomListElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="title"/>
-            <xs:element maxOccurs="unbounded" ref="listItem"/>
+            <xs:element ref="title" minOccurs="0"/>
+            <xs:element ref="listItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="listItemPrefix"/>
         <xs:attribute ref="applicRefId"/>
@@ -4193,9 +4221,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="definitionList" type="definitionListElemType"/>
     <xs:complexType name="definitionListElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="title"/>
-            <xs:element minOccurs="0" ref="definitionListHeader"/>
-            <xs:element maxOccurs="unbounded" ref="definitionListItem"/>
+            <xs:element ref="title" minOccurs="0"/>
+            <xs:element ref="definitionListHeader" minOccurs="0"/>
+            <xs:element ref="definitionListItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4225,9 +4253,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="listItemTerm" type="listItemTermElemType"/>
-    <xs:complexType mixed="true" name="listItemTermElemType">
+    <xs:complexType name="listItemTermElemType" mixed="true">
         <xs:sequence>
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="textElemGroup"/>
+            <xs:group ref="textElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4238,7 +4266,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="listItemDefinition" type="listItemDefinitionElemType"/>
     <xs:complexType name="listItemDefinitionElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="para"/>
+            <xs:element ref="para" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4361,7 +4389,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="dataRestrictionsElemType">
         <xs:sequence>
             <xs:element ref="restrictionInstructions"/>
-            <xs:element minOccurs="0" ref="restrictionInfo"/>
+            <xs:element ref="restrictionInfo" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -4373,11 +4401,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="restrictionInstructionsElemType">
         <xs:sequence>
             <xs:element ref="dataDistribution"/>
-            <xs:element minOccurs="0" ref="exportControl"/>
-            <xs:element minOccurs="0" ref="dataHandling"/>
-            <xs:element minOccurs="0" ref="dataDestruction"/>
-            <xs:element minOccurs="0" ref="dataDisclosure"/>
-            <xs:element minOccurs="0" ref="supersedure"/>
+            <xs:element ref="exportControl" minOccurs="0"/>
+            <xs:element ref="dataHandling" minOccurs="0"/>
+            <xs:element ref="dataDestruction" minOccurs="0"/>
+            <xs:element ref="dataDisclosure" minOccurs="0"/>
+            <xs:element ref="supersedure" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -4385,7 +4413,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="dataDistribution" type="dataDistributionElemType"/>
-    <xs:complexType mixed="true" name="dataDistributionElemType">
+    <xs:complexType name="dataDistributionElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -4394,8 +4422,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="exportControl" type="exportControlElemType"/>
     <xs:complexType name="exportControlElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="exportRegistrationStmt"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="exportRegistrationCode"/>
+            <xs:element ref="exportRegistrationStmt" maxOccurs="unbounded"/>
+            <xs:element ref="exportRegistrationCode" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -4413,8 +4441,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="exportRole"/>
     </xs:complexType>
     <xs:element name="simplePara" type="simpleParaElemType"/>
-    <xs:complexType mixed="true" name="simpleParaElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="simpleParaElemType" mixed="true">
+        <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -4428,36 +4456,36 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="exportRegistrationCode" type="exportRegistrationCodeElemType"/>
-    <xs:complexType mixed="true" name="exportRegistrationCodeElemType">
+    <xs:complexType name="exportRegistrationCodeElemType" mixed="true">
         <xs:attribute ref="exportRegulationCodeType"/>
     </xs:complexType>
     <xs:attribute name="exportRegulationCodeType" type="xs:string"/>
     <xs:attribute name="exportRegulationType" type="xs:string"/>
     <xs:attribute name="governmentAuthority" type="xs:string"/>
     <xs:element name="dataHandling" type="dataHandlingElemType"/>
-    <xs:complexType mixed="true" name="dataHandlingElemType">
+    <xs:complexType name="dataHandlingElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="dataDestruction" type="dataDestructionElemType"/>
-    <xs:complexType mixed="true" name="dataDestructionElemType">
+    <xs:complexType name="dataDestructionElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="dataDisclosure" type="dataDisclosureElemType"/>
-    <xs:complexType mixed="true" name="dataDisclosureElemType">
+    <xs:complexType name="dataDisclosureElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="supersedure" type="supersedureElemType"/>
-    <xs:complexType mixed="true" name="supersedureElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="supersedureElemType" mixed="true">
+        <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -4466,9 +4494,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="restrictionInfo" type="restrictionInfoElemType"/>
     <xs:complexType name="restrictionInfoElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="copyright"/>
-            <xs:element minOccurs="0" ref="policyStatement"/>
-            <xs:element minOccurs="0" ref="dataConds"/>
+            <xs:element ref="copyright" minOccurs="0"/>
+            <xs:element ref="policyStatement" minOccurs="0"/>
+            <xs:element ref="dataConds" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -4478,7 +4506,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="copyright" type="copyrightElemType"/>
     <xs:complexType name="copyrightElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="copyrightPara"/>
+            <xs:element ref="copyrightPara" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -4486,8 +4514,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="copyrightPara" type="copyrightParaElemType"/>
-    <xs:complexType mixed="true" name="copyrightParaElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="copyrightParaElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="emphasis"/>
             <xs:element ref="subScript"/>
             <xs:element ref="superScript"/>
@@ -4500,14 +4528,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="policyStatement" type="policyStatementElemType"/>
-    <xs:complexType mixed="true" name="policyStatementElemType">
+    <xs:complexType name="policyStatementElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="dataConds" type="dataCondsElemType"/>
-    <xs:complexType mixed="true" name="dataCondsElemType">
+    <xs:complexType name="dataCondsElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -4516,7 +4544,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="logo" type="logoElemType"/>
     <xs:complexType name="logoElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="symbol"/>
+            <xs:element ref="symbol" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="applicCrossRefTableRef" type="applicCrossRefTableRefElemType"/>
@@ -4526,20 +4554,18 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:sequence>
     </xs:complexType>
     <xs:element name="applic" type="applicElemType"/>
-    <xs:complexType name="applicElemType">
+        <xs:complexType name="applicElemType">
         <xs:choice>
             <xs:sequence>
                 <xs:element ref="displayText"/>
                 <xs:choice minOccurs="0">
                     <xs:element ref="assert"/>
                     <xs:element ref="evaluate"/>
-                    <xs:element ref="expression"/>
                 </xs:choice>
             </xs:sequence>
             <xs:choice>
                 <xs:element ref="assert"/>
                 <xs:element ref="evaluate"/>
-                <xs:element ref="expression"/>
             </xs:choice>
         </xs:choice>
         <xs:attribute ref="applicConfiguration"/>
@@ -4551,11 +4577,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="displayText" type="displayTextElemType"/>
     <xs:complexType name="displayTextElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="simplePara"/>
+            <xs:element ref="simplePara" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="assert" type="assertElemType"/>
-    <xs:complexType mixed="true" name="assertElemType">
+    <xs:complexType name="assertElemType" mixed="true">
         <xs:attribute ref="applicPropertyIdent"/>
         <xs:attribute ref="applicPropertyType"/>
         <xs:attribute ref="applicPropertyValues"/>
@@ -4578,7 +4604,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:attribute name="applicDisplayClass" type="xs:string"/>
     <xs:element name="evaluate" type="evaluateElemType"/>
     <xs:complexType name="evaluateElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="2">
+        <xs:choice minOccurs="2" maxOccurs="unbounded">
             <xs:element ref="evaluate"/>
             <xs:element ref="assert"/>
         </xs:choice>
@@ -4592,230 +4618,6 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:enumeration value="or"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:element name="expression" type="expressionElemType"/>
-    <xs:complexType name="expressionElemType">
-        <xs:choice>
-            <xs:sequence>
-                <xs:element ref="expression"/>
-                <xs:choice>
-                    <xs:element ref="booleanOperator"/>
-                    <xs:element ref="numberOperator"/>
-                    <xs:element ref="setOperator"/>
-                    <xs:element ref="stringOperator"/>
-                </xs:choice>
-                <xs:element ref="expression"/>
-            </xs:sequence>
-            <xs:sequence>
-                <xs:choice>
-                    <xs:element ref="booleanFunction"/>
-                    <xs:element ref="numberFunction"/>
-                    <xs:element ref="setFunction"/>
-                    <xs:element ref="stringFunction"/>
-                    <xs:element ref="subStringFunction"/>
-                </xs:choice>
-                <xs:element ref="expression"/>
-            </xs:sequence>
-            <xs:element ref="variableRef"/>
-            <xs:element ref="globalPropertyRef"/>
-            <xs:element ref="assert"/>
-            <xs:choice>
-                <xs:element ref="booleanValue"/>
-                <xs:element ref="stringValue"/>
-                <xs:element ref="realValue"/>
-                <xs:element ref="integerValue"/>
-                <xs:element ref="setValue"/>
-                <xs:element ref="noValue"/>
-            </xs:choice>
-        </xs:choice>
-        <xs:attribute ref="id"/>
-        <xs:attribute ref="humanReadableForm"/>
-    </xs:complexType>
-    <xs:element name="booleanOperator" type="booleanOperatorElemType"/>
-    <xs:complexType name="booleanOperatorElemType">
-        <xs:attribute ref="booleanOperation" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="booleanOperation" type="booleanOperationAttType"/>
-    <xs:simpleType name="booleanOperationAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="and"/>
-            <xs:enumeration value="equal"/>
-            <xs:enumeration value="exclusiveOr"/>
-            <xs:enumeration value="notEqual"/>
-            <xs:enumeration value="or"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="numberOperator" type="numberOperatorElemType"/>
-    <xs:complexType name="numberOperatorElemType">
-        <xs:attribute ref="numberOperation" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="numberOperation" type="numberOperationAttType"/>
-    <xs:simpleType name="numberOperationAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="divide"/>
-            <xs:enumeration value="equal"/>
-            <xs:enumeration value="exponent"/>
-            <xs:enumeration value="greaterThan"/>
-            <xs:enumeration value="greaterThanOrEqual"/>
-            <xs:enumeration value="integerDivide"/>
-            <xs:enumeration value="lessThan"/>
-            <xs:enumeration value="lessThanOrEqual"/>
-            <xs:enumeration value="minus"/>
-            <xs:enumeration value="modulus"/>
-            <xs:enumeration value="notEqual"/>
-            <xs:enumeration value="plus"/>
-            <xs:enumeration value="times"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="setOperator" type="setOperatorElemType"/>
-    <xs:complexType name="setOperatorElemType">
-        <xs:attribute ref="setOperation" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="setOperation" type="setOperationAttType"/>
-    <xs:simpleType name="setOperationAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="add"/>
-            <xs:enumeration value="disjoint"/>
-            <xs:enumeration value="equal"/>
-            <xs:enumeration value="intersection"/>
-            <xs:enumeration value="member"/>
-            <xs:enumeration value="notEqual"/>
-            <xs:enumeration value="remove"/>
-            <xs:enumeration value="setDifference"/>
-            <xs:enumeration value="subset"/>
-            <xs:enumeration value="union"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="stringOperator" type="stringOperatorElemType"/>
-    <xs:complexType name="stringOperatorElemType">
-        <xs:attribute ref="stringOperation" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="stringOperation" type="stringOperationAttType"/>
-    <xs:simpleType name="stringOperationAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="concatenate"/>
-            <xs:enumeration value="contains"/>
-            <xs:enumeration value="equal"/>
-            <xs:enumeration value="greaterThan"/>
-            <xs:enumeration value="greaterThanOrEqual"/>
-            <xs:enumeration value="lessThan"/>
-            <xs:enumeration value="lessThanOrEqual"/>
-            <xs:enumeration value="notEqual"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="booleanFunction" type="booleanFunctionElemType"/>
-    <xs:complexType name="booleanFunctionElemType">
-        <xs:attribute ref="booleanAction" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="booleanAction" type="booleanActionAttType"/>
-    <xs:simpleType name="booleanActionAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="defined"/>
-            <xs:enumeration value="not"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="numberFunction" type="numberFunctionElemType"/>
-    <xs:complexType name="numberFunctionElemType">
-        <xs:attribute ref="numberAction" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="numberAction" type="numberActionAttType"/>
-    <xs:simpleType name="numberActionAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="commonLogarithm"/>
-            <xs:enumeration value="cosecant"/>
-            <xs:enumeration value="cosine"/>
-            <xs:enumeration value="cotangent"/>
-            <xs:enumeration value="exponential"/>
-            <xs:enumeration value="factorial"/>
-            <xs:enumeration value="float"/>
-            <xs:enumeration value="hyperbolicCosecant"/>
-            <xs:enumeration value="hyperbolicCosine"/>
-            <xs:enumeration value="hyperbolicCotangent"/>
-            <xs:enumeration value="hyperbolicSecant"/>
-            <xs:enumeration value="hyperbolicSine"/>
-            <xs:enumeration value="hyperbolicTangent"/>
-            <xs:enumeration value="inverseCosecant"/>
-            <xs:enumeration value="inverseCosine"/>
-            <xs:enumeration value="inverseCotangent"/>
-            <xs:enumeration value="inverseSecant"/>
-            <xs:enumeration value="inverseSine"/>
-            <xs:enumeration value="inverseTangent"/>
-            <xs:enumeration value="naturalLogarithm"/>
-            <xs:enumeration value="negative"/>
-            <xs:enumeration value="secant"/>
-            <xs:enumeration value="sine"/>
-            <xs:enumeration value="squareRoot"/>
-            <xs:enumeration value="tangent"/>
-            <xs:enumeration value="truncate"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="setFunction" type="setFunctionElemType"/>
-    <xs:complexType name="setFunctionElemType">
-        <xs:attribute ref="setAction" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="setAction" type="setActionAttType"/>
-    <xs:simpleType name="setActionAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="empty"/>
-            <xs:enumeration value="sizeOf"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="stringFunction" type="stringFunctionElemType"/>
-    <xs:complexType name="stringFunctionElemType">
-        <xs:attribute ref="stringAction" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="stringAction" type="stringActionAttType"/>
-    <xs:simpleType name="stringActionAttType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="empty"/>
-            <xs:enumeration value="sizeOf"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="subStringFunction" type="subStringFunctionElemType"/>
-    <xs:complexType name="subStringFunctionElemType">
-        <xs:sequence>
-            <xs:element ref="subStringPosition"/>
-            <xs:choice minOccurs="0">
-                <xs:element ref="subStringLength"/>
-                <xs:element ref="subStringPosition"/>
-            </xs:choice>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:element name="subStringPosition" type="xs:integer"/>
-    <xs:element name="subStringLength" type="xs:integer"/>
-    <xs:element name="variableRef" type="variableRefElemType"/>
-    <xs:complexType name="variableRefElemType">
-        <xs:attribute ref="variableName" use="required"/>
-    </xs:complexType>
-    <xs:attribute name="variableName" type="xs:string"/>
-    <xs:element name="globalPropertyRef" type="globalPropertyRefElemType"/>
-    <xs:complexType name="globalPropertyRefElemType">
-        <xs:attribute ref="applicPropertyIdent" use="required"/>
-        <xs:attribute ref="applicPropertyType" use="required"/>
-    </xs:complexType>
-    <xs:element name="booleanValue" type="booleanValueElemType"/>
-    <xs:complexType name="booleanValueElemType">
-        <xs:choice>
-            <xs:element ref="trueValue"/>
-            <xs:element ref="falseValue"/>
-        </xs:choice>
-    </xs:complexType>
-    <xs:element name="trueValue" type="emptyElemType"/>
-    <xs:complexType name="emptyElemType"/>
-    <xs:element name="falseValue" type="emptyElemType"/>
-    <xs:element name="stringValue" type="xs:string"/>
-    <xs:element name="realValue" type="xs:string"/>
-    <xs:element name="integerValue" type="xs:string"/>
-    <xs:element name="setValue" type="setValueElemType"/>
-    <xs:complexType name="setValueElemType">
-        <xs:choice>
-            <xs:element maxOccurs="unbounded" ref="stringValue"/>
-            <xs:element maxOccurs="unbounded" ref="realValue"/>
-            <xs:element maxOccurs="unbounded" ref="integerValue"/>
-            <xs:element ref="noValue"/>
-        </xs:choice>
-    </xs:complexType>
-    <xs:element name="noValue" type="emptyElemType"/>
-    <xs:attribute name="humanReadableForm" type="xs:string"/>
     <xs:attribute name="applicConfiguration" type="applicConfigurationAttType"/>
     <xs:simpleType name="applicConfigurationAttType">
         <xs:restriction base="xs:string">
@@ -4830,7 +4632,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="applicRef" type="applicRefElemType"/>
     <xs:complexType name="applicRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="dmRef"/>
+            <xs:element ref="dmRef" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicIdentValue" use="required"/>
         <xs:attribute ref="id"/>
@@ -4863,15 +4665,15 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="authorityExceptions" type="authorityExceptionsElemType"/>
     <xs:complexType name="authorityExceptionsElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="productConfiguration"/>
-            <xs:element minOccurs="0" ref="retrofit"/>
+            <xs:element ref="productConfiguration" minOccurs="0"/>
+            <xs:element ref="retrofit" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="productConfiguration" type="productConfigurationElemType"/>
     <xs:complexType name="productConfigurationElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="excludedModification"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="additionalModification"/>
+            <xs:element ref="excludedModification" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="additionalModification" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="excludedModification" type="xs:string"/>
@@ -4879,13 +4681,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="retrofit" type="retrofitElemType"/>
     <xs:complexType name="retrofitElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="modification"/>
+            <xs:element ref="modification" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="modification" type="modificationElemType"/>
     <xs:complexType name="modificationElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="modificationTitle"/>
+            <xs:element ref="modificationTitle" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="authorizationIdent" use="required"/>
         <xs:attribute ref="id"/>
@@ -4906,7 +4708,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:element name="authorityNotes" type="xs:string"/>
     <xs:element name="systemBreakdownCode" type="systemBreakdownCodeElemType"/>
-    <xs:complexType mixed="true" name="systemBreakdownCodeElemType">
+    <xs:complexType name="systemBreakdownCodeElemType" mixed="true">
         <xs:attribute ref="id"/>
     </xs:complexType>
     <xs:element name="functionalItemCode" type="xs:string"/>
@@ -5021,8 +4823,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="reasonForUpdate" type="reasonForUpdateElemType"/>
     <xs:complexType name="reasonForUpdateElemType">
         <xs:choice>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="simplePara"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="simpleRefPara"/>
+            <xs:element ref="simplePara" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="simpleRefPara" minOccurs="0" maxOccurs="unbounded"/>
         </xs:choice>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -5031,9 +4833,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="simpleRefPara" type="simpleRefParaElemType"/>
-    <xs:complexType mixed="true" name="simpleRefParaElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="simpleRefParaElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="verbatimText"/>
             <xs:element ref="emphasis"/>
             <xs:element ref="inlineSignificantData"/>
@@ -5152,19 +4954,19 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:simpleType>
     <xs:attribute name="updateHighlight" type="yesOrNoAttType"/>
     <xs:element name="productSafety" type="productSafetyElemType"/>
-    <xs:complexType mixed="true" name="productSafetyElemType">
+    <xs:complexType name="productSafetyElemType" mixed="true">
         <xs:attribute ref="safetyLabel" use="required"/>
     </xs:complexType>
     <xs:attribute name="safetyLabel" type="xs:string"/>
     <xs:element name="remarks" type="remarksElemType"/>
     <xs:complexType name="remarksElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="simplePara"/>
+            <xs:element ref="simplePara" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="new" name="issueType" type="issueTypeAttType"/>
+    <xs:attribute name="issueType" type="issueTypeAttType" default="new"/>
     <xs:simpleType name="issueTypeAttType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="new"/>
@@ -5178,7 +4980,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="content" type="contentElemType"/>
-    <xs:complexType name="contentElemType">
+        <xs:complexType name="contentElemType">
         <xs:sequence>
             <xs:element minOccurs="0" ref="refs"/>
             <xs:element ref="update"/>
@@ -5198,7 +5000,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="insertObjectGroup" type="insertObjectGroupElemType"/>
     <xs:complexType name="insertObjectGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="insertObject"/>
+            <xs:element ref="insertObject" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="insertObject" type="insertObjectGenericElemType"/>
@@ -5235,10 +5037,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:sequence>
             <xs:element ref="partIdent"/>
             <xs:element ref="itemIdentData"/>
-            <xs:element minOccurs="0" ref="procurementData"/>
-            <xs:element minOccurs="0" ref="techData"/>
-            <xs:element minOccurs="0" ref="partRefGroup"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="procurementData" minOccurs="0"/>
+            <xs:element ref="techData" minOccurs="0"/>
+            <xs:element ref="partRefGroup" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="partNumberUnavailableFlag"/>
@@ -5260,12 +5062,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="itemIdentDataElemType">
         <xs:sequence>
             <xs:element ref="descrForPart"/>
-            <xs:element minOccurs="0" ref="partKeyword"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="overLengthPartNumber"/>
-            <xs:element minOccurs="0" ref="limitedPartNumber"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="customerStockNumber"/>
-            <xs:element minOccurs="0" ref="natoStockNumber"/>
+            <xs:element ref="partKeyword" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="overLengthPartNumber" minOccurs="0"/>
+            <xs:element ref="limitedPartNumber" minOccurs="0"/>
+            <xs:element ref="customerStockNumber" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="natoStockNumber" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5273,33 +5075,33 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="descrForPart" type="descrForPartElemType"/>
-    <xs:complexType mixed="true" name="descrForPartElemType">
+    <xs:complexType name="descrForPartElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="partKeyword" type="partKeywordElemType"/>
-    <xs:complexType mixed="true" name="partKeywordElemType">
+    <xs:complexType name="partKeywordElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="overLengthPartNumber" type="overLengthPartNumberElemType"/>
-    <xs:complexType mixed="true" name="overLengthPartNumberElemType">
+    <xs:complexType name="overLengthPartNumberElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="limitedPartNumber" type="limitedPartNumberElemType"/>
-    <xs:complexType mixed="true" name="limitedPartNumberElemType">
+    <xs:complexType name="limitedPartNumberElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="customerStockNumber" type="customerStockNumberElemType"/>
-    <xs:complexType mixed="true" name="customerStockNumberElemType">
+    <xs:complexType name="customerStockNumberElemType" mixed="true">
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5307,10 +5109,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="natoStockNumber" type="natoStockNumberElemType"/>
-    <xs:complexType mixed="true" name="natoStockNumberElemType">
+    <xs:complexType name="natoStockNumberElemType" mixed="true">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="fullNatoStockNumber"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="fullNatoStockNumber" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="natoSupplyClass"/>
         <xs:attribute ref="natoCodificationBureau"/>
@@ -5327,9 +5129,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="procurementData" type="procurementDataElemType"/>
     <xs:complexType name="procurementDataElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="enterpriseRef"/>
-            <xs:element minOccurs="0" ref="buyerFurnishedEquipFlag"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="sourcingType"/>
+            <xs:element ref="enterpriseRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="buyerFurnishedEquipFlag" minOccurs="0"/>
+            <xs:element ref="sourcingType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5339,10 +5141,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="enterpriseRef" type="enterpriseRefElemType"/>
     <xs:complexType name="enterpriseRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="dmRef"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="businessUnit"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="dmRef" minOccurs="0"/>
+            <xs:element ref="businessUnit" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="enterpriseType"/>
         <xs:attribute ref="enterpriseRefType"/>
@@ -5480,20 +5282,20 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="techData" type="techDataElemType"/>
     <xs:complexType name="techDataElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="sparePartClass"/>
-            <xs:element minOccurs="0" ref="partUsage"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="specDocument"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantity"/>
-            <xs:element minOccurs="0" ref="physicalSecurityPilferageCode"/>
-            <xs:element minOccurs="0" ref="fitmentCode"/>
-            <xs:element minOccurs="0" ref="unitOfIssue"/>
-            <xs:element minOccurs="0" ref="unitOfIssueQualificationSegment"/>
-            <xs:element minOccurs="0" ref="specialStorage"/>
-            <xs:element minOccurs="0" ref="calibrationMarker"/>
-            <xs:element minOccurs="0" ref="placardText"/>
+            <xs:element ref="sparePartClass" minOccurs="0"/>
+            <xs:element ref="partUsage" minOccurs="0"/>
+            <xs:element ref="specDocument" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="quantity" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="physicalSecurityPilferageCode" minOccurs="0"/>
+            <xs:element ref="fitmentCode" minOccurs="0"/>
+            <xs:element ref="unitOfIssue" minOccurs="0"/>
+            <xs:element ref="unitOfIssueQualificationSegment" minOccurs="0"/>
+            <xs:element ref="specialStorage" minOccurs="0"/>
+            <xs:element ref="calibrationMarker" minOccurs="0"/>
+            <xs:element ref="placardText" minOccurs="0"/>
             <xs:choice>
-                <xs:element minOccurs="0" ref="hazardousClass"/>
-                <xs:element minOccurs="0" ref="hazards"/>
+                <xs:element ref="hazardousClass" minOccurs="0"/>
+                <xs:element ref="hazards" minOccurs="0"/>
             </xs:choice>
         </xs:sequence>
         <xs:attribute ref="etopsFlag"/>
@@ -5634,7 +5436,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="specDocument" type="specDocumentElemType"/>
     <xs:complexType name="specDocumentElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="manufacturerCodeValue"/>
@@ -5649,7 +5451,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:attribute name="specDocumentNumber" type="xs:string"/>
     <xs:attribute name="specDocumentType" type="xs:string"/>
     <xs:element name="physicalSecurityPilferageCode" type="physicalSecurityPilferageCodeElemType"/>
-    <xs:complexType mixed="true" name="physicalSecurityPilferageCodeElemType">
+    <xs:complexType name="physicalSecurityPilferageCodeElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
@@ -5667,7 +5469,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="unitOfIssue" type="unitOfIssueElemType"/>
-    <xs:complexType mixed="true" name="unitOfIssueElemType">
+    <xs:complexType name="unitOfIssueElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
@@ -5683,12 +5485,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="quantityPerUnit" type="xs:string"/>
     <xs:attribute name="unitOfMeasure" type="xs:string"/>
     <xs:element name="specialStorage" type="specialStorageElemType"/>
-    <xs:complexType mixed="true" name="specialStorageElemType">
+    <xs:complexType name="specialStorageElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="calibrationMarker" type="calibrationMarkerElemType"/>
-    <xs:complexType mixed="true" name="calibrationMarkerElemType">
+    <xs:complexType name="calibrationMarkerElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
@@ -5815,7 +5617,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="hazardRef" type="hazardRefElemType"/>
     <xs:complexType name="hazardRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="dmRef"/>
+            <xs:element ref="dmRef" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="hazardIdentNumber" use="required"/>
@@ -5827,9 +5629,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="hazard" type="hazardElemType"/>
     <xs:complexType name="hazardElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
-            <xs:element maxOccurs="unbounded" ref="hazardousClass"/>
-            <xs:element maxOccurs="unbounded" ref="safetyInformation"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="hazardousClass" maxOccurs="unbounded"/>
+            <xs:element ref="safetyInformation" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5837,12 +5639,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="safetyInformation" type="safetyInformationElemType"/>
-    <xs:complexType mixed="true" name="safetyInformationElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="safetyInformationElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="attentionText"/>
             <xs:element ref="attentionRandomList"/>
         </xs:choice>
-        <xs:attribute default="ssc01" ref="supplementalSafetyCategory"/>
+        <xs:attribute ref="supplementalSafetyCategory" default="ssc01"/>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5957,11 +5759,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="partRefGroup" type="partRefGroupElemType"/>
     <xs:complexType name="partRefGroupElemType">
         <xs:choice maxOccurs="unbounded">
-            <xs:element minOccurs="0" ref="replacedBy"/>
-            <xs:element minOccurs="0" ref="optionalPart"/>
-            <xs:element minOccurs="0" ref="preferredSparePart"/>
-            <xs:element minOccurs="0" ref="alteredFromPart"/>
-            <xs:element minOccurs="0" ref="localFabricationMaterial"/>
+            <xs:element ref="replacedBy" minOccurs="0"/>
+            <xs:element ref="optionalPart" minOccurs="0"/>
+            <xs:element ref="preferredSparePart" minOccurs="0"/>
+            <xs:element ref="alteredFromPart" minOccurs="0"/>
+            <xs:element ref="localFabricationMaterial" minOccurs="0"/>
         </xs:choice>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -5975,8 +5777,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
                 <xs:element ref="partRef"/>
                 <xs:element ref="catalogSeqNumberRef"/>
             </xs:choice>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="functionalItemRef"/>
-            <xs:element minOccurs="0" ref="replacementCond"/>
+            <xs:element ref="functionalItemRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="replacementCond" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="replacementCode" use="required"/>
         <xs:attribute ref="applicRefId"/>
@@ -5988,7 +5790,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="partRef" type="partRefElemType"/>
     <xs:complexType name="partRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="partNumberValue" use="required"/>
         <xs:attribute ref="manufacturerCodeValue" use="required"/>
@@ -6000,7 +5802,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="catalogSeqNumberRef" type="catalogSeqNumberRefElemType"/>
     <xs:complexType name="catalogSeqNumberRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="modelIdentCode"/>
         <xs:attribute ref="systemDiffCode"/>
@@ -6019,7 +5821,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT2"/>
+        <xs:attribute ref="xlink:type" fixed="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show" default="new"/>
+        <xs:attribute ref="xlink:actuate" default="onRequest"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:attribute name="figureNumber" type="figureNumberAttType"/>
@@ -6050,7 +5856,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:attribute name="initialProvisioningProjectNumber" type="xs:string"/>
     <xs:attribute name="responsiblePartnerCompanyCode" type="xs:string"/>
     <xs:element name="replacementCond" type="replacementCondElemType"/>
-    <xs:complexType mixed="true" name="replacementCondElemType">
+    <xs:complexType name="replacementCondElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -6060,8 +5866,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="optionalPart" type="optionalPartElemType"/>
     <xs:complexType name="optionalPartElemType">
         <xs:choice>
-            <xs:element maxOccurs="unbounded" ref="partRef"/>
-            <xs:element maxOccurs="unbounded" ref="catalogSeqNumberRef"/>
+            <xs:element ref="partRef" maxOccurs="unbounded"/>
+            <xs:element ref="catalogSeqNumberRef" maxOccurs="unbounded"/>
         </xs:choice>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6071,8 +5877,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="preferredSparePart" type="preferredSparePartElemType"/>
     <xs:complexType name="preferredSparePartElemType">
         <xs:choice>
-            <xs:element maxOccurs="unbounded" ref="partRef"/>
-            <xs:element maxOccurs="unbounded" ref="catalogSeqNumberRef"/>
+            <xs:element ref="partRef" maxOccurs="unbounded"/>
+            <xs:element ref="catalogSeqNumberRef" maxOccurs="unbounded"/>
         </xs:choice>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6083,10 +5889,10 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="alteredFromPartElemType">
         <xs:sequence>
             <xs:choice>
-                <xs:element maxOccurs="unbounded" ref="partRef"/>
-                <xs:element maxOccurs="unbounded" ref="catalogSeqNumberRef"/>
+                <xs:element ref="partRef" maxOccurs="unbounded"/>
+                <xs:element ref="catalogSeqNumberRef" maxOccurs="unbounded"/>
             </xs:choice>
-            <xs:element minOccurs="0" ref="alteredFromPartDescr"/>
+            <xs:element ref="alteredFromPartDescr" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6094,7 +5900,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="alteredFromPartDescr" type="alteredFromPartDescrElemType"/>
-    <xs:complexType mixed="true" name="alteredFromPartDescrElemType">
+    <xs:complexType name="alteredFromPartDescrElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -6104,24 +5910,24 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="localFabricationMaterialElemType">
         <xs:sequence>
             <xs:choice>
-                <xs:element maxOccurs="unbounded" ref="partRef"/>
-                <xs:element maxOccurs="unbounded" ref="catalogSeqNumberRef"/>
+                <xs:element ref="partRef" maxOccurs="unbounded"/>
+                <xs:element ref="catalogSeqNumberRef" maxOccurs="unbounded"/>
             </xs:choice>
-            <xs:element minOccurs="0" ref="quantity"/>
+            <xs:element ref="quantity" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="0" name="partNumberUnavailableFlag" type="yesOrNoAttType"/>
+    <xs:attribute name="partNumberUnavailableFlag" type="yesOrNoAttType" default="0"/>
     <xs:element name="zoneSpec" type="zoneSpecElemType"/>
     <xs:complexType name="zoneSpecElemType">
         <xs:sequence>
             <xs:element ref="zoneIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="zoneRefGroup"/>
+            <xs:element ref="zoneRefGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="zoneAlts"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="zoneType"/>
         <xs:attribute ref="id"/>
@@ -6141,7 +5947,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="zoneRefGroup" type="zoneRefGroupElemType"/>
     <xs:complexType name="zoneRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="zoneRef"/>
+            <xs:element ref="zoneRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="zoneRefType" use="required"/>
         <xs:attribute ref="id"/>
@@ -6152,9 +5958,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="zoneRef" type="zoneRefElemType"/>
     <xs:complexType name="zoneRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="zoneNumber"/>
@@ -6164,12 +5970,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="0" name="lsarData" type="yesOrNoAttType"/>
+    <xs:attribute name="lsarData" type="yesOrNoAttType" default="0"/>
     <xs:attribute name="zoneRefType" type="xs:string"/>
     <xs:element name="zoneAlts" type="zoneAltsElemType"/>
     <xs:complexType name="zoneAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="zone"/>
+            <xs:element ref="zone" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6180,12 +5986,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="zoneElemType">
         <xs:sequence>
             <xs:element ref="itemDescr"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="zoneSide"/>
-            <xs:element minOccurs="0" ref="boundaryFrom"/>
-            <xs:element minOccurs="0" ref="boundaryTo"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="zoneRefGroup"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="internalRef"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="zoneSide" minOccurs="0"/>
+            <xs:element ref="boundaryFrom" minOccurs="0"/>
+            <xs:element ref="boundaryTo" minOccurs="0"/>
+            <xs:element ref="zoneRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="internalRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="altNumber"/>
         <xs:attribute ref="applicRefId"/>
@@ -6195,7 +6001,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="itemDescr" type="itemDescrElemType"/>
-    <xs:complexType mixed="true" name="itemDescrElemType">
+    <xs:complexType name="itemDescrElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -6220,7 +6026,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="boundaryFrom" type="boundaryFromElemType"/>
     <xs:complexType name="boundaryFromElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="boundary"/>
+            <xs:element ref="boundary" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6228,9 +6034,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="boundary" type="boundaryElemType"/>
-    <xs:complexType mixed="true" name="boundaryElemType">
+    <xs:complexType name="boundaryElemType" mixed="true">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantity"/>
+            <xs:element ref="quantity" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6240,7 +6046,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="boundaryTo" type="boundaryToElemType"/>
     <xs:complexType name="boundaryToElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="boundary"/>
+            <xs:element ref="boundary" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6261,13 +6067,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:sequence>
             <xs:element ref="functionalItemIdent"/>
             <xs:element ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRef"/>
-            <xs:element minOccurs="0" ref="softwareClassification"/>
-            <xs:element minOccurs="0" ref="softwareCustomizationStatus"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="functionalItemRefGroup"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="functionalPhysicalAreaRef" minOccurs="0"/>
+            <xs:element ref="softwareClassification" minOccurs="0"/>
+            <xs:element ref="softwareCustomizationStatus" minOccurs="0"/>
+            <xs:element ref="functionalItemRefGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="functionalItemAlts"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6288,7 +6094,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalPhysicalAreaRef" type="functionalPhysicalAreaRefElemType"/>
     <xs:complexType name="functionalPhysicalAreaRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="dmRef"/>
+            <xs:element ref="dmRef" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="systemDiffCode"/>
         <xs:attribute ref="systemCode" use="required"/>
@@ -6525,7 +6331,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalItemRefGroup" type="functionalItemRefGroupElemType"/>
     <xs:complexType name="functionalItemRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="functionalItemRef"/>
+            <xs:element ref="functionalItemRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="functionalItemRefType" use="required"/>
         <xs:attribute ref="id"/>
@@ -6640,7 +6446,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalItemAlts" type="functionalItemAltsElemType"/>
     <xs:complexType name="functionalItemAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="functionalItem"/>
+            <xs:element ref="functionalItem" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6650,16 +6456,16 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalItem" type="functionalItemElemType"/>
     <xs:complexType name="functionalItemElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="location"/>
-            <xs:element minOccurs="0" ref="accessFrom"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRef"/>
-            <xs:element minOccurs="0" ref="reqQuantity"/>
-            <xs:element minOccurs="0" ref="functionalItemFamily"/>
-            <xs:element minOccurs="0" ref="groundingType"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="functionalItemRefGroup"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="internalRef"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="location" minOccurs="0"/>
+            <xs:element ref="accessFrom" minOccurs="0"/>
+            <xs:element ref="functionalPhysicalAreaRef" minOccurs="0"/>
+            <xs:element ref="reqQuantity" minOccurs="0"/>
+            <xs:element ref="functionalItemFamily" minOccurs="0"/>
+            <xs:element ref="groundingType" minOccurs="0"/>
+            <xs:element ref="functionalItemRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="internalRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="altNumber"/>
         <xs:attribute ref="normativeComponentFlag"/>
@@ -6676,7 +6482,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:element ref="zoneRef"/>
             <xs:sequence>
                 <xs:element ref="accessPointRef"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantity"/>
+                <xs:element ref="quantity" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:element ref="installationLocation"/>
         </xs:choice>
@@ -6688,9 +6494,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="accessPointRef" type="accessPointRefElemType"/>
     <xs:complexType name="accessPointRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="accessPointNumber"/>
@@ -6807,7 +6613,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="installationLocation" type="installationLocationElemType"/>
-    <xs:complexType mixed="true" name="installationLocationElemType">
+    <xs:complexType name="installationLocationElemType" mixed="true">
         <xs:attribute ref="unitOfMeasure"/>
         <xs:attribute ref="installationLocationType"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6929,33 +6735,33 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="reqQuantity" type="reqQuantityElemType"/>
-    <xs:complexType mixed="true" name="reqQuantityElemType">
+    <xs:complexType name="reqQuantityElemType" mixed="true">
         <xs:attribute ref="unitOfMeasure"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="functionalItemFamily" type="functionalItemFamilyElemType"/>
-    <xs:complexType mixed="true" name="functionalItemFamilyElemType">
+    <xs:complexType name="functionalItemFamilyElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="groundingType" type="groundingTypeElemType"/>
-    <xs:complexType mixed="true" name="groundingTypeElemType">
+    <xs:complexType name="groundingTypeElemType" mixed="true">
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="0" name="normativeComponentFlag" type="yesOrNoAttType"/>
-    <xs:attribute default="0" name="sealedFlag" type="yesOrNoAttType"/>
+    <xs:attribute name="normativeComponentFlag" type="yesOrNoAttType" default="0"/>
+    <xs:attribute name="sealedFlag" type="yesOrNoAttType" default="0"/>
     <xs:element name="circuitBreakerSpec" type="circuitBreakerSpecElemType"/>
     <xs:complexType name="circuitBreakerSpecElemType">
         <xs:sequence>
             <xs:element ref="circuitBreakerIdent"/>
             <xs:element ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRef"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="circuitBreakerRefGroup"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="functionalPhysicalAreaRef" minOccurs="0"/>
+            <xs:element ref="circuitBreakerRefGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="circuitBreakerAlts"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -6975,7 +6781,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="circuitBreakerRefGroup" type="circuitBreakerRefGroupElemType"/>
     <xs:complexType name="circuitBreakerRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="circuitBreakerRef"/>
+            <xs:element ref="circuitBreakerRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="circuitBreakerRefType" use="required"/>
         <xs:attribute ref="id"/>
@@ -7090,7 +6896,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="circuitBreakerAlts" type="circuitBreakerAltsElemType"/>
     <xs:complexType name="circuitBreakerAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="circuitBreaker"/>
+            <xs:element ref="circuitBreaker" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7100,14 +6906,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="circuitBreaker" type="circuitBreakerElemType"/>
     <xs:complexType name="circuitBreakerElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
             <xs:element ref="circuitBreakerClass"/>
-            <xs:element minOccurs="0" ref="location"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRef"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="functionalItemRefGroup"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="circuitBreakerRefGroup"/>
-            <xs:element minOccurs="0" ref="amperage"/>
+            <xs:element ref="location" minOccurs="0"/>
+            <xs:element ref="functionalPhysicalAreaRef" minOccurs="0"/>
+            <xs:element ref="functionalItemRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="circuitBreakerRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="amperage" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="altNumber"/>
         <xs:attribute ref="monitoredFlag"/>
@@ -7128,7 +6934,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="amperage" type="amperageElemType"/>
-    <xs:complexType mixed="true" name="amperageElemType">
+    <xs:complexType name="amperageElemType" mixed="true">
         <xs:attribute ref="unitOfMeasure"/>
     </xs:complexType>
     <xs:attribute name="monitoredFlag" type="yesOrNoAttType"/>
@@ -7138,9 +6944,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="accessPointSpecElemType">
         <xs:sequence>
             <xs:element ref="accessPointIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="accessPointRefGroup"/>
+            <xs:element ref="accessPointRefGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="accessPointAlts"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7158,7 +6964,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="accessPointRefGroup" type="accessPointRefGroupElemType"/>
     <xs:complexType name="accessPointRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="accessPointRef"/>
+            <xs:element ref="accessPointRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="accessPointRefType" use="required"/>
         <xs:attribute ref="id"/>
@@ -7170,7 +6976,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="accessPointAlts" type="accessPointAltsElemType"/>
     <xs:complexType name="accessPointAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="accessPoint"/>
+            <xs:element ref="accessPoint" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7180,17 +6986,17 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="accessPoint" type="accessPointElemType"/>
     <xs:complexType name="accessPointElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
             <xs:element ref="accessPointType"/>
             <xs:element ref="zoneRef"/>
-            <xs:element minOccurs="0" ref="accessTo"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="accessPointRefGroup"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="fastener"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantity"/>
-            <xs:element minOccurs="0" ref="hoursToClose"/>
-            <xs:element minOccurs="0" ref="hoursToOpen"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="internalRef"/>
+            <xs:element ref="accessTo" minOccurs="0"/>
+            <xs:element ref="accessPointRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="fastener" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="quantity" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="hoursToClose" minOccurs="0"/>
+            <xs:element ref="hoursToOpen" minOccurs="0"/>
+            <xs:element ref="internalRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="altNumber"/>
         <xs:attribute ref="applicRefId"/>
@@ -7210,8 +7016,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="accessTo" type="accessToElemType"/>
     <xs:complexType name="accessToElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="functionalItemRef"/>
-            <xs:element minOccurs="0" ref="otherItems"/>
+            <xs:element ref="functionalItemRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="otherItems" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7219,7 +7025,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="otherItems" type="otherItemsElemType"/>
-    <xs:complexType mixed="true" name="otherItemsElemType">
+    <xs:complexType name="otherItemsElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7238,14 +7044,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="fastenerType" type="fastenerTypeElemType"/>
-    <xs:complexType mixed="true" name="fastenerTypeElemType">
+    <xs:complexType name="fastenerTypeElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="fastenerQuantity" type="fastenerQuantityElemType"/>
-    <xs:complexType mixed="true" name="fastenerQuantityElemType">
+    <xs:complexType name="fastenerQuantityElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7253,14 +7059,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="hingedFastenerFlag" type="yesOrNoAttType"/>
     <xs:element name="hoursToClose" type="hoursToCloseElemType"/>
-    <xs:complexType mixed="true" name="hoursToCloseElemType">
+    <xs:complexType name="hoursToCloseElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="hoursToOpen" type="hoursToOpenElemType"/>
-    <xs:complexType mixed="true" name="hoursToOpenElemType">
+    <xs:complexType name="hoursToOpenElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7273,9 +7079,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:element ref="itemIdentData"/>
             <xs:element ref="procurementData"/>
             <xs:element ref="techData"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="toolRefGroup"/>
-            <xs:element minOccurs="0" ref="toolAlts"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="refs"/>
+            <xs:element ref="toolRefGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="toolAlts" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7295,7 +7101,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="toolRefGroup" type="toolRefGroupElemType"/>
     <xs:complexType name="toolRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="toolRef"/>
+            <xs:element ref="toolRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="toolRefType" use="required"/>
         <xs:attribute ref="id"/>
@@ -7306,7 +7112,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="toolRef" type="toolRefElemType"/>
     <xs:complexType name="toolRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="toolNumber" use="required"/>
         <xs:attribute ref="manufacturerCodeValue"/>
@@ -7317,13 +7123,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
-    <xs:attribute default="1" name="specific" type="yesOrNoAttType"/>
-    <xs:attribute default="0" name="toolAltFlag" type="yesOrNoAttType"/>
+    <xs:attribute name="specific" type="yesOrNoAttType" default="1"/>
+    <xs:attribute name="toolAltFlag" type="yesOrNoAttType" default="0"/>
     <xs:attribute name="toolRefType" type="xs:string"/>
     <xs:element name="toolAlts" type="toolAltsElemType"/>
     <xs:complexType name="toolAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="tool"/>
+            <xs:element ref="tool" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7334,13 +7140,13 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="toolElemType">
         <xs:sequence>
             <xs:element ref="itemDescr"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRef"/>
-            <xs:element minOccurs="0" ref="rcmdQuantity"/>
-            <xs:element minOccurs="0" ref="packaging"/>
-            <xs:element minOccurs="0" ref="taskCategory"/>
-            <xs:element minOccurs="0" ref="simpleRemark"/>
-            <xs:element minOccurs="0" ref="internalRef"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="refs"/>
+            <xs:element ref="functionalPhysicalAreaRef" minOccurs="0"/>
+            <xs:element ref="rcmdQuantity" minOccurs="0"/>
+            <xs:element ref="packaging" minOccurs="0"/>
+            <xs:element ref="taskCategory" minOccurs="0"/>
+            <xs:element ref="simpleRemark" minOccurs="0"/>
+            <xs:element ref="internalRef" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="altNumber"/>
         <xs:attribute ref="deliveredSpecificationFlag"/>
@@ -7351,14 +7157,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="rcmdQuantity" type="rcmdQuantityElemType"/>
-    <xs:complexType mixed="true" name="rcmdQuantityElemType">
+    <xs:complexType name="rcmdQuantityElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="packaging" type="packagingElemType"/>
-    <xs:complexType mixed="true" name="packagingElemType">
+    <xs:complexType name="packagingElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7374,7 +7180,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="taskCategoryCode" type="xs:string"/>
     <xs:element name="simpleRemark" type="simpleRemarkElemType"/>
-    <xs:complexType mixed="true" name="simpleRemarkElemType">
+    <xs:complexType name="simpleRemarkElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7385,12 +7191,12 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="enterpriseSpecElemType">
         <xs:sequence>
             <xs:element ref="enterpriseIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="enterpriseIdentAlt"/>
+            <xs:element ref="enterpriseIdentAlt" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="enterpriseName"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="businessUnit"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="enterpriseRef"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="businessUnit" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="enterpriseRef" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7416,18 +7222,18 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="supplySpecElemType">
         <xs:sequence>
             <xs:element ref="supplyIdent"/>
-            <xs:element minOccurs="0" ref="supplySetGroup"/>
-            <xs:element minOccurs="0" ref="supplyClassification"/>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="specGroup"/>
-            <xs:element minOccurs="0" ref="enterpriseGroup"/>
-            <xs:element minOccurs="0" ref="natoStockNumber"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="quantity"/>
-            <xs:element minOccurs="0" ref="rcmd"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="refs"/>
-            <xs:element minOccurs="0" ref="lowestAuthorizedLevelGroup"/>
-            <xs:element minOccurs="0" ref="hazards"/>
+            <xs:element ref="supplySetGroup" minOccurs="0"/>
+            <xs:element ref="supplyClassification" minOccurs="0"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="specGroup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="enterpriseGroup" minOccurs="0"/>
+            <xs:element ref="natoStockNumber" minOccurs="0"/>
+            <xs:element ref="quantity" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="rcmd" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="lowestAuthorizedLevelGroup" minOccurs="0"/>
+            <xs:element ref="hazards" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="manufacturedFlag"/>
         <xs:attribute ref="obsoleteFlag"/>
@@ -7566,7 +7372,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="supplySet" type="supplySetElemType"/>
     <xs:complexType name="supplySetElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="supplyRef"/>
+            <xs:element ref="supplyRef" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7576,9 +7382,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="supplyRef" type="supplyRefElemType"/>
     <xs:complexType name="supplyRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="supplyNumber" use="required"/>
         <xs:attribute ref="supplyNumberType" use="required"/>
@@ -7591,7 +7397,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="specGroup" type="specGroupElemType"/>
     <xs:complexType name="specGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="specDocument"/>
+            <xs:element ref="specDocument" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="vendorFlag"/>
         <xs:attribute ref="id"/>
@@ -7603,7 +7409,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="enterpriseGroup" type="enterpriseGroupElemType"/>
     <xs:complexType name="enterpriseGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="enterpriseInfo"/>
+            <xs:element ref="enterpriseInfo" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7614,7 +7420,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="enterpriseInfoElemType">
         <xs:sequence>
             <xs:element ref="enterpriseRef"/>
-            <xs:element minOccurs="0" ref="shippingInfo"/>
+            <xs:element ref="shippingInfo" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="locallySuppliedFlag" use="required"/>
         <xs:attribute ref="id"/>
@@ -7636,14 +7442,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="transport" type="transportElemType"/>
-    <xs:complexType mixed="true" name="transportElemType">
+    <xs:complexType name="transportElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="shelfLife" type="shelfLifeElemType"/>
-    <xs:complexType mixed="true" name="shelfLifeElemType">
+    <xs:complexType name="shelfLifeElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7651,7 +7457,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="locallySuppliedFlag" type="yesOrNoAttType"/>
     <xs:element name="rcmd" type="rcmdElemType"/>
-    <xs:complexType mixed="true" name="rcmdElemType">
+    <xs:complexType name="rcmdElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7660,7 +7466,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="lowestAuthorizedLevelGroup" type="lowestAuthorizedLevelGroupElemType"/>
     <xs:complexType name="lowestAuthorizedLevelGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="lowestAuthorizedLevel"/>
+            <xs:element ref="lowestAuthorizedLevel" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="lowestAuthorizedLevel" type="lowestAuthorizedLevelElemType"/>
@@ -7771,7 +7577,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:enumeration value="la99"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:attribute default="1" name="manufacturedFlag" type="yesOrNoAttType"/>
+    <xs:attribute name="manufacturedFlag" type="yesOrNoAttType" default="1"/>
     <xs:attribute name="obsoleteFlag" type="yesOrNoAttType"/>
     <xs:attribute name="specialLabelFlag" type="yesOrNoAttType"/>
     <xs:attribute name="supplyCategory" type="supplyCategoryAttType"/>
@@ -7882,15 +7688,15 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="supplyRqmtSpecElemType">
         <xs:sequence>
             <xs:element ref="supplyRqmtIdent"/>
-            <xs:element minOccurs="0" ref="physicalChemicalDescr"/>
-            <xs:element minOccurs="0" ref="usage"/>
-            <xs:element minOccurs="0" ref="complianceCategory"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="processCategory"/>
-            <xs:element minOccurs="0" ref="supplyRqmtStatus"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="specGroup"/>
+            <xs:element ref="physicalChemicalDescr" minOccurs="0"/>
+            <xs:element ref="usage" minOccurs="0"/>
+            <xs:element ref="complianceCategory" minOccurs="0"/>
+            <xs:element ref="processCategory" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="supplyRqmtStatus" minOccurs="0"/>
+            <xs:element ref="specGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="supplyRqmtAlts"/>
-            <xs:element minOccurs="0" ref="rcmd"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="rcmd" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="supplyCategory"/>
@@ -7912,7 +7718,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:attribute name="supplyRqmtNumber" type="xs:string"/>
     <xs:element name="physicalChemicalDescr" type="xs:string"/>
     <xs:element name="usage" type="usageElemType"/>
-    <xs:complexType mixed="true" name="usageElemType">
+    <xs:complexType name="usageElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -7936,14 +7742,14 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="supplyRqmtStatus" type="supplyRqmtStatusElemType"/>
     <xs:complexType name="supplyRqmtStatusElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="supplyRqmtRef"/>
+            <xs:element ref="supplyRqmtRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="supplyRqmtStatusValue"/>
     </xs:complexType>
     <xs:element name="supplyRqmtRef" type="supplyRqmtRefElemType"/>
     <xs:complexType name="supplyRqmtRefElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="materialCategory"/>
         <xs:attribute ref="vendorFlag"/>
@@ -7957,7 +7763,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="supplyRqmtAlts" type="supplyRqmtAltsElemType"/>
     <xs:complexType name="supplyRqmtAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="supplyRqmt"/>
+            <xs:element ref="supplyRqmt" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -7969,16 +7775,16 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:sequence>
             <xs:element ref="supplyRqmtAltIdent"/>
             <xs:element ref="supplySetGroup"/>
-            <xs:element minOccurs="0" ref="supplyRqmtAltStatus"/>
-            <xs:element minOccurs="0" ref="enterpriseRef"/>
-            <xs:element minOccurs="0" ref="supplyClassification"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="specGroup"/>
+            <xs:element ref="supplyRqmtAltStatus" minOccurs="0"/>
+            <xs:element ref="enterpriseRef" minOccurs="0"/>
+            <xs:element ref="supplyClassification" minOccurs="0"/>
+            <xs:element ref="specGroup" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="safetyCategory"/>
-            <xs:element minOccurs="0" ref="usage"/>
-            <xs:element minOccurs="0" ref="rcmd"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="safetyCategory" minOccurs="0"/>
+            <xs:element ref="usage" minOccurs="0"/>
+            <xs:element ref="rcmd" minOccurs="0"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="productCategory"/>
         <xs:attribute ref="supplyRqmtType"/>
@@ -8002,11 +7808,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="supplyRqmtAltStatusElemType">
         <xs:sequence>
             <xs:element ref="authorizationStatus"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="supplyRqmtRef"/>
+            <xs:element ref="supplyRqmtRef" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="authorizationStatus" type="authorizationStatusElemType"/>
-    <xs:complexType mixed="true" name="authorizationStatusElemType">
+    <xs:complexType name="authorizationStatusElemType" mixed="true">
         <xs:attribute ref="authorizationStatusDate"/>
     </xs:complexType>
     <xs:attribute name="authorizationStatusDate" type="xs:string"/>
@@ -8135,9 +7941,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="functionalPhysicalAreaSpecElemType">
         <xs:sequence>
             <xs:element ref="functionalPhysicalAreaIdent"/>
-            <xs:element minOccurs="0" ref="name"/>
-            <xs:element minOccurs="0" ref="shortName"/>
-            <xs:element minOccurs="0" ref="functionalPhysicalAreaRefGroup"/>
+            <xs:element ref="name" minOccurs="0"/>
+            <xs:element ref="shortName" minOccurs="0"/>
+            <xs:element ref="functionalPhysicalAreaRefGroup" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8158,7 +7964,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="functionalPhysicalAreaRefGroup" type="functionalPhysicalAreaRefGroupElemType"/>
     <xs:complexType name="functionalPhysicalAreaRefGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="functionalPhysicalAreaRef"/>
+            <xs:element ref="functionalPhysicalAreaRef" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="controlIndicatorSpec" type="controlIndicatorSpecElemType"/>
@@ -8166,7 +7972,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:sequence>
             <xs:element ref="controlIndicatorKey"/>
             <xs:element ref="controlIndicatorName"/>
-            <xs:element minOccurs="0" ref="shortName"/>
+            <xs:element ref="shortName" minOccurs="0"/>
             <xs:element ref="controlIndicatorDescr"/>
         </xs:sequence>
         <xs:attribute ref="controlIndicatorNumber" use="required"/>
@@ -8177,15 +7983,15 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="controlIndicatorKey" type="controlIndicatorKeyElemType"/>
-    <xs:complexType mixed="true" name="controlIndicatorKeyElemType">
+    <xs:complexType name="controlIndicatorKeyElemType" mixed="true">
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="controlIndicatorName" type="controlIndicatorNameElemType"/>
-    <xs:complexType mixed="true" name="controlIndicatorNameElemType">
-        <xs:group maxOccurs="unbounded" minOccurs="0" ref="subOrSuperScriptElemGroup"/>
+    <xs:complexType name="controlIndicatorNameElemType" mixed="true">
+        <xs:group ref="subOrSuperScriptElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
@@ -8194,8 +8000,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="controlIndicatorDescr" type="controlIndicatorDescrElemType"/>
     <xs:complexType name="controlIndicatorDescrElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="note"/>
-            <xs:element maxOccurs="unbounded" ref="controlIndicatorFunction"/>
+            <xs:element ref="note" minOccurs="0"/>
+            <xs:element ref="controlIndicatorFunction" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -8204,8 +8010,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="controlIndicatorFunction" type="controlIndicatorFunctionElemType"/>
-    <xs:complexType mixed="true" name="controlIndicatorFunctionElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="controlIndicatorFunctionElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="symbol"/>
             <xs:element ref="inlineSignificantData"/>
             <xs:group ref="subOrSuperScriptElemGroup"/>
@@ -8219,7 +8025,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="applicSpecElemType">
         <xs:sequence>
             <xs:element ref="applicSpecIdent"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="applicMapRefId" use="required"/>
@@ -8240,8 +8046,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="warningSpecElemType">
         <xs:sequence>
             <xs:element ref="warningIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
-            <xs:element maxOccurs="unbounded" ref="warningAndCautionPara"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="warningAndCautionPara" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8258,8 +8064,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="warningIdentNumber" type="xs:string"/>
     <xs:element name="warningAndCautionPara" type="warningAndCautionParaElemType"/>
-    <xs:complexType mixed="true" name="warningAndCautionParaElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="warningAndCautionParaElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="attentionText"/>
             <xs:element ref="attentionRandomList"/>
         </xs:choice>
@@ -8273,8 +8079,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="cautionSpecElemType">
         <xs:sequence>
             <xs:element ref="cautionIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
-            <xs:element maxOccurs="unbounded" ref="warningAndCautionPara"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="warningAndCautionPara" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8294,9 +8100,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="hazardSpecElemType">
         <xs:sequence>
             <xs:element ref="hazardIdent"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="symbol"/>
-            <xs:element maxOccurs="unbounded" ref="hazardousClass"/>
-            <xs:element maxOccurs="unbounded" ref="safetyInformation"/>
+            <xs:element ref="symbol" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="hazardousClass" maxOccurs="unbounded"/>
+            <xs:element ref="safetyInformation" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8317,7 +8123,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
             <xs:element ref="terminologyIdent"/>
             <xs:element ref="terminologyTerm"/>
             <xs:element ref="terminologyDefinition"/>
-            <xs:element minOccurs="0" ref="refs"/>
+            <xs:element ref="refs" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attribute ref="termType" use="required"/>
@@ -8335,8 +8141,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     </xs:complexType>
     <xs:attribute name="terminologyIdentNumber" type="xs:string"/>
     <xs:element name="terminologyTerm" type="terminologyTermElemType"/>
-    <xs:complexType mixed="true" name="terminologyTermElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="terminologyTermElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="subOrSuperScriptElemGroup"/>
             <xs:element ref="symbol"/>
         </xs:choice>
@@ -8349,7 +8155,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="terminologyDefinition" type="terminologyDefinitionElemType"/>
     <xs:complexType name="terminologyDefinitionElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="1" ref="terminologyPara"/>
+            <xs:element ref="terminologyPara" minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8357,8 +8163,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="terminologyPara" type="terminologyParaElemType"/>
-    <xs:complexType mixed="true" name="terminologyParaElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:complexType name="terminologyParaElemType" mixed="true">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="inlineSignificantData"/>
             <xs:element ref="changeInline"/>
             <xs:element ref="symbol"/>
@@ -8480,8 +8286,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:complexType name="figureElemType">
         <xs:sequence>
             <xs:element ref="title"/>
-            <xs:element maxOccurs="unbounded" ref="graphic"/>
-            <xs:element minOccurs="0" ref="legend"/>
+            <xs:element ref="graphic" maxOccurs="unbounded"/>
+            <xs:element ref="legend" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -8492,8 +8298,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="graphic" type="graphicElemType"/>
     <xs:complexType name="graphicElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="hotspot"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="reasonForAmendment"/>
+            <xs:element ref="hotspot" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="reasonForAmendment" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="infoEntityIdent" use="required"/>
@@ -8503,12 +8309,16 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT0"/>
+        <xs:attribute ref="xlink:type" fixed="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show"/>
+        <xs:attribute ref="xlink:actuate"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="hotspot" type="hotspotElemType"/>
     <xs:complexType name="hotspotElemType">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="hotspot"/>
             <xs:element ref="internalRef"/>
             <xs:element ref="dmRef"/>
@@ -8533,7 +8343,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:attribute name="hotspotTitle" type="xs:string"/>
     <xs:attribute name="objectDescr" type="xs:string"/>
     <xs:attribute name="objectCoordinates" type="xs:string"/>
-    <xs:attribute default="visible" name="visibility" type="visibilityAttType"/>
+    <xs:attribute name="visibility" type="visibilityAttType" default="visible"/>
     <xs:simpleType name="visibilityAttType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="visible"/>
@@ -8541,9 +8351,9 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="reasonForAmendment" type="reasonForAmendmentElemType"/>
-    <xs:complexType mixed="true" name="reasonForAmendmentElemType">
+    <xs:complexType name="reasonForAmendmentElemType" mixed="true">
         <xs:sequence>
-            <xs:group maxOccurs="unbounded" minOccurs="0" ref="textElemGroup"/>
+            <xs:group ref="textElemGroup" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="controlAuthorityRefs"/>
@@ -8561,7 +8371,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="figureAlts" type="figureAltsElemType"/>
     <xs:complexType name="figureAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="figure"/>
+            <xs:element ref="figure" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8571,8 +8381,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="multimedia" type="multimediaElemType"/>
     <xs:complexType name="multimediaElemType">
         <xs:sequence>
-            <xs:element minOccurs="0" ref="title"/>
-            <xs:element maxOccurs="unbounded" ref="multimediaObject"/>
+            <xs:element ref="title" minOccurs="0"/>
+            <xs:element ref="multimediaObject" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="id"/>
@@ -8583,8 +8393,8 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="multimediaObject" type="multimediaObjectElemType"/>
     <xs:complexType name="multimediaObjectElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="parameter"/>
-            <xs:element maxOccurs="unbounded" minOccurs="0" ref="reasonForAmendment"/>
+            <xs:element ref="parameter" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="reasonForAmendment" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="applicRefId"/>
         <xs:attribute ref="autoPlay"/>
@@ -8598,7 +8408,11 @@ The details for copyright can be found in the S1000D Specification.</xs:document
         <xs:attribute ref="showPluginControls"/>
         <xs:attributeGroup ref="changeAttGroup"/>
         <xs:attributeGroup ref="securityAttGroup"/>
-        <xs:attributeGroup ref="xlink:XLINKATT0"/>
+        <xs:attribute ref="xlink:type" fixed="simple"/>
+        <xs:attribute ref="xlink:href"/>
+        <xs:attribute ref="xlink:title"/>
+        <xs:attribute ref="xlink:show"/>
+        <xs:attribute ref="xlink:actuate"/>
         <xs:attribute ref="controlAuthorityRefs"/>
     </xs:complexType>
     <xs:element name="parameter" type="parameterElemType"/>
@@ -8635,7 +8449,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="multimediaAlts" type="multimediaAltsElemType"/>
     <xs:complexType name="multimediaAltsElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="multimedia"/>
+            <xs:element ref="multimedia" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="id"/>
         <xs:attributeGroup ref="changeAttGroup"/>
@@ -8653,7 +8467,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="replaceObjectGroup" type="replaceObjectGroupElemType"/>
     <xs:complexType name="replaceObjectGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="replaceObject"/>
+            <xs:element ref="replaceObject" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="replaceObject" type="replaceObjectElemType"/>
@@ -8686,7 +8500,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="deleteObjectGroup" type="deleteObjectGroupElemType"/>
     <xs:complexType name="deleteObjectGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="deleteObject"/>
+            <xs:element ref="deleteObject" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="deleteObject" type="deleteObjectElemType"/>
@@ -8752,7 +8566,7 @@ The details for copyright can be found in the S1000D Specification.</xs:document
     <xs:element name="reinstateObjectGroup" type="reinstateObjectGroupElemType"/>
     <xs:complexType name="reinstateObjectGroupElemType">
         <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="reinstateObject"/>
+            <xs:element ref="reinstateObject" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="reinstateObject" type="insertObjectGenericElemType"/>

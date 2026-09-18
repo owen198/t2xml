@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 0.17596946213155856,
+  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/BIKE_7_to_S1000D_spec_sample/test_inference.trec",
+  "qrels_path": "/workspace/t2xml/retrieval/S1000D_spec_sample/qrels.test.tsv"
+}
