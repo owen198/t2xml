@@ -5,7 +5,7 @@
 | --- | --- | --- | --- | --- |
 | MRR | 0.6111 | 0.5208 | 0.7500 | 0.2323 |
 
-This is not zero-shot transfer: each pretrain checkpoint is evaluated on its own source's dev split.
+Note: Each pretrain checkpoint is evaluated on its own source's dev split.
 
 ### Zero-shot Test Evaluation
 
