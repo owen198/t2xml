@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/ga1/BIKE_7_to_s1kd-tools-doc/checkpoints",
+  "best_dev_mrr": 0.47916666666666663,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/ga1/BIKE_7_to_s1kd-tools-doc/checkpoints": 0.47916666666666663
+  }
+}
