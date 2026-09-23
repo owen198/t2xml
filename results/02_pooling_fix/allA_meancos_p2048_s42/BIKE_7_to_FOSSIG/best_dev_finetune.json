@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/allA_meancos_p2048_s42/BIKE_7_to_FOSSIG/checkpoints",
+  "best_dev_mrr": 1.0,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/allA_meancos_p2048_s42/BIKE_7_to_FOSSIG/checkpoints": 1.0
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/mepablate_s42/BIKE_7_to_S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.8154761904761905,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/mepablate_s42/BIKE_7_to_S1000D_spec_sample/checkpoints": 0.8154761904761905
+  }
+}

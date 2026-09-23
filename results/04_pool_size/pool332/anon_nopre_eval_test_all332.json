@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 0.4993219510026232,
+  "trec_save_path": "",
+  "qrels_path": "/workspace/t2xml/retrieval_anonq/S1000D_spec_sample/qrels.test.all332.tsv"
+}

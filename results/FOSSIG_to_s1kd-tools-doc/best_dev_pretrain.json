@@ -1,7 +1,0 @@
-{
-  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/FOSSIG_to_s1kd-tools-doc/checkpoints",
-  "best_dev_mrr": 0.75,
-  "per_checkpoint": {
-    "/workspace/t2xml/santa/runs/pretrain/FOSSIG_to_s1kd-tools-doc/checkpoints": 0.75
-  }
-}

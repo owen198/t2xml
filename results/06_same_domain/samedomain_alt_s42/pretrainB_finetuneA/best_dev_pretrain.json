@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/samedomain_alt_s42/pretrainB_finetuneA/checkpoints",
+  "best_dev_mrr": 0.682142857142857,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/samedomain_alt_s42/pretrainB_finetuneA/checkpoints": 0.682142857142857
+  }
+}

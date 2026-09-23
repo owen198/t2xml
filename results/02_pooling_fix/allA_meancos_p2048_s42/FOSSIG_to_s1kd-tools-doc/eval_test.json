@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 1.0,
+  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/allA_meancos_p2048_s42/FOSSIG_to_s1kd-tools-doc/test_inference.trec",
+  "qrels_path": "/workspace/t2xml/retrieval/s1kd-tools-doc/qrels.test.tsv"
+}

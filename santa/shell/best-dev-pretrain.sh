@@ -31,6 +31,6 @@ cd "${SANTA_DIR}/best_dev"
     --eval_path ${REPO_ROOT}/pretrain${PRETRAIN_SOURCE:+/${PRETRAIN_SOURCE}}/sda_pairs.dev.jsonl \
     --per_device_eval_batch_size 64 \
     --q_max_len 50 \
-    --p_max_len 256 \
+    --p_max_len ${P_MAX_LEN:-256} \
     --topk 100 \
     --results_path ${RESULTS_PATH}

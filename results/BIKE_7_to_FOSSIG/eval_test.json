@@ -1,5 +1,0 @@
-{
-  "eval_mrr": 0.75,
-  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/BIKE_7_to_FOSSIG/test_inference.trec",
-  "qrels_path": "/workspace/t2xml/retrieval/FOSSIG/qrels.test.tsv"
-}

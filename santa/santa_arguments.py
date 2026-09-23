@@ -13,3 +13,7 @@ class SantaArguments:
         default=True,
         metadata={"help": "Whether to get generate loss"}
     )
+    temperature: float = field(
+        default=1.0,
+        metadata={"help": "Divides the contrastive scores; use with --normalize True (cosine), e.g. 0.05"}
+    )

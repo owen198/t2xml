@@ -4,6 +4,7 @@ from itertools import repeat
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import random
+import torch
 from transformers import BatchEncoding, PreTrainedTokenizer
 from openmatch.trainer import DRTrainer
 from openmatch.dataset.train_dataset import TrainDatasetBase, MappingTrainDatasetMixin,StreamTrainDatasetMixin
@@ -18,6 +19,12 @@ class STrainer(DRTrainer):
         query, passage, label = inputs
         outputs = model(query=query, passage=passage, label=label)
         return (outputs.loss, outputs) if return_outputs else outputs.loss
+
+    def prediction_step(self, model, inputs, prediction_loss_only, ignore_keys=None):
+        inputs = self._prepare_inputs(inputs)
+        with torch.no_grad():
+            loss = self.compute_loss(model, inputs).detach()
+        return (loss, None, None)
 
 
 class Sdataset(TrainDatasetBase):

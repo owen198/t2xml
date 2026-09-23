@@ -1,5 +1,0 @@
-{
-  "eval_mrr": 0.17358850975060616,
-  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/zero_shot/FOSSIG_to_S1000D_spec_sample/test_inference.trec",
-  "qrels_path": "/workspace/t2xml/retrieval/S1000D_spec_sample/qrels.test.tsv"
-}

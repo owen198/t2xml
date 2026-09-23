@@ -1,5 +1,0 @@
-{
-  "eval_mrr": 0.1739492601113565,
-  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/zero_shot/s1kd-tools-doc_to_S1000D_spec_sample/test_inference.trec",
-  "qrels_path": "/workspace/t2xml/retrieval/S1000D_spec_sample/qrels.test.tsv"
-}

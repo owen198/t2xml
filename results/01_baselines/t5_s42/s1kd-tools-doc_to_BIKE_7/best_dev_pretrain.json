@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/t5_s42/s1kd-tools-doc_to_BIKE_7/checkpoints",
+  "best_dev_mrr": 0.5208333333333333,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/t5_s42/s1kd-tools-doc_to_BIKE_7/checkpoints": 0.5208333333333333
+  }
+}

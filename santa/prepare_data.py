@@ -121,8 +121,11 @@ def build_finetune_split(tokenizer, split, retrieval_dir, out_dir):
 
 
 def main():
+    global SAFETY_MAX_LEN
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model_name_or_path", default="t5-base")
+    parser.add_argument("--model_name_or_path", default="Salesforce/codet5-base",
+                         help="Tokenizer for the pre-tokenized ids; must be the same checkpoint family as the MODEL "
+                              "pretrain.sh trains (default Salesforce/codet5-base), or the ids are garbage to the model.")
     parser.add_argument("--pretrain-root", default=str(REPO_ROOT / "pretrain"),
                          help="Directory containing one subdir per dataset folder (sda_pairs/mep_pairs).")
     parser.add_argument("--retrieval-root", default=str(REPO_ROOT / "retrieval"),
@@ -133,7 +136,10 @@ def main():
     parser.add_argument("--models", nargs="+", default=None,
                          help="Model names from model_configs.json to build (default: all).")
     parser.add_argument("--splits", nargs="+", default=["train", "dev", "test"])
+    parser.add_argument("--safety-max-len", type=int, default=SAFETY_MAX_LEN,
+                         help="Offline per-text token cap; must be >= the --p_max_len used at train time.")
     args = parser.parse_args()
+    SAFETY_MAX_LEN = args.safety_max_len
 
     configs = load_model_configs(args.model_config)
     if args.models:

@@ -46,13 +46,14 @@ cd "${SANTA_DIR}"
     --train_path ${DATA_DIR}/finetune.train.jsonl \
     --eval_path ${DATA_DIR}/finetune.dev.jsonl \
     --per_device_train_batch_size 16 \
-    --gradient_accumulation_steps 8 \
+    --gradient_accumulation_steps 1 \
     --bf16 True \
     --train_n_passages 1 \
     --learning_rate 2e-5 \
     --q_max_len 50 \
-    --p_max_len 256 \
+    --p_max_len ${P_MAX_LEN:-256} \
     --l_max_len 64 \
     --num_train_epochs 12 \
     --use_generate False \
-    --logging_dir ${OUTPUT}/logs
+    --logging_dir ${OUTPUT}/logs \
+    ${EXTRA_TRAIN_ARGS:-}

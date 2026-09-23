@@ -23,15 +23,19 @@ fi
 export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
 export MODEL_PATH=${MODEL_PATH:-${SANTA_DIR}/runs/finetune${RUN_TAG}/checkpoints}
 export RESULTS_PATH=${RESULTS_PATH:-${REPO_ROOT}/results${RUN_TAG}/best_dev_finetune.json}
+# RETRIEVAL_ROOT lets a family point at a different retrieval benchmark (e.g.
+# retrieval_anonq, whose queries don't quote document identifiers) without
+# touching the default original-query benchmark.
+export RETRIEVAL_ROOT=${RETRIEVAL_ROOT:-${REPO_ROOT}/retrieval}
 
 cd "${SANTA_DIR}/best_dev"
 "${PYTHON}" evaluate_xml_finetune.py \
     --model_path ${MODEL_PATH} \
-    --corpus_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.dev.jsonl \
-    --query_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.dev.jsonl \
-    --qrels_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.dev.tsv \
+    --corpus_path ${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.dev.jsonl \
+    --query_path ${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.dev.jsonl \
+    --qrels_path ${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.dev.tsv \
     --per_device_eval_batch_size 64 \
     --q_max_len 50 \
-    --p_max_len 256 \
+    --p_max_len ${P_MAX_LEN:-256} \
     --topk 100 \
     --results_path ${RESULTS_PATH}

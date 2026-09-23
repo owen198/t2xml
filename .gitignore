@@ -51,8 +51,11 @@ __pycache__/
 
 poincare/
 
-# Model checkpoints / training runs
-**/runs/
+# Model checkpoints / training runs. `runs/*` (not `runs/`) so the experiment launchers in
+# santa/runs/*.sh can be re-included -- results/README.md points to them.
+**/runs/*
+!santa/runs/*.sh
+santa/runs/run_kfold.sh
 **/checkpoints/
 *.safetensors
 *.ckpt
@@ -61,3 +64,18 @@ poincare/
 
 # Local caches and results
 .preprocess_cache/
+
+# Tokenizer/comparison variants of santa/data/ -- fully regenerable from pretrain*/retrieval*/ via
+# prepare_data.py or prepare_samedomain.py (see results/README.md for which experiment used which).
+# santa/data/ itself (the canonical 12-pair set) is intentionally NOT covered by this and stays tracked.
+santa/data_*/
+
+# Abandoned k-fold study (results contradict each other; likely trained at p_max_len 256). Kept locally only.
+results/07_kfold/
+kfold/
+datasets/build_kfold_split.py
+santa/prepare_kfold.py
+
+# Cached query/passage embeddings from shell/index-xml.sh (~10 MB of binaries). Local only;
+# regenerate by re-running an experiment's launcher.
+results/**/embeddings.npz

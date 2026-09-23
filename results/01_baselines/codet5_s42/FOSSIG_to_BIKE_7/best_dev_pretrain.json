@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/codet5_s42/FOSSIG_to_BIKE_7/checkpoints",
+  "best_dev_mrr": 0.75,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/codet5_s42/FOSSIG_to_BIKE_7/checkpoints": 0.75
+  }
+}

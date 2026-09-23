@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/allA_meancos_p2048_s42/S1000D_spec_sample_to_s1kd-tools-doc/checkpoints",
+  "best_dev_mrr": 0.869047619047619,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/allA_meancos_p2048_s42/S1000D_spec_sample_to_s1kd-tools-doc/checkpoints": 0.869047619047619
+  }
+}

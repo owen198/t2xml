@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/nopreAll_meancos_p1024_s2/FOSSIG/checkpoints",
+  "best_dev_mrr": 0.75,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/nopreAll_meancos_p1024_s2/FOSSIG/checkpoints": 0.75
+  }
+}

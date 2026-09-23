@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 0.8015873015873015,
+  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/anonq_meancos_p1024_s2/s1kd-tools-doc_to_S1000D_spec_sample/test_inference.trec",
+  "qrels_path": "/workspace/t2xml/retrieval_anonq/S1000D_spec_sample/qrels.test.tsv"
+}

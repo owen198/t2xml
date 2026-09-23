@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/t5_s42/S1000D_spec_sample_to_BIKE_7/checkpoints",
+  "best_dev_mrr": 0.22968202432488144,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/t5_s42/S1000D_spec_sample_to_BIKE_7/checkpoints": 0.22968202432488144
+  }
+}

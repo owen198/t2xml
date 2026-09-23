@@ -46,6 +46,8 @@ def encode_all(model, tokenizer, texts, max_len, batch_size, device, is_query):
                 _, reps = model.encode_query(batch)
             else:
                 _, reps, _ = model.encode_passage(batch, labels=None)
+        if getattr(model, "normalize", False):
+            reps = torch.nn.functional.normalize(reps, dim=-1)
         embs.append(reps.cpu())
     return torch.cat(embs, dim=0)
 
@@ -56,6 +58,9 @@ def main():
     parser.add_argument("--corpus_path", type=str, required=True, help="retrieval/corpus.<split>.jsonl")
     parser.add_argument("--query_path", type=str, required=True, help="retrieval/queries.<split>.jsonl")
     parser.add_argument("--trec_save_path", type=str, required=True, help="Where to write the TREC-format run")
+    parser.add_argument("--save_embeddings", type=str, default=None,
+                        help="Optional .npz path to dump corpus/query ids+embeddings alongside the TREC run, "
+                             "so viz_embeddings.py can plot them later without the checkpoint on disk")
     parser.add_argument("--per_device_eval_batch_size", type=int, default=64)
     parser.add_argument("--q_max_len", type=int, default=50)
     parser.add_argument("--p_max_len", type=int, default=256)
@@ -94,6 +99,17 @@ def main():
     index = faiss.IndexFlatIP(corpus_np.shape[1])
     index.add(corpus_np)
     top_scores, top_indices = index.search(query_np, topk)
+
+    if args.save_embeddings:
+        os.makedirs(os.path.dirname(args.save_embeddings) or ".", exist_ok=True)
+        np.savez_compressed(
+            args.save_embeddings,
+            corpus_ids=np.array(corpus_ids),
+            corpus_embs=corpus_np,
+            query_ids=np.array(query_ids),
+            query_embs=query_np,
+        )
+        logger.info("Saved embeddings to %s", args.save_embeddings)
 
     os.makedirs(os.path.dirname(args.trec_save_path), exist_ok=True)
     with open(args.trec_save_path, "w") as f:

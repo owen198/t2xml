@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/longpretrain100_s42/s1kd-tools-doc_to_S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.8035714285714286,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/longpretrain100_s42/s1kd-tools-doc_to_S1000D_spec_sample/checkpoints": 0.8035714285714286
+  }
+}

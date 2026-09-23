@@ -21,7 +21,8 @@ fi
 # BIKE_7_to_FOSSIG -> FOSSIG. No folder slug contains the substring "_to_",
 # so this round-trips cleanly.
 export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
-export QRELS_PATH=${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.${SPLIT}.tsv
+export RETRIEVAL_ROOT=${RETRIEVAL_ROOT:-${REPO_ROOT}/retrieval}
+export QRELS_PATH=${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/qrels.${SPLIT}.tsv
 export TREC_PATH=${TREC_PATH:-${SANTA_DIR}/runs/retrieve${RUN_TAG}/${SPLIT}_inference.trec}
 export RESULTS_PATH=${RESULTS_PATH:-${REPO_ROOT}/results${RUN_TAG}/eval_${SPLIT}.json}
 

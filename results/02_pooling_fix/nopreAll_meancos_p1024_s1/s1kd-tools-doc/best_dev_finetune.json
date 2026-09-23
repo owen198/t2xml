@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/nopreAll_meancos_p1024_s1/s1kd-tools-doc/checkpoints",
+  "best_dev_mrr": 0.6875,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/nopreAll_meancos_p1024_s1/s1kd-tools-doc/checkpoints": 0.6875
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/fixA_meancos_p1024_s1/FOSSIG_to_S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 1.0,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/fixA_meancos_p1024_s1/FOSSIG_to_S1000D_spec_sample/checkpoints": 1.0
+  }
+}

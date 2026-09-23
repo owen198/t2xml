@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/pool332_anon_s42/BIKE_7_to_S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.869047619047619,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/pool332_anon_s42/BIKE_7_to_S1000D_spec_sample/checkpoints": 0.869047619047619
+  }
+}

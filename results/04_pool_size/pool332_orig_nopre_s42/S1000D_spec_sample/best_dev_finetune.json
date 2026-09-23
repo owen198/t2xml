@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/pool332_orig_nopre_s42/S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.9107142857142857,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/pool332_orig_nopre_s42/S1000D_spec_sample/checkpoints": 0.9107142857142857
+  }
+}

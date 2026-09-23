@@ -6,6 +6,12 @@ set -e
 # and writes a TREC-format run file for evaluate_xml.sh to score. Run
 # best-dev-finetune.sh first so MODEL_PATH's default (.../checkpoints/best_dev)
 # exists -- otherwise point MODEL_PATH at a specific checkpoint yourself.
+#
+# Also dumps the corpus/query embeddings this step already computes to
+# results${RUN_TAG}/embeddings.npz (gitignored, local only). Keep it after
+# deleting runs/**/checkpoints to save space: point
+# diagnostics/viz_embeddings.py's --model at that .npz to re-plot without the
+# checkpoint on disk. Set EMB_SAVE_PATH="" to skip.
 
 export SPLIT=test
 
@@ -25,14 +31,22 @@ fi
 export FINETUNE_SOURCE=${FINETUNE_SOURCE:-${MODEL_NAME##*_to_}}
 export MODEL_PATH=${MODEL_PATH:-${SANTA_DIR}/runs/finetune${RUN_TAG}/checkpoints/best_dev}
 export TREC_PATH=${TREC_PATH:-${SANTA_DIR}/runs/retrieve${RUN_TAG}/${SPLIT}_inference.trec}
+export EMB_SAVE_PATH=${EMB_SAVE_PATH-${REPO_ROOT}/results${RUN_TAG}/embeddings.npz}
+export RETRIEVAL_ROOT=${RETRIEVAL_ROOT:-${REPO_ROOT}/retrieval}
+
+SAVE_EMB_ARGS=()
+if [[ -n "${EMB_SAVE_PATH}" ]]; then
+    SAVE_EMB_ARGS=(--save_embeddings "${EMB_SAVE_PATH}")
+fi
 
 cd "${SANTA_DIR}/evaluate_xml"
 "${PYTHON}" index_xml.py \
     --model_name_or_path ${MODEL_PATH} \
-    --corpus_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.${SPLIT}.jsonl \
-    --query_path ${REPO_ROOT}/retrieval${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.${SPLIT}.jsonl \
+    --corpus_path ${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/corpus.${SPLIT}.jsonl \
+    --query_path ${RETRIEVAL_ROOT}${FINETUNE_SOURCE:+/${FINETUNE_SOURCE}}/queries.${SPLIT}.jsonl \
     --trec_save_path ${TREC_PATH} \
     --per_device_eval_batch_size 64 \
     --q_max_len 50 \
-    --p_max_len 256 \
-    --topk 100
+    --p_max_len ${P_MAX_LEN:-256} \
+    --topk 100 \
+    "${SAVE_EMB_ARGS[@]}"

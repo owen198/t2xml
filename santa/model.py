@@ -59,6 +59,11 @@ class SModel(nn.Module):
         self.tied = tied
         self.lm_q = lm_q
         self.lm_p = lm_p
+        if train_args is not None and os.environ.get("GRAD_CKPT") == "1":
+            # Opt-in activation checkpointing so long passages (p_max_len >= 2048) fit in memory.
+            for lm in {id(lm_q): lm_q, id(lm_p): lm_p}.values():
+                lm.gradient_checkpointing_enable()
+                lm.config.use_cache = False
         self.head_q = head_q
         self.head_p = head_p
 
@@ -102,7 +107,10 @@ class SModel(nn.Module):
         q_hidden, q_reps = self.encode_query(query)
         p_hidden, p_reps, g_loss = self.encode_passage(passage, label)
 
-        scores = torch.matmul(q_reps, p_reps.transpose(0, 1))
+        if self.normalize:
+            q_reps = F.normalize(q_reps, dim=-1)
+            p_reps = F.normalize(p_reps, dim=-1)
+        scores = torch.matmul(q_reps, p_reps.transpose(0, 1)) / self.santa_args.temperature
 
         target = torch.arange(
             scores.size(0),
@@ -127,6 +135,12 @@ class SModel(nn.Module):
         if items is None:
             return None, None
         items = BatchEncoding(items)
+        if self.pooling == "mean":
+            hidden = model.encoder(input_ids=items.input_ids, attention_mask=items.attention_mask).last_hidden_state
+            reps = self._mean_pool(hidden, items.attention_mask)
+            if head is not None:
+                reps = head(reps)
+            return hidden, reps
         decoder_input_ids = torch.zeros((items.input_ids.shape[0], 1), dtype=torch.long).to(items.input_ids.device)
         items_out = model(**items, decoder_input_ids=decoder_input_ids, output_hidden_states=True, return_dict=True)
         hidden = items_out.decoder_hidden_states[-1]
@@ -135,12 +149,29 @@ class SModel(nn.Module):
             reps = head(reps)  # D * d
         return hidden, reps
 
+    @staticmethod
+    def _mean_pool(hidden, attention_mask):
+        mask = attention_mask.unsqueeze(-1).to(hidden.dtype)
+        return (hidden * mask).sum(1) / mask.sum(1).clamp(min=1)
+
     def encode_p(self, items, model, head,labels):
         if items is None:
             return None, None
         items = BatchEncoding(items)
         g_loss=0
         decoder_input_ids = torch.zeros((items.input_ids.shape[0], 1), dtype=torch.long).to(items.input_ids.device)
+        if self.pooling == "mean":
+            # Mean of the encoder output over non-pad tokens; the decoder is only run for the MEP generative loss.
+            if self.santa_args.use_generate and not labels.equal(torch.tensor([0]).to(labels.device)):
+                items_out = model(**items, output_hidden_states=True, return_dict=True, labels=labels)
+                g_loss = items_out.loss
+                hidden = items_out.encoder_last_hidden_state
+            else:
+                hidden = model.encoder(input_ids=items.input_ids, attention_mask=items.attention_mask).last_hidden_state
+            reps = self._mean_pool(hidden, items.attention_mask)
+            if head is not None:
+                reps = head(reps)
+            return hidden, reps, g_loss
         if self.santa_args.use_generate and not labels.equal(torch.tensor([0]).to(labels.device)):
             items_out = model(**items, output_hidden_states=True, return_dict=True, labels=labels)
             g_loss=items_out.loss

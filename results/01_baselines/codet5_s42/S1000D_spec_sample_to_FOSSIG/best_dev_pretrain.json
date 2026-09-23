@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/pretrain/codet5_s42/S1000D_spec_sample_to_FOSSIG/checkpoints",
+  "best_dev_mrr": 0.2424938157081014,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/pretrain/codet5_s42/S1000D_spec_sample_to_FOSSIG/checkpoints": 0.2424938157081014
+  }
+}

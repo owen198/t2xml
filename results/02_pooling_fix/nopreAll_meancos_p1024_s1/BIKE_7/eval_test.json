@@ -1,0 +1,5 @@
+{
+  "eval_mrr": 0.6305555555555555,
+  "trec_save_path": "/workspace/t2xml/santa/runs/retrieve/nopreAll_meancos_p1024_s1/BIKE_7/test_inference.trec",
+  "qrels_path": "/workspace/t2xml/retrieval/BIKE_7/qrels.test.tsv"
+}

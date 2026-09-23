@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/cnt_p1024_s42/BIKE_7_to_S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.1988713667285096,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/cnt_p1024_s42/BIKE_7_to_S1000D_spec_sample/checkpoints": 0.1988713667285096
+  }
+}

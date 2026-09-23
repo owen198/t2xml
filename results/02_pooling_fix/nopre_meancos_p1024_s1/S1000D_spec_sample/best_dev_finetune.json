@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/nopre_meancos_p1024_s1/S1000D_spec_sample/checkpoints",
+  "best_dev_mrr": 0.9464285714285714,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/nopre_meancos_p1024_s1/S1000D_spec_sample/checkpoints": 0.9464285714285714
+  }
+}

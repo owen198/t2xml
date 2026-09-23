@@ -1,0 +1,7 @@
+{
+  "best_checkpoint": "/workspace/t2xml/santa/runs/finetune/codet5_s42/s1kd-tools-doc_to_FOSSIG/checkpoints",
+  "best_dev_mrr": 0.75,
+  "per_checkpoint": {
+    "/workspace/t2xml/santa/runs/finetune/codet5_s42/s1kd-tools-doc_to_FOSSIG/checkpoints": 0.75
+  }
+}
